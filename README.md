@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/hrvhTsGas" alt="godbolt">
+    <a href="https://godbolt.org/z/4r3PqGGvW" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -35,11 +35,9 @@ $$
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/hrvhTsGas).
+at [Godbolt](https://godbolt.org/z/4r3PqGGvW).
 
 ```cpp
-#include <cstddef>
-#include <cstdint>
 #include <iomanip>
 #include <iostream>
 
