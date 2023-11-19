@@ -24,7 +24,7 @@ with approximately $100$ decinal digits of precision
 The approximate square root value computed is:
 
 $$
-\sqrt {\left(} 1.2+3.4i {\right)} {\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
+\sqrt { \frac{12}{10} + \frac{34}{10}i } {\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
