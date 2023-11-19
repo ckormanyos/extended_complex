@@ -5,6 +5,15 @@ VisualStudioVersion = 16.0.34114.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "extended_complex", "extended_complex.vcxproj", "{86701D12-57C0-4D03-BB4A-637ECEE3E589}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_doc", "_doc", "{4A3658D9-2ABD-4E37-AF9C-78BE514A90B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F7210510-5825-413E-8E1A-1A66B965F122}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E2934CA9-C187-441D-9B95-D80E5DA74EEF}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\extended_complex.yml = .github\workflows\extended_complex.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -18,6 +27,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E2934CA9-C187-441D-9B95-D80E5DA74EEF} = {F7210510-5825-413E-8E1A-1A66B965F122}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE1B7689-8323-4A41-AF7C-C54D31185BFF}
