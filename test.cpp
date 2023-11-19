@@ -117,6 +117,16 @@ namespace local
     const complex_type result_21 = pow  ( val_z1.real(), val_z2);                         // N[(12/10)^((56/10) + ((78 I)/10)), 100]
     const complex_type result_22 = pow  ( val_z1, -17);                                   // N[((12/10) + ((34 I)/10)) ^ -17, 100]
 
+    // Ensure that printing works.
+    {
+      std::stringstream strm;
+
+      strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
+           << result_07;
+
+      std::cout << strm.str() << std::endl;
+    }
+
     const complex_type control_01(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_02(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_03(my_lexical_cast<float_type>(  "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"),    my_lexical_cast<float_type>( "-0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"));

@@ -87,7 +87,7 @@
 
     // I/O stream operators.
     template<typename T, typename char_type, typename traits_type, typename EnableType = void>
-    std::basic_istream<char_type, traits_type>& operator>>(std::basic_istream<char_type, traits_type>&, complex<T, EnableType>&);
+    std::basic_istream<char_type, traits_type>& operator>>(std::basic_istream<char_type, traits_type>&, const complex<T, EnableType>&);
 
     template<typename T, typename char_type, typename traits_type, typename EnableType = void>
     std::basic_ostream<char_type, traits_type>& operator<<(std::basic_ostream<char_type, traits_type>&, const complex<T, EnableType>&);
@@ -592,7 +592,7 @@
 
     // I/O stream operators.
     template<typename T, typename char_type, typename traits_type, typename EnableType>
-    std::basic_istream<char_type, traits_type>& operator>>(std::basic_istream<char_type, traits_type>& my_istream, complex<T, EnableType>& my_z)
+    std::basic_istream<char_type, traits_type>& operator>>(std::basic_istream<char_type, traits_type>& my_istream, const complex<T, EnableType>& my_z)
     {
       // Parse an (extended) complex number of any of the forms u, (u) or (u,v).
 
@@ -736,7 +736,7 @@
       return my_istream;
     }
 
-    template<class T, typename EnableType, class char_type, class traits_type>
+    template<typename T, typename char_type, typename traits_type, typename EnableType>
     std::basic_ostream<char_type, traits_type>& operator<<(std::basic_ostream<char_type, traits_type>& my_ostream, const complex<T, EnableType>& my_z)
     {
       std::basic_ostringstream<char_type, traits_type> my_tmp_ostream;
