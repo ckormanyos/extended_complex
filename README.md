@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/f777aT4G3" alt="godbolt">
+    <a href="https://godbolt.org/z/hrvhTsGas" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -24,11 +24,11 @@ with approximately $100$ decinal digits of precision
 The approximate square root value computed is:
 
 $$
-\sqrt\left( 1.2+3.4i\right){\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
+\sqrt {\left(} 1.2+3.4i {\right)} {\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
 $$
 
-The example code is listed in its entirety below. It is also available at
-[Godbolt](https://godbolt.org/z/f777aT4G3).
+The example code is listed in its entirety below. It is also available _live_
+at [Godbolt](https://godbolt.org/z/hrvhTsGas).
 
 ```cpp
 #include <cstddef>
@@ -106,5 +106,5 @@ both built-in floating point types `float`, `double`
 and `long double` as well as a $100$-decimal digit type from
 `Boost.Multiprecision`.
 
-Continuous integration runs on Ubuntu for GCC/clang using
+Continuous integration runs on Ubuntu with both GCC/clang using
 the develop branch of modular-boost.
