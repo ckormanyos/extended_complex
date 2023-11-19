@@ -80,7 +80,7 @@ namespace local
                               + std::string(std::size_t(std::numeric_limits<float_type>::digits10 - 2), char('0'))
                               + std::string(std::size_t(2U), char('9')));
 
-    const float_type tol = boost::lexical_cast<float_type>(str_tol.c_str());
+    const float_type tol = my_lexical_cast<float_type>(str_tol.c_str());
 
     std::cout << "Testing with tolerance: " << tol << std::endl;
 
