@@ -117,14 +117,23 @@ namespace local
     const complex_type result_21 = pow  ( val_z1.real(), val_z2);                         // N[(12/10)^((56/10) + ((78 I)/10)), 100]
     const complex_type result_22 = pow  ( val_z1, -17);                                   // N[((12/10) + ((34 I)/10)) ^ -17, 100]
 
-    // Ensure that printing works.
+    auto result_is_ok = true;
+
+    // Ensure that I/O-streaming works.
     {
       std::stringstream strm;
 
       strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
            << result_07;
 
-      std::cout << strm.str() << std::endl;
+      complex_type ctrl;
+
+      strm >> ctrl;
+
+      const auto result_strm_is_ok = (   is_close_fraction(result_07.real(), ctrl.real(), tol)
+                                      && is_close_fraction(result_07.imag(), ctrl.imag(), tol));
+
+      result_is_ok = (result_strm_is_ok && result_is_ok);
     }
 
     const complex_type control_01(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
@@ -149,8 +158,6 @@ namespace local
     const complex_type control_20(my_lexical_cast<float_type>(  "-0.03277613870122620601990858385164868868755535963372013573012556184586155243067581560513902047571175876"),   my_lexical_cast<float_type>( "-0.08229096285844296094766104540456274850393339107196281307901532754610012233461478959682645571793968423"));
     const complex_type control_21(my_lexical_cast<float_type>(  "+0.411234943477464115466545795217592784968613499972731227382657362718492707513495252941835813107553442"),     my_lexical_cast<float_type>( "+2.745341999926603737618437066482640101524732307796305942046035072295581269096378050886721641340275877"));
     const complex_type control_22(my_lexical_cast<float_type>(  "-1.675252371850406899814405010415989537774631374868045423015789145275321916111080349152932009587122213E-10"), my_lexical_cast<float_type>( "-2.958659710782851665531275356243445397830042290616607863429795098837043056911533376739287222040650405E-10"));
-
-    auto result_is_ok = true;
 
     { const auto result_real_is_ok = is_close_fraction(result_01.real(), control_01.real(), tol); const auto result_imag_is_ok = is_close_fraction(result_01.imag(), control_01.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); }
     { const auto result_real_is_ok = is_close_fraction(result_02.real(), control_02.real(), tol); const auto result_imag_is_ok = is_close_fraction(result_02.imag(), control_02.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); }
