@@ -22,10 +22,16 @@ multiple-precision floating-point type from `Boost.Multiprecision`.
 It computes a complex-valued square root with approximately
 $100$ decimal digits of precision.
 
-The approximate square root value computed is:
+The square root value computed is
 
 $$
-\sqrt { \frac{12}{10} + \frac{34}{10}i } {\sim}1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{.}}
+s = \sqrt { \frac{12}{10} + \frac{34}{10}i }
+$$
+
+the approximate complex-value of which is
+
+$$
+s {\sim}1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{,}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
