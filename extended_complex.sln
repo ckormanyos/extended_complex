@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "extended_complex", "extended_complex.vcxproj", "{86701D12-57C0-4D03-BB4A-637ECEE3E589}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_doc", "_doc", "{4A3658D9-2ABD-4E37-AF9C-78BE514A90B4}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F7210510-5825-413E-8E1A-1A66B965F122}"
 EndProject
