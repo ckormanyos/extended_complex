@@ -18,6 +18,8 @@
   #include <array>
   #endif
   #include <cmath>
+  #include <cstddef>
+  #include <cstdint>
   #if !defined(EXTENDED_COMPLEX_DISABLE_IOSTREAM)
   #include <istream>
   #include <ostream>
