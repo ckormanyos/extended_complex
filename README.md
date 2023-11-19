@@ -25,13 +25,13 @@ $100$ decimal digits of precision.
 The square root value computed is
 
 $$
-s = \sqrt { \frac{12}{10} + \frac{34}{10}i }
+\sqrt { \frac{12}{10} + \frac{34}{10}i }
 $$
 
 the approximate complex-value of which is
 
 $$
-s {\sim}1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{,}}
+1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
@@ -108,10 +108,10 @@ auto main() -> int
 ## Testing and Continuous Integration
 
 A small test program exercises a variety of non-trivial
-algebraic and elementary-function values. The test program tests
-both built-in floating point types `float`, `double`
-and `long double` as well as a $100$-decimal digit type from
-`Boost.Multiprecision`.
+algebraic and elementary-function values. The test program verifies
+the extended-complex class for both built-in floating point types
+`float`, `double` and `long double` as well as a $100$-decimal digit type
+from `Boost.Multiprecision`.
 
 Continuous integration runs on Ubuntu with both GCC/clang using
 the develop branch of modular-boost.
