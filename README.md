@@ -6,29 +6,36 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/f777aT4G3" alt="godbolt">
+    <a href="https://godbolt.org/z/hrvhTsGas" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
 `extended_complex` creates an extended-complex-number adaption-class in C++14.
 
 It can be used with both built-in floating-point types as well as
-user-defined numberic types.
+user-defined numeric types.
 
 ## Example
 
-The following example uses a user-defined multiple-precision floating-point
-type from `Boost.Multiprecision` to compute the value of a square root
-with approximately $100$ decinal digits of precision
+The following exciting and informative example takes a user-defined,
+multiple-precision floating-point type from `Boost.Multiprecision`.
+It computes a complex-valued square root with approximately
+$100$ decimal digits of precision.
 
-The approximate square root value computed is:
+The square root value computed is
 
 $$
-\sqrt\left( 1.2+3.4i\right){\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
+\sqrt { \frac{12}{10} + \frac{34}{10}i }
 $$
 
-The example code is listed in its entirety below. It is also available at
-[Godbolt](https://godbolt.org/z/f777aT4G3).
+the approximate complex-value of which is
+
+$$
+1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{.}}
+$$
+
+The example code is listed in its entirety below. It is also available _live_
+at [Godbolt](https://godbolt.org/z/hrvhTsGas).
 
 ```cpp
 #include <cstddef>
@@ -101,10 +108,10 @@ auto main() -> int
 ## Testing and Continuous Integration
 
 A small test program exercises a variety of non-trivial
-algebraic and elementary-function values. The test program tests
-both built-in floating point types `float`, `double`
-and `long double` as well as a $100$-decimal digit type from
-`Boost.Multiprecision`.
+algebraic and elementary-function values. The test program verifies
+the extended-complex class for both built-in floating point types
+`float`, `double` and `long double` as well as a $100$-decimal digit type
+from `Boost.Multiprecision`.
 
-Continuous integration runs on Ubuntu for GCC/clang using
+Continuous integration runs on Ubuntu with both GCC/clang using
 the develop branch of modular-boost.
