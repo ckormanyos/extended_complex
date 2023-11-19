@@ -40,8 +40,10 @@ jobs:
           ./b2 headers
       - name: gcc-clang-native
         run: |
-          echo "query GCC version"
-          g++ -v
-          g++ -Wall -Wextra -O2 -std=c++20 -I. -I../boost-root test.cpp -o test.exe
+          echo "query compiler version"
+          ${{ matrix.compiler }} -v
+          echo "compile the test program"
+          ${{ matrix.compiler }} -Wall -Wextra -O2 -std=${{ matrix.standard }} -I. -I../boost-root test.cpp -o test.exe
           ls -ls ./test.exe
+          echo "run the test program"
           ./test.exe

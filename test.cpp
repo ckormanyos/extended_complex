@@ -76,11 +76,15 @@ namespace local
 
     typedef typename extended_complex::complex<float_type> complex_type;
 
-    const std::string str_tol(  "0."
-                              + std::string(std::size_t(std::numeric_limits<float_type>::digits10 - 2), char('0'))
-                              + std::string(std::size_t(2U), char('9')));
+    const auto str_tol =
+      std::string
+      {
+          "0."
+        + std::string(static_cast<std::size_t>(std::numeric_limits<float_type>::digits10 - 2), '0')
+        + std::string(static_cast<std::size_t>(UINT8_C(2)), '9')
+      };
 
-    const float_type tol = my_lexical_cast<float_type>(str_tol.c_str());
+    const auto tol = my_lexical_cast<float_type>(str_tol.c_str());
 
     std::cout << "Testing with tolerance: " << tol << std::endl;
 
