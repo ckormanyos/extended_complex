@@ -13,18 +13,19 @@ extended_complex
 `extended_complex` creates an extended-complex-number adaption-class in C++14.
 
 It can be used with both built-in floating-point types as well as
-user-defined numberic types.
+user-defined numeric types.
 
 ## Example
 
-The following example uses a user-defined multiple-precision floating-point
-type from `Boost.Multiprecision` to compute the value of a square root
-with approximately $100$ decinal digits of precision
+The following exciting and informative example takes a user-defined,
+multiple-precision floating-point type from `Boost.Multiprecision`.
+It computes a complex-valued square root with approximately
+$100$ decimal digits of precision.
 
 The approximate square root value computed is:
 
 $$
-\sqrt { \frac{12}{10} + \frac{34}{10}i } {\sim}1.550088912847258141616125654603881566976{\ldots}+1.096711282759503047577277387056220643003{\ldots}i{\text{.}}
+\sqrt { \frac{12}{10} + \frac{34}{10}i } {\sim}1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
