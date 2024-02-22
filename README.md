@@ -103,6 +103,13 @@ auto main() -> int
 }
 ```
 
+## In-Depth Example
+
+TBD: Describe the complex-valued Riemann-zeta function calculation.
+
+See an in-depth example that calculates the complex-valued Riemann-zeta function
+[here](https://godbolt.org/z/9aacjGxo8].
+
 ## Testing and Continuous Integration
 
 A small test program exercises a variety of non-trivial

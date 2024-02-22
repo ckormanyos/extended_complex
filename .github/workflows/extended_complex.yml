@@ -33,6 +33,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           ./bootstrap.sh
           ./b2 headers
@@ -41,7 +42,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -O2 -std=${{ matrix.standard }} -I. -I../boost-root test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -O2 -std=${{ matrix.standard }} -I. -I../boost-root example.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
