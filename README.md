@@ -103,17 +103,6 @@ auto main() -> int
 }
 ```
 
-## In-Depth Example
-
-An in-depth, non-trivial [example](./example.cpp)
-provides an implementation of the complex-valued Riemann-zeta function.
-The program handles arguments in a relatively large, yet limited
-unit disc of radius ${\sim}10^{5}$ in ${\mathbb{Z}}$.
-
-This calculation for a single complex-valued point having $101$
-decimal digits of precision can also be seen
-[here](https://godbolt.org/z/846vxYM9h).
-
 ## Testing and Continuous Integration
 
 A small test program exercises a variety of non-trivial
@@ -124,3 +113,24 @@ from `Boost.Multiprecision`.
 
 Continuous integration runs on Ubuntu with both GCC/clang using
 the develop branch of modular-boost.
+
+## In-Depth Example
+
+An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example.cpp)
+provides an implementation of the complex-valued Riemann-zeta function.
+The program handles arguments in a relatively large, yet limited
+unit disc of radius ${\sim}10^{5}$ in ${\mathbb{Z}}$.
+This example uses the algorithm described and found in
+the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
+
+The zeta-function calculation for a single complex-valued point having ${\sim}101$
+decimal digits of precision can also be seen
+[here](https://godbolt.org/z/oxs6Mddn9).
+
+In particular, the value of
+
+$${\zeta}(1.1 + 2.3i)~{\approx}~0.632109498389343535342{\ldots} - 0.265505793636743413620 {\ldots} i$$
+
+is calculated.
+
+This example is also executed and verified in CI.
