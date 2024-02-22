@@ -186,6 +186,8 @@ namespace local
   }
 }
 
+extern auto example() -> bool;
+
 auto main() -> int
 {
   using local_mp_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
@@ -194,11 +196,13 @@ auto main() -> int
   const auto result_dbl__is_ok = local::test<double>();
   const auto result_ldbl_is_ok = local::test<long double>();
   const auto result_mp___is_ok = local::test<local_mp_type>();
+  const auto result_expl_is_ok = ::example();
 
   BOOST_TEST(result_flt__is_ok);
   BOOST_TEST(result_dbl__is_ok);
   BOOST_TEST(result_ldbl_is_ok);
   BOOST_TEST(result_mp___is_ok);
+  BOOST_TEST(result_expl_is_ok);
 
   auto result_is_ok =
   (
@@ -206,9 +210,10 @@ auto main() -> int
     && result_dbl__is_ok
     && result_ldbl_is_ok
     && result_mp___is_ok
+    && result_expl_is_ok
   );
 
-  result_is_ok = ((boost::report_errors() == 0) && result_is_ok);
+  BOOST_TEST(result_is_ok);
 
-  return (result_is_ok ? 0 : -1);
+  return boost::report_errors();
 }

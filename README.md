@@ -103,6 +103,17 @@ auto main() -> int
 }
 ```
 
+## In-Depth Example
+
+An in-depth, non-trivial [example](./example.cpp)
+provides an implementation of the complex-valued Riemann-zeta function.
+The program handles arguments in a relatively large, yet limited
+unit disc of radius ${\sim}10^{5}$ in ${\mathbb{Z}}$.
+
+This calculation for a single complex-valued point having $101$
+decimal digits of precision can also be seen
+[here](https://godbolt.org/z/846vxYM9h).
+
 ## Testing and Continuous Integration
 
 A small test program exercises a variety of non-trivial
