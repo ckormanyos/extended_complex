@@ -17,10 +17,10 @@ user-defined numeric types.
 
 ## Example
 
-The following exciting and informative example takes a user-defined,
+The following straightforward example takes a user-defined,
 multiple-precision floating-point type from `Boost.Multiprecision`.
-It computes a complex-valued square root with approximately
-$100$ decimal digits of precision.
+It computes a complex-valued square root with
+${\sim}100$ decimal digits of precision.
 
 The square root value computed is
 
@@ -31,7 +31,7 @@ $$
 the approximate complex-value of which is
 
 $$
-1.550088912847258141616{\ldots}+1.096711282759503047577{\ldots}i{\text{.}}
+1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
@@ -103,27 +103,16 @@ auto main() -> int
 }
 ```
 
-## Testing and Continuous Integration
-
-A small test program exercises a variety of non-trivial
-algebraic and elementary-function values. The test program verifies
-the extended-complex class for both built-in floating point types
-`float`, `double` and `long double` as well as a $100$-decimal digit type
-from `Boost.Multiprecision`.
-
-Continuous integration runs on Ubuntu with both GCC/clang using
-the develop branch of modular-boost.
-
 ## In-Depth Example
 
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example.cpp)
 provides an implementation of the complex-valued Riemann-zeta function.
 The program handles arguments in a relatively large, yet limited
-unit disc of radius ${\sim}10^{5}$ in ${\mathbb{Z}}$.
+unit disc of radius ${\sim}10^{6}$ in ${\mathbb{Z}}$.
 This example uses the algorithm described and found in
 the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
 
-The zeta-function calculation for a single complex-valued point having ${\sim}101$
+The zeta-function calculation for a single complex-valued point having ${\sim}100$
 decimal digits of precision can also be seen
 [here](https://godbolt.org/z/oxs6Mddn9).
 
@@ -133,4 +122,25 @@ $${\zeta}(1.1 + 2.3i)~{\approx}~0.632109498389343535342{\ldots} - 0.265505793636
 
 is calculated.
 
-This example is also executed and verified in CI.
+The range and domain of this particular calculation are intended
+for high-precision investigations within the above-mentioned unit-disc.
+These is are _not_ intended for finding record-breaking,
+(relatively) low-precision counts of zero-crossings
+in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$,
+which are valuable for providing
+empirical evidence for number-theoretical postulations.
+Other algorithms are needed for these investigations.
+
+## Testing and Continuous Integration
+
+A small test program exercises a variety of non-trivial
+algebraic and elementary-function values. The test program verifies
+the extended-complex class for both built-in floating point types
+`float`, `double` and `long double` as well as a $100$-decimal digit type
+from `Boost.Multiprecision`.
+
+The above-mentioned in-depth Riemann-zeta example is also executed
+and verified in CI.
+
+Continuous integration runs on Ubuntu with both GCC/clang using
+the develop branch of modular-boost.
