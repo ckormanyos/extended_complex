@@ -112,7 +112,7 @@ unit disc of radius ${\sim}10^{5}$ in ${\mathbb{Z}}$.
 
 This calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/9aacjGxo8).
+[here](https://godbolt.org/z/846vxYM9h).
 
 ## Testing and Continuous Integration
 
