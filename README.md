@@ -105,6 +105,11 @@ auto main() -> int
 
 ## In-Depth Example
 
+<p align="center">
+    <a href="https://godbolt.org/z/E9W6dsKcv" alt="godbolt">
+        <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
+</p>
+
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example.cpp)
 provides an implementation of the complex-valued Riemann-zeta function.
 The program handles arguments in a relatively large, yet limited
@@ -114,7 +119,7 @@ the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.191646
 
 The zeta-function calculation for a single complex-valued point having ${\sim}100$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/oxs6Mddn9).
+[here](https://godbolt.org/z/E9W6dsKcv).
 
 In particular, the value of
 
