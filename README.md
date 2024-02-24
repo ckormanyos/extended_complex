@@ -113,7 +113,7 @@ auto main() -> int
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example.cpp)
 provides an implementation of the complex-valued Riemann-zeta function.
 The program handles arguments in a relatively large, yet limited
-unit disc of radius ${\sim}10^{6}$ in ${\mathbb{Z}}$.
+unit disc of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
 the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
 
@@ -127,14 +127,20 @@ $${\zeta}(1.1 + 2.3i)~{\approx}~0.632109498389343535342{\ldots} - 0.265505793636
 
 is calculated.
 
-The range and domain of this particular calculation are intended
-for high-precision investigations within the above-mentioned unit-disc.
+### Not Number-Theory-Ready
+
+The range and domain of the calculations
+in this particular example are intended
+for high-precision investigations within the above-mentioned unit-disc
+of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
+
 These is are _not_ intended for finding record-breaking,
 (relatively) low-precision counts of zero-crossings
-in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$,
+in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$
 which are valuable for providing
-empirical evidence for number-theoretical postulations.
-Other algorithms are needed for these investigations.
+empirical evidence for number-theory.
+Other algorithms are needed for these types
+of number-theoretical investigations.
 
 ## Testing and Continuous Integration
 
