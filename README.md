@@ -103,7 +103,9 @@ auto main() -> int
 }
 ```
 
-## In-Depth Example: Complex-Valued Riemann-Zeta Function
+## In-Depth Example
+
+### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
     <a href="https://godbolt.org/z/E9W6dsKcv" alt="godbolt">
