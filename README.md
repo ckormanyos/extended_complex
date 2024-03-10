@@ -11,9 +11,10 @@ extended_complex
 </p>
 
 `extended_complex` creates an extended-complex-number adaption-class in C++14.
+It is compatible with C++14, 17, 20, 23 and beyond.
 
-It can be used with both built-in floating-point types as well as
-user-defined numeric types.
+The `extended_complex::complex` template class can be used
+with both built-in floating-point types as well as user-defined numeric types.
 
 ## Example
 
