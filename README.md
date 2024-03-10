@@ -108,7 +108,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/fzrKT4xaf" alt="godbolt">
+    <a href="https://godbolt.org/z/PdsxTPT5b" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -119,9 +119,9 @@ unit disc of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
 the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
 
-The zeta-function calculation for a single complex-valued point having ${\sim}100$
+The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/E9W6dsKcv).
+[here](https://godbolt.org/z/PdsxTPT5b).
 
 In particular, the value of
 
