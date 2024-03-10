@@ -121,12 +121,54 @@ constexpr T int64_max()
 
 namespace Util {
 
+namespace detail {
+
+template<typename T>
+struct logn_helper
+{
+public:
+  static T my_logn(const std::uint32_t n)
+  {
+    const auto it_ln =
+      std::find_if
+      (
+        ln_data.cbegin(),
+        ln_data.cend(),
+        [&n](const auto& elem)
+        {
+          return (elem.first == n);
+        }
+      );
+
+    if(it_ln == ln_data.cend())
+    {
+      using std::log;
+
+      const T ln_value = log( T { n } );
+
+      ln_data[n] = ln_value;
+
+      return ln_value;
+    }
+    else
+    {
+      return it_ln->second;
+    }
+  }
+
+private:
+  static std::map<std::uint32_t, T> ln_data;
+};
+
+template<typename T>
+std::map<std::uint32_t, T> logn_helper<T>::ln_data;
+
+} // namespace detail
+
 template<typename T>
 T logn(const std::uint32_t n)
 {
-  using std::log;
-
-  return log( T { n } );
+  return detail::logn_helper<T>::my_logn(n);
 }
 
 template<typename ComplexType>

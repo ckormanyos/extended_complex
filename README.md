@@ -108,7 +108,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/E9W6dsKcv" alt="godbolt">
+    <a href="https://godbolt.org/z/fzrKT4xaf" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
