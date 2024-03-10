@@ -10,7 +10,7 @@ extended_complex
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
-`ckormanyos/extended_complex` creates an extended-complex number-adaption-class.
+`ckormanyos/extended_complex` creates an extended-complex number-adaption class.
 The project is written in header-only C++14, and compatible through C++14, 17, 20, 23 and beyond..
 
 The `extended_complex::complex` template class can be used
@@ -126,7 +126,7 @@ decimal digits of precision can also be seen
 
 In particular, the value of
 
-$${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389343535342{\ldots}~{-}~0.265505793636743413620 {\ldots} i$$
+$${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389343535342{\ldots}~{-}~0.265505793636743413620{\ldots} i$$
 
 is calculated.
 
