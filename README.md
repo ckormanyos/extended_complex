@@ -105,6 +105,8 @@ auto main() -> int
 
 ## In-Depth Example
 
+### Complex-Valued Riemann-Zeta Function
+
 <p align="center">
     <a href="https://godbolt.org/z/E9W6dsKcv" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
@@ -123,7 +125,7 @@ decimal digits of precision can also be seen
 
 In particular, the value of
 
-$${\zeta}(1.1 + 2.3i)~{\approx}~0.632109498389343535342{\ldots} - 0.265505793636743413620 {\ldots} i$$
+$${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389343535342{\ldots} - 0.265505793636743413620 {\ldots} i$$
 
 is calculated.
 
@@ -134,13 +136,13 @@ in this particular example are intended
 for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
 
-These is are _not_ intended for finding record-breaking,
+These are _not_ intended for finding record-breaking,
 (relatively) low-precision counts of zero-crossings
 in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$
-which are valuable for providing
-empirical evidence for number-theory.
-Other algorithms are needed for these types
-of number-theoretical investigations.
+which are valuable for providing empirical evidence
+for prime number investigations in number-theory.
+Other algorithms are needed for this type
+of number-theoretical research.
 
 ## Testing and Continuous Integration
 
