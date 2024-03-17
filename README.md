@@ -155,7 +155,7 @@ $$
 
 See also the image below which shows a graph of the
 absolute value of the complex-valued Riemann-zeta function
-on a small section of the critical strip at $z~=~\frac{1}{2}~+~iy$.
+on a small section of the critical strip at $z={\frac{1}{2}}~+~iy$.
 Several of the first roots are visible.
 
 ![](./images/zeta_critical_strip.jpg)
