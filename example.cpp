@@ -5,6 +5,15 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#include <extended_complex.h>
+
+#define BOOST_MATH_STANDALONE
+#define BOOST_MULTIPRECISION_STANDALONE
+
+#include <boost/math/special_functions/factorials.hpp>
+#include <boost/multiprecision/complex_adaptor.hpp>
+#include <boost/multiprecision/cpp_dec_float.hpp>
+
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
@@ -16,15 +25,6 @@
 #include <sstream>
 #include <vector>
 
-#define BOOST_MATH_STANDALONE
-#define BOOST_MULTIPRECISION_STANDALONE
-
-#include <boost/math/special_functions/factorials.hpp>
-#include <boost/multiprecision/complex_adaptor.hpp>
-#include <boost/multiprecision/cpp_dec_float.hpp>
-
-#include <extended_complex.h>
-
 namespace local { namespace detail {
 
 namespace Util {
@@ -33,22 +33,22 @@ template<typename T1,
          typename T2 = T1>
 struct point
 {
+  explicit point(const T1& x = T1(),
+                 const T2& y = T2()) noexcept : my_x(x), my_y(y) { }
+
   T1 my_x { };
   T2 my_y { };
-
-  explicit point(const T1& x = T1(),
-                 const T2& y = T2()) : my_x(x), my_y(y) { }
 };
 
 } // namespace Util
 
 namespace ef {
 
-void prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf);
-void prime(const std::uint32_t n, std::deque<std::uint32_t>& primes);
+auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void;
+auto prime        (const std::uint32_t n, std::deque<std::uint32_t>& primes)-> void;
 
 template<typename T>
-int order(const T& val)
+auto order(const T& val) -> int
 {
   using std::log;
   using std::lround;
@@ -82,40 +82,22 @@ int order(const T& val)
 }
 
 template<typename T>
-int tol(void)
-{
-  return std::numeric_limits<T>::max_digits10;
-}
+constexpr auto tol(void) noexcept -> int { return std::numeric_limits<T>::max_digits10; }
 
 template<typename T>
-constexpr T one()
-{
-  return T { 1U };
-}
+constexpr auto one() -> T { return T { 1U }; }
 
 template<typename T>
-constexpr double to_double(const T& val)
-{
-  return static_cast<double>(val);
-}
+constexpr auto to_double(const T& val) -> double { return static_cast<double>(val); }
 
 template<typename T>
-constexpr double to_int64(const T& val)
-{
-  return static_cast<double>(val);
-}
+constexpr auto to_int64(const T& val) -> double { return static_cast<double>(val); }
 
 template<typename T>
-constexpr T int64_min()
-{
-  return T { (std::numeric_limits<std::int64_t>::min)() };
-}
+constexpr auto int64_min() -> T { return T { (std::numeric_limits<std::int64_t>::min)() }; }
 
 template<typename T>
-constexpr T int64_max()
-{
-  return T { (std::numeric_limits<std::int64_t>::max)() };
-}
+constexpr auto int64_max() -> T { return T { (std::numeric_limits<std::int64_t>::max)() }; }
 
 } // namespace ef
 
@@ -127,7 +109,7 @@ template<typename T>
 struct logn_helper
 {
 public:
-  static T my_logn(const std::uint32_t n)
+  static auto my_logn(const std::uint32_t n) -> T
   {
     const auto it_ln =
       std::find_if
@@ -161,18 +143,15 @@ private:
 };
 
 template<typename T>
-std::map<std::uint32_t, T> logn_helper<T>::ln_data;
+std::map<std::uint32_t, T> logn_helper<T>::ln_data { };
 
 } // namespace detail
 
 template<typename T>
-T logn(const std::uint32_t n)
-{
-  return detail::logn_helper<T>::my_logn(n);
-}
+auto logn(const std::uint32_t n) -> T { return detail::logn_helper<T>::my_logn(n); }
 
 template<typename ComplexType>
-ComplexType j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::uint32_t, ComplexType>& n_pow_x_prime_factor_map)
+auto j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::uint32_t, ComplexType>& n_pow_x_prime_factor_map) -> ComplexType
 {
   using local_complex_type = ComplexType;
   using local_real_type    = typename local_complex_type::value_type;
@@ -226,10 +205,10 @@ ComplexType j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::u
     }
 
     // Do the power expansion.
-    if     (p == static_cast<std::uint32_t>(1u)) { }
-    else if(p == static_cast<std::uint32_t>(2u)) { pf_pow_x *=  pf_pow_x; }
-    else if(p == static_cast<std::uint32_t>(3u)) { pf_pow_x *= (pf_pow_x * pf_pow_x); }
-    else                                         { pf_pow_x *= pow(pf_pow_x, static_cast<std::int64_t>(p - 1u)); }
+    if     (p == static_cast<std::uint32_t>(UINT8_C(1))) { }
+    else if(p == static_cast<std::uint32_t>(UINT8_C(2))) { pf_pow_x *=  pf_pow_x; }
+    else if(p == static_cast<std::uint32_t>(UINT8_C(3))) { pf_pow_x *= (pf_pow_x * pf_pow_x); }
+    else                                                 { pf_pow_x *= pow(pf_pow_x, static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1)))); }
 
     jpx *= pf_pow_x;
   }
@@ -244,7 +223,7 @@ namespace Primes {
 struct Inserter
 {
 public:
-  static const std::size_t start_index = static_cast<std::size_t>(2u);
+  static constexpr std::size_t start_index = static_cast<std::size_t>(UINT8_C(2));
 
   explicit Inserter(std::deque<std::uint32_t>& sequence)
     : count(static_cast<std::uint32_t>(start_index)),
@@ -254,7 +233,7 @@ public:
 
   void operator()(const bool& bo_is_not_prime) const
   {
-    const bool bo_is_prime = !bo_is_not_prime;
+    const auto bo_is_prime = (!bo_is_not_prime);
 
     if(bo_is_prime)
     {
@@ -269,37 +248,41 @@ private:
   mutable std::back_insert_iterator<std::deque<std::uint32_t>> my_it;
 };
 
-void Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data)
+auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) -> void
 {
   // Establish the range of the prime number calculation. Use an approximation
   // related to the prime number theorem to obtain the value of the maximum prime
   // number or a minimum of at least 100. Also be sure to limit this range to
   // within the upper limit of std::uint32_t.
 
-  static const std::uint32_t min_hundred = static_cast<std::uint32_t>(100u);
-  static const double xmax        = static_cast<double>((std::numeric_limits<std::uint32_t>::max)());
+  constexpr auto min_hundred = static_cast<std::uint32_t>(UINT8_C(100));
+  constexpr auto xmax        = static_cast<double>((std::numeric_limits<std::uint32_t>::max)());
 
-  const std::uint32_t N     = (std::max)(min_hundred, n);
-  const double xn           = static_cast<double>(N);
-  const double logn         = ::log(xn);
-  const double loglogn      = ::log(logn);
-  const double top          = xn * (((logn + loglogn) - 1.0) + ((static_cast<double>(1.8) * loglogn) / logn));
-  const double xlim         = (std::min)(top, xmax);
-  const std::uint32_t nlim  = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
-  const std::uint32_t limit = (std::max)(n, nlim);
+  const auto N       = (std::max)(min_hundred, n);
+  const auto xn      = static_cast<double>(N);
+
+  using std::log;
+
+  const auto logn    = log(xn);
+  const auto loglogn = log(logn);
+  const auto top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((static_cast<double>(1.8) * loglogn) / logn)));
+  const auto xlim    = (std::min)(top, xmax);
+  const auto nlim    = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
+  const auto limit   = (std::max)(n, nlim);
 
   // Use a sieve algorithm to generate a boolean table representation of the primes.
 
   std::vector<bool> sieve(static_cast<std::size_t>(limit), false);
 
-  std::uint32_t i = static_cast<std::uint32_t>(Primes::Inserter::start_index);
-  std::uint32_t i2;
+  auto i = static_cast<std::uint32_t>(Primes::Inserter::start_index);
+
+  std::uint32_t i2 { };
 
   while((i2 = static_cast<std::uint32_t>(i * i)) < limit)
   {
     if(!sieve[i])
     {
-      for(std::uint32_t j = i2; j < limit; j = static_cast<std::uint32_t>(j + i))
+      for(auto j = i2; j < limit; j = static_cast<std::uint32_t>(j + i))
       {
         sieve[j] = true;
       }
@@ -318,7 +301,7 @@ void Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data)
   primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(0u));
 }
 
-std::deque<std::uint32_t>& Data(void)
+auto Data(void) -> std::deque<std::uint32_t>&
 {
   // Create a static data table of primes and return a reference to it.
   static std::deque<std::uint32_t> primes;
@@ -330,18 +313,18 @@ std::deque<std::uint32_t>& Data(void)
     // exceed 0x10000 (decimal 65,536). This number is significant because it is
     // the maximum value which needs to be tested while computing the prime factors
     // of unsigned 32-bit integers, as done in the subroutine Factors(...).
-    Primes::Generator(static_cast<std::uint32_t>(6550u), primes);
+    Primes::Generator(static_cast<std::uint32_t>(UINT16_C(6550)), primes);
   }
 
   return primes;
 }
 
-bool IsPrimeFactor(std::uint32_t& np, const std::uint32_t p)
+auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
 {
   const std::uint32_t q = static_cast<std::uint32_t>(np / p);
   const std::uint32_t r = static_cast<std::uint32_t>(np - static_cast<std::uint32_t>(q * p));
 
-  const bool is_prime_factor = (r == static_cast<std::uint32_t>(0u));
+  const bool is_prime_factor = (r == static_cast<std::uint32_t>(UINT8_C(0)));
 
   if(is_prime_factor)
   {
@@ -351,7 +334,7 @@ bool IsPrimeFactor(std::uint32_t& np, const std::uint32_t p)
   return is_prime_factor;
 }
 
-void Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf)
+auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void
 {
   // Compute the prime factors of the unsigned integer n. Use the divide algorithm of
   // "The Art of Computer Programming Volume 2 Semi-numerical Algorithms Third Edition",
@@ -360,17 +343,19 @@ void Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf)
 
   pf.clear();
 
-  const std::uint32_t sqrt_n = static_cast<std::uint32_t>(static_cast<std::uint64_t>(::sqrt(static_cast<double>(n)) + 0.5));
+  using std::sqrt;
 
-  std::uint32_t np = n;
+  const auto sqrt_n = static_cast<std::uint32_t>(static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5));
 
-  for(std::size_t i = static_cast<std::size_t>(0u); i < sz; i++)
+  auto np = n;
+
+  for(auto i = static_cast<std::size_t>(UINT8_C(0)); i < sz; ++i)
   {
-    const std::uint32_t p = Data()[i];
+    const auto p = Data()[i];
 
     if(IsPrimeFactor(np, p))
     {
-      Util::point<std::uint32_t> ip(p, static_cast<std::uint32_t>(1u));
+      Util::point<std::uint32_t> ip(p, static_cast<std::uint32_t>(UINT8_C(1)));
 
       while(IsPrimeFactor(np, p))
       {
@@ -382,12 +367,12 @@ void Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf)
 
     if(static_cast<std::uint32_t>(np / p) <= p)
     {
-      pf.push_back(Util::point<std::uint32_t>(np, static_cast<std::uint32_t>(1u)));
+      pf.push_back(Util::point<std::uint32_t>(np, static_cast<std::uint32_t>(UINT8_C(1))));
 
       break;
     }
 
-    if((np == static_cast<std::uint32_t>(1u)) || (p >= sqrt_n))
+    if((np == static_cast<std::uint32_t>(UINT8_C(1))) || (p >= sqrt_n))
     {
       break;
     }
@@ -398,7 +383,7 @@ void Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf)
 
 namespace ef {
 
-void prime(const std::uint32_t n, std::deque<std::uint32_t>& primes)
+auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> void
 {
   // For small values of n less than the size of the prime data table, the primes
   // can be copied from the data table. For large values of n, the primes must be
@@ -413,36 +398,39 @@ void prime(const std::uint32_t n, std::deque<std::uint32_t>& primes)
   }
 }
 
-void prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>>& pf)
+auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>>& pf) -> void
 {
+  using local_point_type       = Util::point<std::uint32_t>;
+  using local_point_deque_type = std::deque<local_point_type>;
+
   // Factor the input integer into a list of primes. For small inputs less than 10,000
   // use the tabulated prime factors list. Calculate the prime factors for larger inputs
   // above 10,000.
-  static std::vector<std::deque<Util::point<std::uint32_t> > > prime_factors_list;
+  static std::vector<local_point_deque_type> prime_factors_list { };
 
   if(prime_factors_list.empty())
   {
     // Generate a table of the sets of the first 10,000 integer prime factorizations.
-    prime_factors_list.resize(static_cast<std::size_t>(10000u));
+    prime_factors_list.resize(static_cast<std::size_t>(UINT16_C(10000)));
 
-    prime_factors_list[static_cast<std::size_t>(0u)] = std::deque<Util::point<std::uint32_t> >(static_cast<std::size_t>(1u), Util::point<std::uint32_t>(static_cast<std::uint32_t>(0u), static_cast<std::uint32_t>(1u)));
-    prime_factors_list[static_cast<std::size_t>(1u)] = std::deque<Util::point<std::uint32_t> >(static_cast<std::size_t>(1u), Util::point<std::uint32_t>(static_cast<std::uint32_t>(1u), static_cast<std::uint32_t>(1u)));
-    prime_factors_list[static_cast<std::size_t>(2u)] = std::deque<Util::point<std::uint32_t> >(static_cast<std::size_t>(1u), Util::point<std::uint32_t>(static_cast<std::uint32_t>(2u), static_cast<std::uint32_t>(1u)));
-    prime_factors_list[static_cast<std::size_t>(3u)] = std::deque<Util::point<std::uint32_t> >(static_cast<std::size_t>(1u), Util::point<std::uint32_t>(static_cast<std::uint32_t>(3u), static_cast<std::uint32_t>(1u)));
+    prime_factors_list[static_cast<std::size_t>(UINT8_C(0))] = local_point_deque_type(static_cast<std::size_t>(UINT8_C(1)), local_point_type(static_cast<std::uint32_t>(UINT8_C(0)), static_cast<std::uint32_t>(UINT8_C(1))));
+    prime_factors_list[static_cast<std::size_t>(UINT8_C(1))] = local_point_deque_type(static_cast<std::size_t>(UINT8_C(1)), local_point_type(static_cast<std::uint32_t>(UINT8_C(1)), static_cast<std::uint32_t>(UINT8_C(1))));
+    prime_factors_list[static_cast<std::size_t>(UINT8_C(2))] = local_point_deque_type(static_cast<std::size_t>(UINT8_C(1)), local_point_type(static_cast<std::uint32_t>(UINT8_C(2)), static_cast<std::uint32_t>(UINT8_C(1))));
+    prime_factors_list[static_cast<std::size_t>(UINT8_C(3))] = local_point_deque_type(static_cast<std::size_t>(UINT8_C(1)), local_point_type(static_cast<std::uint32_t>(UINT8_C(3)), static_cast<std::uint32_t>(UINT8_C(1))));
 
-    static const std::uint32_t n_five = static_cast<std::uint32_t>(5u);
+    constexpr std::uint32_t n_five { static_cast<std::uint32_t>(UINT8_C(5)) };
 
-    std::deque<std::uint32_t>::const_iterator it_next_prime = std::find(Primes::Data().cbegin(), Primes::Data().cend(), n_five);
+    auto it_next_prime = std::find(Primes::Data().cbegin(), Primes::Data().cend(), n_five);
 
-    for(std::size_t i = static_cast<std::size_t>(4u); i < prime_factors_list.size(); i++)
+    for(auto i = static_cast<std::size_t>(UINT8_C(4)); i < prime_factors_list.size(); ++i)
     {
       if((it_next_prime != Primes::Data().cend()) && (static_cast<std::uint32_t>(i) == *it_next_prime))
       {
         ++it_next_prime;
 
-        prime_factors_list[i] = std::deque<Util::point<std::uint32_t> >(static_cast<std::size_t>(1u),
-                                                                 Util::point<std::uint32_t>(static_cast<std::uint32_t>(i),
-                                                                 static_cast<std::uint32_t>(1u)));
+        const local_point_type pt_i_one { static_cast<std::uint32_t>(i), static_cast<std::uint32_t>(UINT8_C(1)) };
+
+        prime_factors_list[i] = local_point_deque_type(static_cast<std::size_t>(UINT8_C(1)), pt_i_one);
       }
       else
       {
@@ -464,28 +452,14 @@ void prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>>
 } // namespace ef
 
 template<typename ComplexType>
-ComplexType ZetaTemplate(const ComplexType& s)
+auto ZetaTemplate(const ComplexType& s) -> ComplexType
 {
   using local_complex_type = ComplexType;
   using local_real_type    = typename local_complex_type::value_type;
 
-  //if(ef::isint(s))
-  //{
-  //  // Support pure-integer arguments according to certain conditions.
-  //  const std::int32_t n = ef::to_int32(real(s));
-  //
-  //  if(Zeta_Series::has_simple_form_for_zeta_n(n))
-  //  {
-  //    return ef::riemann_zeta(n);
-  //  }
-  //}
-
-  //if(ef::isneg(s))
-  //{
-  //  // Support negative arguments using the reflection formula.
-  //  // Support arguments with a real part which is less than 1/2.
-  //  return Zeta_Series::Reflection(s);
-  //}
+  // TODO: Support pure-integer arguments according to certain conditions.
+  // TODO: Support negative arguments using the reflection formula.
+  // TODO: Support arguments with a real part which is less than 1/2.
 
   // The algorithms for calculating the Riemann zeta function below use calculations
   // of the integer j raised to the power s, or in other words j^s. The calculation of
@@ -507,7 +481,11 @@ ComplexType ZetaTemplate(const ComplexType& s)
   static const std::vector<std::uint32_t> primes(prime_data.begin(), prime_data.end());
 
   {
-    if(abs(imag(s)) > local_real_type(1000100UL))
+    const local_real_type upper_limit { static_cast<std::uint32_t>(UINT32_C(1000100)) };
+
+    using std::abs;
+
+    if(abs(imag(s)) > upper_limit)
     {
       // Return NaN if s has a large imaginary part.
       return local_complex_type { std::numeric_limits<local_real_type>::quiet_NaN() };
@@ -526,36 +504,51 @@ ComplexType ZetaTemplate(const ComplexType& s)
     // dn is equal to the value of d0 at the end of the loop.
 
     // Use N = (digits * 1.45) + {|imag(s)| * 1.1}
-    static const double nd = static_cast<double>(std::numeric_limits<local_real_type>::digits10) * static_cast<double>(1.45);
-           const double ni = static_cast<double>(static_cast<double>(1.10) * fabs(ef::to_double(imag(s))));
+    constexpr double nd { static_cast<double>(std::numeric_limits<local_real_type>::digits10) * static_cast<double>(1.45) };
 
-    const std::int32_t N        = static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni)));
-          bool         neg_term = (N % static_cast<std::int32_t>(2)) == static_cast<std::int32_t>(0);
+    using std::fabs;
 
-    local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(static_cast<unsigned int>((N + N) - 1));
-    local_real_type four_pow_j              = pow(local_real_type(4U), static_cast<std::int64_t>(N));
+    const double ni = static_cast<double>(static_cast<double>(1.10) * fabs(ef::to_double(imag(s))));
+
+    const auto N = static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni)));
+
+    auto neg_term = ((N % static_cast<std::int32_t>(2)) == static_cast<std::int32_t>(0));
+
+    const auto two_n_minus_one =
+      static_cast<unsigned int>
+      (
+        static_cast<std::int32_t>
+        (
+          static_cast<std::int32_t>(N + N) - static_cast<std::int32_t>(INT8_C(1))
+        )
+      );
+
+    local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
+    local_real_type four_pow_j              = pow(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
     local_real_type n_minus_j_fact          = ef::one<local_real_type>();
-    local_real_type two_j_fact              = n_plus_j_minus_one_fact * static_cast<std::int32_t>(static_cast<std::int32_t>(2) * N);
+    local_real_type two_j_fact              = n_plus_j_minus_one_fact * static_cast<std::int32_t>(static_cast<std::int32_t>(INT8_C(2)) * N);
 
     local_real_type dn = (n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact);
 
     local_complex_type jps = Util::j_pow_x(static_cast<std::uint32_t>(N), s, n_pow_s_prime_factor_map);
 
-    local_complex_type zs = (!neg_term ? dn : -dn) / jps;
+    local_complex_type zs = ((!neg_term) ? dn : -dn) / jps;
 
-    for(std::int32_t j = N - static_cast<std::int32_t>(1); j >= static_cast<std::int32_t>(0); --j)
+    for(auto   j  = static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1)));
+               j >= static_cast<std::int32_t>(INT8_C(0));
+             --j)
     {
-      const bool j_is_zero = (j == static_cast<std::int32_t>(0));
+      const auto j_is_zero = (j == static_cast<std::int32_t>(INT8_C(0)));
 
-      const std::int32_t two_jp1_two_j =
+      const auto two_jp1_two_j =
         static_cast<std::int32_t>
         (
-            static_cast<std::int32_t>((static_cast<std::int32_t>(2) * j) + static_cast<std::int32_t>(1))
-          * static_cast<std::int32_t> (static_cast<std::int32_t>(2) * (!j_is_zero ? j : static_cast<std::int32_t>(1)))
+            static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
+          * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * (!j_is_zero ? j : static_cast<std::int32_t>(INT8_C(1))))
         );
 
       n_plus_j_minus_one_fact /= static_cast<std::int32_t>(N + j);
-      four_pow_j              /= static_cast<std::int32_t>(4);
+      four_pow_j              /= static_cast<std::int32_t>(INT8_C(4));
       n_minus_j_fact          *= static_cast<std::int32_t>(N - j);
       two_j_fact              /= two_jp1_two_j;
 
@@ -566,15 +559,19 @@ ComplexType ZetaTemplate(const ComplexType& s)
         // Increment the zeta function sum.
         jps = Util::j_pow_x(j, s, n_pow_s_prime_factor_map);
 
-        neg_term = !neg_term;
+        neg_term = (!neg_term);
 
-        zs += (!neg_term ? dn : -dn) / jps;
+        zs += ((!neg_term) ? dn : -dn) / jps;
       }
     }
 
-    const local_complex_type two_pow_one_minus_s = pow(local_complex_type( local_real_type { 2 } ), ef::one<local_real_type>() - s);
+    const local_complex_type one_minus_s { ef::one<local_real_type>() - s };
 
-    return zs / (dn * (ef::one<local_real_type>() - two_pow_one_minus_s));
+    static const local_complex_type two_cpx { local_real_type { static_cast<int>(INT8_C(2)) } };
+
+    using std::pow;
+
+    return zs / (dn * (ef::one<local_real_type>() - pow(two_cpx, one_minus_s)));
   }
 }
 
@@ -609,7 +606,7 @@ using real_type    = typename complex_type::value_type;
 } // namespace local
 
 template<typename ComplexType>
-ComplexType riemann_zeta(const ComplexType& s)
+auto riemann_zeta(const ComplexType& s) -> ComplexType
 {
   return local::detail::ZetaTemplate<ComplexType>(s);
 }
