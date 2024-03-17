@@ -21,7 +21,10 @@
     <ClCompile Include="test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="example\example_023_riemann_zeta_z.cpp">
+    <ClCompile Include="example\example023_riemann_zeta_z.cpp">
+      <Filter>Source Files\example</Filter>
+    </ClCompile>
+    <ClCompile Include="example\example023a_riemann_zeta_zeros.cpp">
       <Filter>Source Files\example</Filter>
     </ClCompile>
   </ItemGroup>

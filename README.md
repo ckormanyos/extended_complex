@@ -114,7 +114,7 @@ auto main() -> int
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
-An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example_023_riemann_zeta_z.cpp)
+An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example023_riemann_zeta_z.cpp)
 provides a header-only implementation of the complex-valued
 [Riemann-zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
 The program handles arguments in a relatively large, yet limited
@@ -133,10 +133,30 @@ $${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389
 
 is calculated.
 
+### The First Three High-Precision Zeros on the Critical Strip
+
+In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
+the first three non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
+are calculated to ${\sim}~101$ decimal digits of precision.
+
+The results found are:
+
+$$
+r_{0}~{\sim}~14.13472514173469379045725198356247{\ldots}
+$$
+
+$$
+r_{1}~{\sim}~21.02203963877155499262847959389690{\ldots}
+$$
+
+$$
+r_{2}~{\sim}~25.01085758014568876321379099256282{\ldots}
+$$
+
 ### Not Number-Theory-Ready
 
-The range and domain of the calculations
-in this particular example are intended
+The range and domain of the Riemann-zeta calculations
+in these particular examples are intended
 for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 

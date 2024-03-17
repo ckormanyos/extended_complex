@@ -17,11 +17,8 @@
 #include <cstddef>
 #include <cstdint>
 #include <deque>
-#include <iomanip>
-#include <iostream>
 #include <limits>
 #include <map>
-#include <sstream>
 #include <vector>
 
 namespace zeta_detail { namespace detail {
@@ -43,8 +40,8 @@ struct point
 
 namespace ef {
 
-auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void;
-auto prime        (const std::uint32_t n, std::deque<std::uint32_t>& primes)-> void;
+inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void;
+inline auto prime        (const std::uint32_t n, std::deque<std::uint32_t>& primes)-> void;
 
 template<typename T>
 auto order(const T& val) -> int
@@ -250,7 +247,7 @@ private:
   mutable std::back_insert_iterator<std::deque<value_type>> my_it;
 };
 
-auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) -> void
+inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) -> void
 {
   // Establish the range of the prime number calculation. Use an approximation
   // related to the prime number theorem to obtain the value of the maximum prime
@@ -305,7 +302,7 @@ auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) ->
   primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(0u));
 }
 
-auto Data(void) -> std::deque<std::uint32_t>&
+inline auto Data(void) -> std::deque<std::uint32_t>&
 {
   // Create a static data table of primes and return a reference to it.
   static std::deque<std::uint32_t> primes;
@@ -323,7 +320,7 @@ auto Data(void) -> std::deque<std::uint32_t>&
   return primes;
 }
 
-auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
+inline auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
 {
   const std::uint32_t q = static_cast<std::uint32_t>(np / p);
   const std::uint32_t r = static_cast<std::uint32_t>(np - static_cast<std::uint32_t>(q * p));
@@ -338,7 +335,7 @@ auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
   return is_prime_factor;
 }
 
-auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void
+inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf) -> void
 {
   // Compute the prime factors of the unsigned integer n. Use the divide algorithm of
   // "The Art of Computer Programming Volume 2 Semi-numerical Algorithms Third Edition",
@@ -387,7 +384,7 @@ auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t> >& pf)
 
 namespace ef {
 
-auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> void
+inline auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> void
 {
   // For small values of n less than the size of the prime data table, the primes
   // can be copied from the data table. For large values of n, the primes must be
@@ -402,7 +399,7 @@ auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> void
   }
 }
 
-auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>>& pf) -> void
+inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>>& pf) -> void
 {
   using local_point_type       = Util::point<std::uint32_t>;
   using local_point_deque_type = std::deque<local_point_type>;
