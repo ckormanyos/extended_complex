@@ -10,6 +10,10 @@
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+
 namespace local
 {
   template<typename NumericType>
@@ -36,7 +40,7 @@ namespace local
   }
 } // namespace local
 
-auto example() -> bool
+auto example023_riemann_zeta_z() -> bool
 {
   using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<static_cast<unsigned>(UINT8_C(101))>, boost::multiprecision::et_off>>;
   using real_type    = typename complex_type::value_type;

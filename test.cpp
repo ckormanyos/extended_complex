@@ -186,31 +186,35 @@ namespace local
   }
 }
 
-extern auto example() -> bool;
+extern auto example023_riemann_zeta_z     () -> bool;
+extern auto example023a_riemann_zeta_zeros() -> bool;
 
 auto main() -> int
 {
   using local_mp_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
 
-  const auto result_flt__is_ok = local::test<float>();
-  const auto result_dbl__is_ok = local::test<double>();
-  const auto result_ldbl_is_ok = local::test<long double>();
-  const auto result_mp___is_ok = local::test<local_mp_type>();
-  const auto result_expl_is_ok = ::example();
+  const auto result_flt_________is_ok = local::test<float>();
+  const auto result_dbl_________is_ok = local::test<double>();
+  const auto result_ldbl________is_ok = local::test<long double>();
+  const auto result_mp__________is_ok = local::test<local_mp_type>();
+  const auto result_example023__is_ok = ::example023_riemann_zeta_z();
+  const auto result_example023a_is_ok = ::example023a_riemann_zeta_zeros();
 
-  BOOST_TEST(result_flt__is_ok);
-  BOOST_TEST(result_dbl__is_ok);
-  BOOST_TEST(result_ldbl_is_ok);
-  BOOST_TEST(result_mp___is_ok);
-  BOOST_TEST(result_expl_is_ok);
+  BOOST_TEST(result_flt_________is_ok);
+  BOOST_TEST(result_dbl_________is_ok);
+  BOOST_TEST(result_ldbl________is_ok);
+  BOOST_TEST(result_mp__________is_ok);
+  BOOST_TEST(result_example023__is_ok);
+  BOOST_TEST(result_example023a_is_ok);
 
   auto result_is_ok =
   (
-       result_flt__is_ok
-    && result_dbl__is_ok
-    && result_ldbl_is_ok
-    && result_mp___is_ok
-    && result_expl_is_ok
+       result_flt_________is_ok
+    && result_dbl_________is_ok
+    && result_ldbl________is_ok
+    && result_mp__________is_ok
+    && result_example023__is_ok
+    && result_example023a_is_ok
   );
 
   BOOST_TEST(result_is_ok);
