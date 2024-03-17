@@ -153,6 +153,13 @@ $$
 r_{2}~{\sim}~25.01085758014568876321379099256282{\ldots}
 $$
 
+See also the image below which shows a graph of the
+absolute value of the complex-valued Riemann-zeta function
+on a small section of the critical strip at $z~=~\frac{1}{2}~+~iy$.
+Several of the first roots are visible.
+
+![](./images/zeta_critical_strip.jpg)
+
 ### Not Number-Theory-Ready
 
 The range and domain of the Riemann-zeta calculations
@@ -178,7 +185,7 @@ the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 
-The above-mentioned in-depth Riemann-zeta example is also executed
+The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in CI.
 
 Continuous integration runs on Ubuntu with both GCC/clang using
