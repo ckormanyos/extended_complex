@@ -157,8 +157,15 @@ See also the image below obtained from
 [here](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29%2B%28I+y%29%5D%5D%2C%7By%2C1%2C42%7D%5D).
 It shows a graph of the absolute value of the complex-valued
 Riemann-zeta function on a small section of the critical strip.
-Several of the first roots are visible. These non-trivial
-roots have complex values of
+Several of the first roots are visible.
+
+Non-trivial roots are found on the critical-strip of
+
+$$
+{\zeta}(z){\mbox{,}}
+$$
+
+where
 
 $$
 z={\frac{1}{2}}~+~iy{\mbox{.}}
