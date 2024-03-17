@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/4r3PqGGvW" alt="godbolt">
+    <a href="https://godbolt.org/z/E4jz4s43r" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -36,14 +36,15 @@ $$
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/4r3PqGGvW).
+at [Godbolt](https://godbolt.org/z/E4jz4s43r).
 
 ```cpp
+#include <extended_complex.h>
+
+#include <boost/multiprecision/cpp_dec_float.hpp>
+
 #include <iomanip>
 #include <iostream>
-
-#include <extended_complex.h>
-#include <boost/multiprecision/cpp_dec_float.hpp>
 
 namespace local
 {
@@ -109,7 +110,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/PdsxTPT5b" alt="godbolt">
+    <a href="https://godbolt.org/z/rG6ohK881" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -122,7 +123,7 @@ the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.191646
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/PdsxTPT5b).
+[here](https://godbolt.org/z/rG6ohK881).
 
 In particular, the value of
 
