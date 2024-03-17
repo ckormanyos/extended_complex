@@ -42,7 +42,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -O2 -std=${{ matrix.standard }} -I. -I../boost-root example.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example_023_riemann_zeta_z.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
