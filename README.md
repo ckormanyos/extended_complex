@@ -153,6 +153,27 @@ $$
 r_{2}~{\sim}~25.01085758014568876321379099256282{\ldots}
 $$
 
+See also the image below obtained from
+[here](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29%2B%28I+y%29%5D%5D%2C%7By%2C1%2C42%7D%5D).
+It shows a graph of the absolute value of the complex-valued
+Riemann-zeta function on a small section of the critical strip.
+Several of the first roots are visible.
+
+It is believed that infinitely many non-trivial roots
+can be found on the critical strip of
+
+$$
+{\zeta}(z){\mbox{,}}
+$$
+
+where
+
+$$
+z={\frac{1}{2}}~+~iy{\mbox{.}}
+$$
+
+![](./images/zeta_critical_strip.jpg)
+
 ### Not Number-Theory-Ready
 
 The range and domain of the Riemann-zeta calculations
@@ -178,7 +199,7 @@ the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 
-The above-mentioned in-depth Riemann-zeta example is also executed
+The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in CI.
 
 Continuous integration runs on Ubuntu with both GCC/clang using
