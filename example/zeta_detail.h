@@ -5,14 +5,13 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#include <extended_complex.h>
+#ifndef ZETA_DETAIL_2024_03_17_H
+#define ZETA_DETAIL_2024_03_17_H
 
 #define BOOST_MATH_STANDALONE
 #define BOOST_MULTIPRECISION_STANDALONE
 
 #include <boost/math/special_functions/factorials.hpp>
-#include <boost/multiprecision/complex_adaptor.hpp>
-#include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include <algorithm>
 #include <cstddef>
@@ -25,7 +24,7 @@
 #include <sstream>
 #include <vector>
 
-namespace local { namespace detail {
+namespace zeta_detail { namespace detail {
 
 namespace Util {
 
@@ -220,13 +219,16 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::uint32_t
 
 namespace Primes {
 
+template<typename IntegralType>
 struct Inserter
 {
 public:
+  using value_type = IntegralType;
+
   static constexpr std::size_t start_index = static_cast<std::size_t>(UINT8_C(2));
 
-  explicit Inserter(std::deque<std::uint32_t>& sequence)
-    : count(static_cast<std::uint32_t>(start_index)),
+  explicit Inserter(std::deque<value_type>& sequence)
+    : count(static_cast<value_type>(start_index)),
       my_it(std::back_inserter(sequence)) { }
 
   Inserter() = delete;
@@ -244,8 +246,8 @@ public:
   }
 
 private:
-  mutable std::uint32_t count { };
-  mutable std::back_insert_iterator<std::deque<std::uint32_t>> my_it;
+  mutable value_type count { };
+  mutable std::back_insert_iterator<std::deque<value_type>> my_it;
 };
 
 auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) -> void
@@ -274,7 +276,9 @@ auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) ->
 
   std::vector<bool> sieve(static_cast<std::size_t>(limit), false);
 
-  auto i = static_cast<std::uint32_t>(Primes::Inserter::start_index);
+  using primes_inserter_type = Primes::Inserter<std::uint32_t>;
+
+  auto i = static_cast<std::uint32_t>(primes_inserter_type::start_index);
 
   std::uint32_t i2 { };
 
@@ -294,9 +298,9 @@ auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) ->
   // Extract the prime numbers into the data table by inserting them from the sieve.
   primes_data.clear();
 
-  std::for_each(sieve.begin() + Primes::Inserter::start_index,
+  std::for_each(sieve.begin() + primes_inserter_type::start_index,
                 sieve.end(),
-                Primes::Inserter(primes_data));
+                primes_inserter_type(primes_data));
 
   primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(0u));
 }
@@ -575,86 +579,14 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   }
 }
 
-template<typename NumericType>
-auto is_close_fraction(const NumericType& a,
-                       const NumericType& b,
-                       const NumericType& tol) noexcept -> bool
-{
-  using std::fabs;
-
-  auto result_is_ok = bool { };
-
-  if(b == static_cast<NumericType>(0))
-  {
-    result_is_ok = (fabs(a - b) < tol);
-  }
-  else
-  {
-    const auto delta = fabs(1 - (a / b));
-
-    result_is_ok = (delta < tol);
-  }
-
-  return result_is_ok;
-}
-
 } // namespace detail
 
-using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<101>, boost::multiprecision::et_off>>;
-using real_type    = typename complex_type::value_type;
-
-} // namespace local
+} // namespace zeta_detail
 
 template<typename ComplexType>
 auto riemann_zeta(const ComplexType& s) -> ComplexType
 {
-  return local::detail::ZetaTemplate<ComplexType>(s);
+  return zeta_detail::detail::ZetaTemplate<ComplexType>(s);
 }
 
-auto example() -> bool
-{
-  using local::complex_type;
-  using local::real_type;
-
-  // N[Zeta[(11/10) + ((23 I) /10), 101]
-  //   0.632109498389343535342169571825433072547166503805556530807503296226452975136793086061836360968673834125891496185123905777760
-  // - 0.265505793636743413619960696457985203582955058856950038898137949405729351965402359763549645860763401989286376534257444945731 I
-
-  complex_type c(real_type(11) / 10, real_type(23) / 10);
-
-  const auto rz = riemann_zeta(c);
-
-  {
-    std::stringstream strm;
-
-    strm << std::setprecision(std::numeric_limits<real_type>::digits10) << rz;
-
-    std::cout << strm.str() << std::endl;
-  }
-
-  bool result_is_ok { };
-
-  {
-    const real_type tol { std::numeric_limits<real_type>::epsilon() * 64U };
-
-    const complex_type
-      rz_ctrl
-      {
-        real_type("+0.632109498389343535342169571825433072547166503805556530807503296226452975136793086061836360968673834125891496185123905777760"),
-        real_type("-0.265505793636743413619960696457985203582955058856950038898137949405729351965402359763549645860763401989286376534257444945731")
-      };
-
-    const auto result_zeta_real_is_ok = local::detail::is_close_fraction(rz.real(), rz_ctrl.real(), tol);
-    const auto result_zeta_imag_is_ok = local::detail::is_close_fraction(rz.imag(), rz_ctrl.imag(), tol);
-
-    result_is_ok = (result_zeta_real_is_ok && result_zeta_imag_is_ok);
-
-    std::stringstream strm;
-
-    strm << "result_is_ok: " << std::boolalpha << result_is_ok;
-
-    std::cout << strm.str() << std::endl;
-  }
-
-  return result_is_ok;
-}
+#endif // ZETA_DETAIL_2024_03_17_H

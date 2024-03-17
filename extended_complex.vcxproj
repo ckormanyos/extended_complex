@@ -78,10 +78,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="example\zeta_detail.h" />
     <ClInclude Include="extended_complex.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="example.cpp" />
+    <ClCompile Include="example\example_023_riemann_zeta_z.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
