@@ -159,10 +159,17 @@ It shows a graph of the absolute value of the complex-valued
 Riemann-zeta function on a small section of the critical strip.
 Several of the first roots are visible.
 
-Non-trivial roots are found on the critical strip of
+It is believed that infinitely many non-trivial roots
+can be found on the critical strip of
 
 $$
-{\zeta}(z){\mbox{, where}}~z={\frac{1}{2}}~+~iy{\mbox{.}}
+{\zeta}(z){\mbox{,}}
+$$
+
+where
+
+$$
+z={\frac{1}{2}}~+~iy{\mbox{.}}
 $$
 
 ![](./images/zeta_critical_strip.jpg)
