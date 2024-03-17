@@ -171,5 +171,5 @@ ACM Transactions on Mathematical Software, Vol. 37, Issue 4, pp 1-27.
 See also the following [link](https://doi.org/10.1145/1916461.1916469).
 
 [2] D. Platt and T. Trudgian,
-_The_ _Riemann_ _hypothesis_ _is_ _true_ _up_ _to_ $3~{\cdot}~10^{12}$,
+_The_ _Riemann_ _hypothesis_ _is_ _true_ _up_ _to_ ${\mbox{\textit{3}}}{\cdot}{\mbox{\textit{10}}}^{12}$,
 [arXiv:2004.09765](https://arxiv.org/pdf/2004.09765.pdf) [math.NT].
