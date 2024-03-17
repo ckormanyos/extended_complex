@@ -110,20 +110,22 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/rG6ohK881" alt="godbolt">
+    <a href="https://godbolt.org/z/scqq9jY1b" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
-An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example.cpp)
-provides an implementation of the complex-valued Riemann-zeta function.
+An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example_023_riemann_zeta_z.cpp)
+provides a header-only implementation of the complex-valued
+[Riemann-zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
 The program handles arguments in a relatively large, yet limited
-unit disc of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
+unit disc of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
-the (legacy) e_float code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
+the (legacy) `e_float` code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
+See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/rG6ohK881).
+[here](https://godbolt.org/z/scqq9jY1b).
 
 In particular, the value of
 
@@ -136,7 +138,7 @@ is calculated.
 The range and domain of the calculations
 in this particular example are intended
 for high-precision investigations within the above-mentioned unit-disc
-of radius ${\sim}10^{6}$ in ${\mathbb{C}}$.
+of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 
 These are _not_ intended for finding record-breaking,
 (relatively) low-precision counts of zero-crossings
@@ -144,7 +146,9 @@ in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$
 which are valuable for providing empirical evidence
 for prime number investigations in number-theory.
 Other algorithms are needed for this type
-of number-theoretical research.
+of number-theoretical research. See also [2]
+for a summary of these and a recent record-breaking
+calculation.
 
 ## Testing and Continuous Integration
 
@@ -152,10 +156,21 @@ A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
-from `Boost.Multiprecision`.
+from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 
 The above-mentioned in-depth Riemann-zeta example is also executed
 and verified in CI.
 
 Continuous integration runs on Ubuntu with both GCC/clang using
 the develop branch of modular-boost.
+
+## References
+
+[1] C.M. Kormanyos,
+_Algorithm_ _910_: _A_ _Portable_ _C++_ _Multiple_-_Precision_ _System_ _for_ _Special_-_Function_ _Calculations_,
+ACM Transactions on Mathematical Software, Vol. 37, Issue 4, pp 1-27.
+See also the following [link](https://doi.org/10.1145/1916461.1916469).
+
+[2] D. Platt and T. Trudgian,
+_The_ _Riemann_ _hypothesis_ _is_ _true_ _up_ _to_ ${\mbox{\textit{3}}}{\cdot}{\mbox{\textit{10}}}^{\mbox{\textit{\small{12}}}}$,
+[arXiv:2004.09765](https://arxiv.org/pdf/2004.09765.pdf) [math.NT].

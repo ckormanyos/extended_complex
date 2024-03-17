@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2016 - 2023.
+//  Copyright Christopher Kormanyos 2016 - 2024.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,7 +17,7 @@
 #include <extended_complex.h>
 
 // cd /mnt/c/Users/User/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
-// g++ -Wall -Wextra -O2 -std=c++20 -I. -I/mnt/c/boost/boost_1_83_0 test.cpp -o test.exe
+// g++ -Wall -Wextra -O3 -std=c++20 -I. -I/mnt/c/boost/boost_1_84_0 examples/example_023_riemann_zeta_z test.cpp -o test.exe
 
 namespace local
 {
