@@ -155,8 +155,8 @@ $$
 
 ### Not Number-Theory-Ready
 
-The range and domain of the calculations
-in this particular example are intended
+The range and domain of the Riemann-zeta calculations
+in these particular examples are intended
 for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 
