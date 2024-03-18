@@ -19,7 +19,8 @@ with both built-in floating-point types as well as user-defined numeric types.
 ## Example
 
 The following straightforward example takes a user-defined,
-multiple-precision floating-point type from `Boost.Multiprecision`.
+multiple-precision floating-point type from
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
 ${\sim}~100$ decimal digits of precision.
 
@@ -108,7 +109,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/scqq9jY1b" alt="godbolt">
+    <a href="https://godbolt.org/z/xqcehj4fj" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -123,7 +124,7 @@ See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/scqq9jY1b).
+[here](https://godbolt.org/z/xqcehj4fj).
 
 In particular, the value of
 
