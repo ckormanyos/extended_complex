@@ -44,11 +44,11 @@ namespace local
 
     std::uintmax_t max_iter { static_cast<std::uintmax_t>(UINT8_C(32)) };
 
-    auto result = boost::math::tools::toms748_solve(local::my_riemann_function, std::get<0>(bt_val), std::get<1>(bt_val), tol, max_iter);
-
-    static const real_type my_half { real_type { static_cast<int>(INT8_C(1)) } / static_cast<int>(INT8_C(2)) };
-
-    const complex_type arg_on_crit_strip { my_half, result.first };
+    const std::pair<real_type, real_type>
+      result
+      {
+        boost::math::tools::toms748_solve(local::my_riemann_function, std::get<0>(bt_val), std::get<1>(bt_val), tol, max_iter)
+      };
 
     {
       std::stringstream strm;
@@ -58,13 +58,16 @@ namespace local
       std::cout << strm.str() << std::endl;
     }
 
-    return arg_on_crit_strip;
+    static const real_type my_half { real_type { static_cast<int>(INT8_C(1)) } / static_cast<int>(INT8_C(2)) };
+
+    return { my_half, result.first };
   }
 } // namespace local
 
 auto example023a_riemann_zeta_zeros() -> bool
 {
   using local::real_type;
+  using local::complex_type;
   using local::bracket_type;
   using local::find_bracketed_riemann_root;
 
@@ -90,17 +93,17 @@ auto example023a_riemann_zeta_zeros() -> bool
     };
 
   // 14.134725141734693790457251983562470270784257115699243175685567460149963429809256764949010393171561012
-  const auto rz0 = find_bracketed_riemann_root(bt_val0);
+  const complex_type rz0 { find_bracketed_riemann_root(bt_val0) };
 
   // 21.022039638771554992628479593896902777334340524902781754629520403587598586068890799713658514180151419
-  const auto rz1 = find_bracketed_riemann_root(bt_val1);
+  const complex_type rz1 { find_bracketed_riemann_root(bt_val1) };
 
   // 25.01085758014568876321379099256282181865954967255799667249654200674509209844164427784023822455806244
-  const auto rz2 = find_bracketed_riemann_root(bt_val2);
+  const complex_type rz2 { find_bracketed_riemann_root(bt_val2) };
+
+  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * 64 };
 
   using std::abs;
-
-  const auto my_real_tol = std::numeric_limits<real_type>::epsilon() * 32;
 
   const auto result_rz0_is_ok = (abs(riemann_zeta(rz0)) < my_real_tol);
   const auto result_rz1_is_ok = (abs(riemann_zeta(rz1)) < my_real_tol);

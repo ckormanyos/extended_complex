@@ -21,18 +21,13 @@ with both built-in floating-point types as well as user-defined numeric types.
 The following straightforward example takes a user-defined,
 multiple-precision floating-point type from `Boost.Multiprecision`.
 It computes a complex-valued square root with
-${\sim}100$ decimal digits of precision.
+${\sim}~100$ decimal digits of precision.
 
 The square root value computed is
 
 $$
 \sqrt { \frac{12}{10} + \frac{34}{10}i }
-$$
-
-the approximate complex-value of which is
-
-$$
-1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
+{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
@@ -135,31 +130,8 @@ is calculated.
 
 ### The First Three High-Precision Zeros on the Critical Strip
 
-In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
-the first three non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
-are calculated to ${\sim}~101$ decimal digits of precision.
-
-The results found are:
-
-$$
-r_{0}~{\sim}~14.13472514173469379045725198356247{\ldots}
-$$
-
-$$
-r_{1}~{\sim}~21.02203963877155499262847959389690{\ldots}
-$$
-
-$$
-r_{2}~{\sim}~25.01085758014568876321379099256282{\ldots}
-$$
-
-See also the image below obtained from
-[here](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29%2B%28I+y%29%5D%5D%2C%7By%2C1%2C42%7D%5D).
-It shows a graph of the absolute value of the complex-valued
-Riemann-zeta function on a small section of the critical strip.
-Several of the first roots are visible.
-
 It is believed that infinitely many non-trivial roots
+of the complex-valued Riemann-zeta function
 can be found on the critical strip of
 
 $$
@@ -169,15 +141,41 @@ $$
 where
 
 $$
-z={\frac{1}{2}}~+~iy{\mbox{.}}
+z={\sigma}~+~it~=~{\frac{1}{2}}~+~it{\mbox{,}}
 $$
 
+and $t$ is the imaginary component of $z$.
+
+See also the image below obtained from
+[here](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29%2B%28I+y%29%5D%5D%2C%7By%2C1%2C42%7D%5D).
+It shows a graph of the absolute value of the complex-valued
+Riemann-zeta function on a small section of the critical strip.
+Several of the first roots are visible.
+
 ![](./images/zeta_critical_strip.jpg)
+
+In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
+the first three non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
+are calculated to ${\sim}~101$ decimal digits of precision.
+
+The results found are:
+
+$$
+r_{0}~{\approx}~14.13472514173469379045725198356247{\ldots}
+$$
+
+$$
+r_{1}~{\approx}~21.02203963877155499262847959389690{\ldots}
+$$
+
+$$
+r_{2}~{\approx}~25.01085758014568876321379099256282{\ldots}
+$$
 
 ### Not Number-Theory-Ready
 
 The range and domain of the Riemann-zeta calculations
-in these particular examples are intended
+in the particular examples described above are designed
 for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 
