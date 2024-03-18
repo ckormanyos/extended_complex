@@ -90,9 +90,25 @@ auto example023a_riemann_zeta_zeros() -> bool
       real_type { static_cast<unsigned>(UINT16_C(251)) } / static_cast<unsigned>(UINT8_C(10)),
     };
 
+  const bracket_type
+    bt_val3
+    {
+      real_type { static_cast<unsigned>(UINT16_C(304)) } / static_cast<unsigned>(UINT8_C(10)),
+      real_type { static_cast<unsigned>(UINT16_C(305)) } / static_cast<unsigned>(UINT8_C(10)),
+    };
+
+  const bracket_type
+    bt_val4
+    {
+      real_type { static_cast<unsigned>(UINT16_C(329)) } / static_cast<unsigned>(UINT8_C(10)),
+      real_type { static_cast<unsigned>(UINT16_C(330)) } / static_cast<unsigned>(UINT8_C(10)),
+    };
+
   // rz0: 14.134725141734693790457251983562470270784257115699243175685567460149963429809256764949010393171561012
   // rz1: 21.022039638771554992628479593896902777334340524902781754629520403587598586068890799713658514180151419
   // rz2: 25.01085758014568876321379099256282181865954967255799667249654200674509209844164427784023822455806244
+  // rz3: 30.424876125859513210311897530584091320181560023715440180962146036993329389333277920290584293902089105
+  // rz4: 32.935061587739189690662368964074903488812715603517039009280003440784815608630551005938848496135348718
 
   using local::complex_type;
   using local::find_riemann_root;
@@ -100,16 +116,28 @@ auto example023a_riemann_zeta_zeros() -> bool
   const complex_type rz0 { find_riemann_root(bt_val0) };
   const complex_type rz1 { find_riemann_root(bt_val1) };
   const complex_type rz2 { find_riemann_root(bt_val2) };
+  const complex_type rz3 { find_riemann_root(bt_val3) };
+  const complex_type rz4 { find_riemann_root(bt_val4) };
 
-  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * 64 };
+  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * 256 };
 
   using std::abs;
 
   const auto result_rz0_is_ok = (abs(riemann_zeta(rz0)) < my_real_tol);
   const auto result_rz1_is_ok = (abs(riemann_zeta(rz1)) < my_real_tol);
   const auto result_rz2_is_ok = (abs(riemann_zeta(rz2)) < my_real_tol);
+  const auto result_rz3_is_ok = (abs(riemann_zeta(rz3)) < my_real_tol);
+  const auto result_rz4_is_ok = (abs(riemann_zeta(rz4)) < my_real_tol);
 
-  const auto result_is_ok { result_rz0_is_ok && result_rz1_is_ok && result_rz2_is_ok };
+  const auto
+    result_is_ok
+    {
+         result_rz0_is_ok
+      && result_rz1_is_ok
+      && result_rz2_is_ok
+      && result_rz3_is_ok
+      && result_rz4_is_ok
+    };
 
   return result_is_ok;
 }

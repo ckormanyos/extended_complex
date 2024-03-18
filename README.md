@@ -171,7 +171,7 @@ Several of the first roots are visible.
 ![](./images/zeta_critical_strip.jpg)
 
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
-the first three non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
+the first five non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
 are calculated to ${\sim}~101$ decimal digits of precision.
 
 The results found are:
@@ -188,7 +188,15 @@ $$
 r_{2}~{\approx}~25.01085758014568876321379099256282{\ldots}
 $$
 
-### Not Number-Theory-Ready
+$$
+r_{3}~{\approx}~30.42487612585951321031189753058409{\ldots}
+$$
+
+$$
+r_{4}~{\approx}~32.93506158773918969066236896407490{\ldots}
+$$
+
+### _Not_ Number-Theory-Ready
 
 The range and domain of the Riemann-zeta calculations
 in the particular examples described above are designed
