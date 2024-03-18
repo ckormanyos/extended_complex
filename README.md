@@ -26,8 +26,12 @@ ${\sim}~100$ decimal digits of precision.
 The square root value computed is
 
 $$
-\sqrt { \frac{12}{10} + \frac{34}{10}i }
-{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
+
+\begin{align}
+    \sqrt { \frac{12}{10} &+ \frac{34}{10}i } \\
+    &{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
+\end{align}
+
 $$
 
 The example code is listed in its entirety below. It is also available _live_
