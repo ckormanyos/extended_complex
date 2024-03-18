@@ -128,27 +128,34 @@ $${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389
 
 is calculated.
 
-### The First Three High-Precision Zeros on the Critical Strip
+### Zeros on the Critical Strip
 
-It is believed that infinitely many non-trivial roots
-of the complex-valued Riemann-zeta function
-can be found on the critical strip of
+It is believed that infinitely many non-trivial roots (zeros)
+of the complex-valued Riemann-zeta function can be found
+on the critical strip of
 
 $$
 {\zeta}(z){\mbox{,}}
 $$
 
-where
+with
 
 $$
 z={\sigma}~+~it~=~{\frac{1}{2}}~+~it{\mbox{,}}
 $$
 
-and $t$ is the imaginary component of $z$.
+where the fixed value of $\frac{1}{2}$ is the real component of $z$
+and varying $t$ is the imaginary component of $z$.
 
 See also the image below obtained from
-[here](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29%2B%28I+y%29%5D%5D%2C%7By%2C1%2C42%7D%5D).
-It shows a graph of the absolute value of the complex-valued
+[WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+36%7D%5D).
+The following command has been used.
+
+```
+Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 36}]
+```
+
+The graph shows the absolute value of the complex-valued
 Riemann-zeta function on a small section of the critical strip.
 Several of the first roots are visible.
 

@@ -14,23 +14,23 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <tuple>
+#include <utility>
 
 namespace local
 {
   using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<static_cast<unsigned>(UINT8_C(101))>, boost::multiprecision::et_off>>;
   using real_type    = typename complex_type::value_type;
 
-  real_type my_riemann_function(real_type y)
+  real_type my_riemann_function(const real_type& y)
   {
     static const real_type my_half { real_type { static_cast<int>(INT8_C(1)) } / static_cast<int>(INT8_C(2)) };
 
     return riemann_zeta(complex_type { my_half, y }).real();
   }
 
-  using bracket_type = std::tuple<real_type, real_type>;
+  using bracket_type = std::pair<real_type, real_type>;
 
-  auto find_bracketed_riemann_root(const bracket_type& bt_val) -> complex_type
+  auto find_riemann_root(const bracket_type& bt_val) -> complex_type
   {
     auto tol =
       [](const real_type& a, const real_type& b)
@@ -47,7 +47,7 @@ namespace local
     const std::pair<real_type, real_type>
       result
       {
-        boost::math::tools::toms748_solve(local::my_riemann_function, std::get<0>(bt_val), std::get<1>(bt_val), tol, max_iter)
+        boost::math::tools::toms748_solve(local::my_riemann_function, bt_val.first, bt_val.second, tol, max_iter)
       };
 
     {
@@ -67,9 +67,7 @@ namespace local
 auto example023a_riemann_zeta_zeros() -> bool
 {
   using local::real_type;
-  using local::complex_type;
   using local::bracket_type;
-  using local::find_bracketed_riemann_root;
 
   const bracket_type
     bt_val0
@@ -82,24 +80,26 @@ auto example023a_riemann_zeta_zeros() -> bool
     bt_val1
     {
       real_type { static_cast<unsigned>(UINT16_C(210)) } / static_cast<unsigned>(UINT8_C(10)),
-      real_type { static_cast<unsigned>(UINT16_C(212)) } / static_cast<unsigned>(UINT8_C(10)),
+      real_type { static_cast<unsigned>(UINT16_C(211)) } / static_cast<unsigned>(UINT8_C(10)),
     };
 
   const bracket_type
     bt_val2
     {
-      real_type { static_cast<unsigned>(UINT16_C(249)) } / static_cast<unsigned>(UINT8_C(10)),
+      real_type { static_cast<unsigned>(UINT16_C(250)) } / static_cast<unsigned>(UINT8_C(10)),
       real_type { static_cast<unsigned>(UINT16_C(251)) } / static_cast<unsigned>(UINT8_C(10)),
     };
 
-  // 14.134725141734693790457251983562470270784257115699243175685567460149963429809256764949010393171561012
-  const complex_type rz0 { find_bracketed_riemann_root(bt_val0) };
+  // rz0: 14.134725141734693790457251983562470270784257115699243175685567460149963429809256764949010393171561012
+  // rz1: 21.022039638771554992628479593896902777334340524902781754629520403587598586068890799713658514180151419
+  // rz2: 25.01085758014568876321379099256282181865954967255799667249654200674509209844164427784023822455806244
 
-  // 21.022039638771554992628479593896902777334340524902781754629520403587598586068890799713658514180151419
-  const complex_type rz1 { find_bracketed_riemann_root(bt_val1) };
+  using local::complex_type;
+  using local::find_riemann_root;
 
-  // 25.01085758014568876321379099256282181865954967255799667249654200674509209844164427784023822455806244
-  const complex_type rz2 { find_bracketed_riemann_root(bt_val2) };
+  const complex_type rz0 { find_riemann_root(bt_val0) };
+  const complex_type rz1 { find_riemann_root(bt_val1) };
+  const complex_type rz2 { find_riemann_root(bt_val2) };
 
   const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * 64 };
 
