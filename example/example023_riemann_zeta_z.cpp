@@ -10,6 +10,7 @@
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <sstream>

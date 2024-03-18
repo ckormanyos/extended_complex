@@ -19,7 +19,8 @@ with both built-in floating-point types as well as user-defined numeric types.
 ## Example
 
 The following straightforward example takes a user-defined,
-multiple-precision floating-point type from `Boost.Multiprecision`.
+multiple-precision floating-point type from
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
 ${\sim}~100$ decimal digits of precision.
 
@@ -108,7 +109,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/scqq9jY1b" alt="godbolt">
+    <a href="https://godbolt.org/z/xqcehj4fj" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -123,7 +124,7 @@ See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/scqq9jY1b).
+[here](https://godbolt.org/z/xqcehj4fj).
 
 In particular, the value of
 
@@ -140,7 +141,8 @@ is calculated.
 ### Zeros on the Critical Strip
 
 It is believed that there are infinitely many non-trivial roots (zeros)
-of the complex-valued Riemann-zeta function. These all lie
+of the complex-valued Riemann-zeta function. It is, furthermore,
+hypothesized that these zeros all lie
 on the so-called _critical_ _strip_ of
 
 $$
@@ -155,6 +157,8 @@ $$
 
 where the fixed value of $\frac{1}{2}$ is the real component of $z$
 and the varying value $t$ is the imaginary component of $z$.
+This characteristic of the Riemann-zeta function
+forges deep connections to both prime numbers as well as number theory.
 
 See also the image below obtained from
 [WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+36%7D%5D).
