@@ -154,7 +154,7 @@ z={\sigma}~+~it~=~{\frac{1}{2}}~+~it{\mbox{,}}
 $$
 
 where the fixed value of $\frac{1}{2}$ is the real component of $z$
-and varying value of $t$ is the imaginary component of $z$.
+and the varying value $t$ is the imaginary component of $z$.
 
 See also the image below obtained from
 [WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+36%7D%5D).
