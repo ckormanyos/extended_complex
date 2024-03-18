@@ -139,9 +139,9 @@ is calculated.
 
 ### Zeros on the Critical Strip
 
-It is believed that infinitely many non-trivial roots (zeros)
-of the complex-valued Riemann-zeta function can be found
-on the critical strip of
+It is believed that there are infinitely many non-trivial roots (zeros)
+of the complex-valued Riemann-zeta function. These all lie
+on the so-called _critical_ _strip_ of
 
 $$
 {\zeta}(z){\mbox{,}}
@@ -154,7 +154,7 @@ z={\sigma}~+~it~=~{\frac{1}{2}}~+~it{\mbox{,}}
 $$
 
 where the fixed value of $\frac{1}{2}$ is the real component of $z$
-and varying $t$ is the imaginary component of $z$.
+and varying value of $t$ is the imaginary component of $z$.
 
 See also the image below obtained from
 [WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+36%7D%5D).
