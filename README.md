@@ -26,12 +26,11 @@ ${\sim}~100$ decimal digits of precision.
 The square root value computed is
 
 $$
+    \sqrt { \frac{12}{10} + \frac{34}{10}i }
+$$
 
-\begin{align}
-    \sqrt { \frac{12}{10} &+ \frac{34}{10}i } \\
-    &{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
-\end{align}
-
+$$
+{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
@@ -128,7 +127,13 @@ decimal digits of precision can also be seen
 
 In particular, the value of
 
-$${\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}~{\approx}~0.632109498389343535342{\ldots}~{-}~0.265505793636743413620{\ldots} i$$
+$$
+{\zeta}{\Bigl(}\frac{11}{10} + \frac{23}{10}i{\Bigr)}
+$$
+
+$$
+{\approx}{~}{~}0.632109498389343535342{\ldots}~{-}~0.265505793636743413620{\ldots} i$$
+$$
 
 is calculated.
 
