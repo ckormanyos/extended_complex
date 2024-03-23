@@ -60,7 +60,7 @@ namespace local
 
     static const real_type my_half { 0.5F };
 
-    return std::move( complex_type { my_half, result.first } );
+    return { my_half, result.first };
   }
 } // namespace local
 
