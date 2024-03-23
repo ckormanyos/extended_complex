@@ -46,3 +46,38 @@ jobs:
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
+  clang-native-macos:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [ clang++ ]
+        standard: [ c++14, c++20 ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+      - name: clone-submods-bootstrap-headers-boost-develop
+        run: |
+          git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
+          cd ../boost-root
+          git submodule update --init tools
+          git submodule update --init libs/assert
+          git submodule update --init libs/config
+          git submodule update --init libs/core
+          git submodule update --init libs/math
+          git submodule update --init libs/multiprecision
+          ./bootstrap.sh
+          ./b2 headers
+      - name: clang-native-macos
+        run: |
+          echo "query compiler version"
+          ${{ matrix.compiler }} -v
+          echo "compile the test program"
+          ${{ matrix.compiler }} -Wall -Wextra -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ls -ls ./test.exe
+          echo "run the test program"
+          ./test.exe

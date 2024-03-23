@@ -116,11 +116,11 @@ auto main() -> int
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example023_riemann_zeta_z.cpp)
 provides a header-only implementation of the complex-valued
 [Riemann-zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
-The program handles arguments in a relatively large, yet limited
+The program handles arguments in a relatively large, yet limited,
 unit disc of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
-the (legacy) `e_float` code and [paper](https://doi.acm.org/10.1145/1916461.1916469).
-See also [1] in the references below.
+the [`e_float`](https://doi.acm.org/10.1145/1916461.1916469)
+code and paper. See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
@@ -161,11 +161,11 @@ This characteristic of the Riemann-zeta function
 forges deep connections to both prime numbers as well as number theory.
 
 See also the image below obtained from
-[WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+36%7D%5D).
+[WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+42%7D%5D).
 The following command has been used.
 
 ```
-Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 36}]
+Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 ```
 
 The graph shows the absolute value of the complex-valued
@@ -175,7 +175,7 @@ Several of the first roots are visible.
 ![](./images/zeta_critical_strip.jpg)
 
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
-the first five non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
+the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
 are calculated to ${\sim}~101$ decimal digits of precision.
 
 The results found are:
@@ -200,6 +200,14 @@ $$
 r_{4}~{\approx}~32.93506158773918969066236896407490{\ldots}
 $$
 
+$$
+r_{5}~{\approx}~37.58617815882567125721776348070533{\ldots}
+$$
+
+$$
+r_{6}~{\approx}~40.91871901214749518739812691463325{\ldots}
+$$
+
 ### _Not_ Number-Theory-Ready
 
 The range and domain of the Riemann-zeta calculations
@@ -208,14 +216,14 @@ for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 
 These are _not_ intended for finding record-breaking,
-(relatively) low-precision counts of zero-crossings
-in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$
-which are valuable for providing empirical evidence
+relatively low-precision counts of zero-crossings
+in the critical strip at ${\mathbb{Re}}(z)=\frac{1}{2}$.
+These are valuable for providing empirical evidence
 for prime number investigations in number-theory.
 Other algorithms are needed for this type
 of number-theoretical research. See also [2]
-for a summary of these and a recent record-breaking
-calculation.
+for a summary of these methods and a recent
+record-breaking calculation.
 
 ## Testing and Continuous Integration
 
