@@ -172,8 +172,8 @@ Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 ```
 
 The graph below shows the absolute value of the complex-valued
-Riemann-zeta function on a small section of the critical line.
-Several of the first roots are visible.
+Riemann-zeta function on a small segment of the critical line.
+The first $7$ non-trivial zeros are visible.
 
 ![](./images/zeta_critical_strip.jpg)
 
@@ -184,31 +184,31 @@ are calculated to ${\sim}~501$ decimal digits of precision.
 The results found are:
 
 $$
-r_{0}~{\approx}~14.134725141734693790457251983562470270784257115699{\ldots}
+t_{0}~{\approx}~14.134725141734693790457251983562470270784257115699{\ldots}
 $$
 
 $$
-r_{1}~{\approx}~21.022039638771554992628479593896902777334340524902{\ldots}
+t_{1}~{\approx}~21.022039638771554992628479593896902777334340524902{\ldots}
 $$
 
 $$
-r_{2}~{\approx}~25.010857580145688763213790992562821818659549672557{\ldots}
+t_{2}~{\approx}~25.010857580145688763213790992562821818659549672557{\ldots}
 $$
 
 $$
-r_{3}~{\approx}~30.424876125859513210311897530584091320181560023715{\ldots}
+t_{3}~{\approx}~30.424876125859513210311897530584091320181560023715{\ldots}
 $$
 
 $$
-r_{4}~{\approx}~32.935061587739189690662368964074903488812715603517{\ldots}
+t_{4}~{\approx}~32.935061587739189690662368964074903488812715603517{\ldots}
 $$
 
 $$
-r_{5}~{\approx}~37.586178158825671257217763480705332821405597350830{\ldots}
+t_{5}~{\approx}~37.586178158825671257217763480705332821405597350830{\ldots}
 $$
 
 $$
-r_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
+t_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
 $$
 
 ### _Not_ Number-Theory-Ready
