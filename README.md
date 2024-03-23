@@ -148,15 +148,17 @@ $$
 z={\sigma}~+~it{\mbox{,}}
 $$
 
-where ${\sigma}$ with $0~{<}~{\sigma}~{<}~1 is the real component of $z$
-and $t$ is the imaginary component of $z$.
+where $0<{\sigma}<1$.
 
 It is believed that there are infinitely many non-trivial roots (zeros)
 of the complex-valued Riemann-zeta function. The critical strip
-contains all the non-trivial zeros. This characteristic of the Riemann-zeta function
-forges deep connections to both prime numbers as well as number theory.
+is thought to contain all the non-trivial zeros.
 
-The Riemann Hypothesis, for instance, states that all non-trivial zeros
+This characteristic of the Riemann-zeta function forges deep connections
+to both prime numbers as well as number theory.
+
+The [Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis),
+for instance, states that all non-trivial zeros
 of the Riemann zeta function are further localized and lie on the _critical_ _line_
 at ${\sigma}~=~1/2$. This bold conjecture remains unproven despite significant efforts
 by mathematicians to prove it.
