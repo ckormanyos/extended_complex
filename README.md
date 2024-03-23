@@ -236,8 +236,12 @@ from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprec
 The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in CI.
 
-Continuous integration runs on Ubuntu with both GCC/clang using
+Continuous integration runs on Ubuntu and MacOS with both GCC/clang using
 the develop branch of modular-boost.
+
+GCC's run-time
+[sanitizers](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html)
+are also used in CI in order to help assure dynamic quality.
 
 ## References
 
