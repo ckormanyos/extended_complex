@@ -138,74 +138,75 @@ $$
 
 is calculated.
 
-### Zeros on the Critical Strip
+### High-Precision Zeros on the Critical Line
+
+The so-called _critical_ _strip_ refers to the region in the complex plane
+for which the argument $z$ of the complex-valued Riemann-zeta
+function ${\zeta}(z)$ is
+
+$$
+z={\sigma}~+~it{\mbox{,}}
+$$
+
+where ${\sigma}$ with $0~{<}~{\sigma}~{<}~1 is the real component of $z$
+and $t$ is the imaginary component of $z$.
 
 It is believed that there are infinitely many non-trivial roots (zeros)
-of the complex-valued Riemann-zeta function. It is, furthermore,
-hypothesized that these zeros all lie
-on the so-called _critical_ _strip_ of
-
-$$
-{\zeta}(z){\mbox{,}}
-$$
-
-with
-
-$$
-z={\sigma}~+~it~=~{\frac{1}{2}}~+~it{\mbox{,}}
-$$
-
-where the fixed value of $\frac{1}{2}$ is the real component of $z$
-and the varying value $t$ is the imaginary component of $z$.
-This characteristic of the Riemann-zeta function
+of the complex-valued Riemann-zeta function. The critical strip
+contains all the non-trivial zeros. This characteristic of the Riemann-zeta function
 forges deep connections to both prime numbers as well as number theory.
+
+The Riemann Hypothesis, for instance, states that all non-trivial zeros
+of the Riemann zeta function are further localized and lie on the _critical_ _line_
+at ${\sigma}~=~1/2$. This bold conjecture remains unproven despite significant efforts
+by mathematicians to prove it.
 
 See also the image below obtained from
 [WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+42%7D%5D).
 The following command has been used.
 
-```
+```wl
 Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 ```
 
-The graph shows the absolute value of the complex-valued
-Riemann-zeta function on a small section of the critical strip.
+The graph below shows the absolute value of the complex-valued
+Riemann-zeta function on a small section of the critical line.
 Several of the first roots are visible.
 
 ![](./images/zeta_critical_strip.jpg)
 
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
-the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical strip
-are calculated to ${\sim}~101$ decimal digits of precision.
+the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
+are calculated to ${\sim}~501$ decimal digits of precision.
 
 The results found are:
 
 $$
-r_{0}~{\approx}~14.13472514173469379045725198356247{\ldots}
+r_{0}~{\approx}~14.134725141734693790457251983562470270784257115699{\ldots}
 $$
 
 $$
-r_{1}~{\approx}~21.02203963877155499262847959389690{\ldots}
+r_{1}~{\approx}~21.022039638771554992628479593896902777334340524902{\ldots}
 $$
 
 $$
-r_{2}~{\approx}~25.01085758014568876321379099256282{\ldots}
+r_{2}~{\approx}~25.010857580145688763213790992562821818659549672557{\ldots}
 $$
 
 $$
-r_{3}~{\approx}~30.42487612585951321031189753058409{\ldots}
+r_{3}~{\approx}~30.424876125859513210311897530584091320181560023715{\ldots}
 $$
 
 $$
-r_{4}~{\approx}~32.93506158773918969066236896407490{\ldots}
+r_{4}~{\approx}~32.935061587739189690662368964074903488812715603517{\ldots}
 $$
 
 $$
-r_{5}~{\approx}~37.58617815882567125721776348070533{\ldots}
+r_{5}~{\approx}~37.586178158825671257217763480705332821405597350830{\ldots}
 $$
 
 $$
-r_{6}~{\approx}~40.91871901214749518739812691463325{\ldots}
+r_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
 $$
 
 ### _Not_ Number-Theory-Ready
