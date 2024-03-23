@@ -220,7 +220,7 @@ of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 
 These are _not_ intended for finding record-breaking,
 relatively low-precision counts of zero-crossings
-in the critical line at ${\sigma}=1/2$.
+on the critical line at ${\sigma}=1/2$.
 These are valuable for providing empirical evidence
 for prime number investigations in number-theory.
 Other algorithms are needed for this type
