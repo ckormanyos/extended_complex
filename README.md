@@ -10,8 +10,8 @@ extended_complex
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
-`ckormanyos/extended_complex` creates an extended-complex number-adaption class.
-The project is written in header-only C++14, and compatible through C++14, 17, 20, 23 and beyond..
+`ckormanyos/extended_complex` creates an extended complex-number adaption class.
+The project is written in header-only C++14, and compatible through C++14, 17, 20, 23 and beyond.
 
 The `extended_complex::complex` template class can be used
 with both built-in floating-point types as well as user-defined numeric types.
@@ -240,9 +240,8 @@ from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprec
 The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in CI.
 
-Continuous integration runs on Ubuntu and MacOS with both GCC/clang using
-the develop branch of modular-boost.
-
+Continuous integration runs on Ubuntu and MacOS with both GCC/clang.
+CI uses the develop branch of modular-boost, when needed, for multiprecision types.
 GCC's run-time
 [sanitizers](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html)
 are also used in CI in order to help assure dynamic quality.
