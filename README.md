@@ -163,19 +163,20 @@ of the Riemann zeta function are further localized and lie on the _critical_ _li
 at ${\sigma}~=~1/2$. This bold conjecture remains unproven despite significant efforts
 by mathematicians to prove it.
 
-See also the image below obtained from
-[WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+42%7D%5D).
-The following command has been used.
-
-```wl
-Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
-```
-
 The graph below shows the absolute value of the complex-valued
 Riemann-zeta function on a small segment of the critical line.
 The first $7$ non-trivial zeros are visible.
 
 ![](./images/zeta_critical_strip.jpg)
+
+This image showing $\vert\zeta(z)\vert$ on a small segment of
+the critical line has been obtained from
+[WolframAlpha(R)](https://www.wolframalpha.com/input?i=Plot%5BAbs%5BZeta%5B%281%2F2%29+%2B+%28I+t%29%5D%5D%2C+%7Bt%2C+1%2C+42%7D%5D)
+using the following command.
+
+```wl
+Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
+```
 
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
 the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
