@@ -244,11 +244,11 @@ and verified in the tests.
 
 ## Continuous Integration
 
-Continuous integration runs on Ubuntu and MacOS with both GCC/clang.
-CI uses the develop branch of modular-boost, when needed, for multiprecision types.
-GCC's run-time
+Continuous integration runs on Ubuntu and MacOS with both GCC/clang
+and also runs on Windows with MSVC. GCC's run-time
 [sanitizers](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html)
 are also used in CI in order to help assure dynamic quality.
+CI uses the develop branch of modular-boost, when needed, for multiprecision types.
 
 ## References
 
