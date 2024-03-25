@@ -18,7 +18,16 @@
 
 namespace local
 {
-  using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<static_cast<unsigned>(UINT8_C(501))>, boost::multiprecision::et_off>>;
+  namespace detail
+  {
+    constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(501)) };
+
+    using multiprecision_float_type =
+      boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
+                                    boost::multiprecision::et_off>;
+  }
+
+  using complex_type = extended_complex::complex<detail::multiprecision_float_type>;
   using real_type    = typename complex_type::value_type;
 
   real_type my_riemann_function(const real_type& y)

@@ -17,7 +17,7 @@
 #include <extended_complex.h>
 
 // cd /mnt/c/Users/User/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
-// g++ -Wall -Wextra -O3 -std=c++20 -I. -I/mnt/c/boost/boost_1_84_0 examples/example_023_riemann_zeta_z test.cpp -o test.exe
+// g++ -Werror -Wall -Wextra -Wno-unused-parameter -O3 -std=c++20 -I. -I/mnt/c/boost/boost_1_84_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
 
 namespace local
 {

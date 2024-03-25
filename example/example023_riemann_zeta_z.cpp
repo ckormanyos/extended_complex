@@ -43,7 +43,13 @@ namespace local
 
 auto example023_riemann_zeta_z() -> bool
 {
-  using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<static_cast<unsigned>(UINT8_C(101))>, boost::multiprecision::et_off>>;
+  constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT8_C(101)) };
+
+  using multiprecision_float_type =
+    boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
+                                  boost::multiprecision::et_off>;
+
+  using complex_type = extended_complex::complex<multiprecision_float_type>;
   using real_type    = typename complex_type::value_type;
 
   // N[Zeta[(11/10) + ((23 I) /10), 101]
