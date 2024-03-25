@@ -181,6 +181,8 @@ Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
 the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
 are calculated to ${\sim}~501$ decimal digits of precision.
+Root finding uses [_Algorithm_ _748_](https://doi.org/10.1145/210089.210111).
+See also [2] in the references below.
 
 The results found are:
 
@@ -225,11 +227,11 @@ on the critical line at ${\sigma}=1/2$.
 These are valuable for providing empirical evidence
 for prime number investigations in number-theory.
 Other algorithms are needed for this type
-of number-theoretical research. See also [2]
+of number-theoretical research. See also [3]
 for a summary of these methods and a recent
 record-breaking calculation.
 
-## Testing and Continuous Integration
+## Testing
 
 A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
@@ -238,7 +240,9 @@ the extended-complex class for both built-in floating point types
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
 
 The above-mentioned in-depth Riemann-zeta examples are also executed
-and verified in CI.
+and verified in the tests.
+
+## Continuous Integration
 
 Continuous integration runs on Ubuntu and MacOS with both GCC/clang.
 CI uses the develop branch of modular-boost, when needed, for multiprecision types.
@@ -250,9 +254,14 @@ are also used in CI in order to help assure dynamic quality.
 
 [1] C.M. Kormanyos,
 _Algorithm_ _910_: _A_ _Portable_ _C++_ _Multiple_-_Precision_ _System_ _for_ _Special_-_Function_ _Calculations_,
-ACM Transactions on Mathematical Software, Vol. 37, Issue 4, pp 1-27.
-See also the following [link](https://doi.org/10.1145/1916461.1916469).
+ACM Transactions on Mathematical Software, Vol. 37, Issue 4, pp 1-27 (01 February 2011),
+[https://doi.org/10.1145/1916461.1916469](https://doi.org/10.1145/1916461.1916469).
 
-[2] D. Platt and T. Trudgian,
+[2] G.E. Alefeld, F.A. Potra, Yixun Shi,
+_Algorithm_ _748_: _enclosing_ _zeros_ _of_ _continuous_ _functions_,
+ACM Transactions on Mathematical Software, Vol. 21, Issue 3, pp 327-344 (01 September 1995),
+[https://doi.org/10.1145/210089.210111](https://doi.org/10.1145/210089.210111).
+
+[3] D. Platt and T. Trudgian,
 _The_ _Riemann_ _hypothesis_ _is_ _true_ _up_ _to_ ${\mbox{\textit{3}}}{\cdot}{\mbox{\textit{10}}}^{\mbox{\textit{\small{12}}}}$,
-[arXiv:2004.09765](https://arxiv.org/pdf/2004.09765.pdf) [math.NT].
+[arXiv:2004.09765](https://arxiv.org/pdf/2004.09765.pdf).
