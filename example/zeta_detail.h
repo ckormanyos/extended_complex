@@ -12,7 +12,7 @@
 #define BOOST_MULTIPRECISION_STANDALONE
 
 #include <boost/math/special_functions/factorials.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/unordered/unordered_map.hpp>
 
 #include <algorithm>
 #include <cstddef>

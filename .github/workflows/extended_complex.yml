@@ -35,6 +35,7 @@ jobs:
           git submodule update --init libs/core
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
       - name: gcc-clang-native
@@ -70,6 +71,7 @@ jobs:
           git submodule update --init libs/core
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
       - name: gcc-clang-native
@@ -105,6 +107,7 @@ jobs:
           git submodule update --init libs/core
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
       - name: gcc-clang-native
@@ -140,6 +143,7 @@ jobs:
           git submodule update --init libs/core
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
       - name: clang-native-macos
@@ -167,6 +171,7 @@ jobs:
           git submodule update --init libs/core
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/unordered
           ./bootstrap.bat
           ./b2 headers
       - uses: actions/checkout@v4
