@@ -12,13 +12,13 @@
 #define BOOST_MULTIPRECISION_STANDALONE
 
 #include <boost/math/special_functions/factorials.hpp>
+#include <boost/unordered/unordered_map.hpp>
 
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <deque>
 #include <limits>
-#include <map>
 #include <vector>
 
 namespace zeta_detail { namespace detail {
@@ -135,11 +135,11 @@ public:
   }
 
 private:
-  static std::map<std::uint32_t, T> ln_data;
+  static boost::unordered_map<std::uint32_t, T> ln_data;
 };
 
 template<typename T>
-std::map<std::uint32_t, T> logn_helper<T>::ln_data { };
+boost::unordered_map<std::uint32_t, T> logn_helper<T>::ln_data { };
 
 } // namespace detail
 
@@ -147,7 +147,7 @@ template<typename T>
 auto logn(const std::uint32_t n) -> T { return detail::logn_helper<T>::my_logn(n); }
 
 template<typename ComplexType>
-auto j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::uint32_t, ComplexType>& n_pow_x_prime_factor_map) -> ComplexType
+auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<std::uint32_t, ComplexType>& n_pow_x_prime_factor_map) -> ComplexType
 {
   using local_complex_type = ComplexType;
   using local_real_type    = typename local_complex_type::value_type;
@@ -165,7 +165,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, std::map<std::uint32_t
     const std::uint32_t n = pf[i].my_x;
     const std::uint32_t p = pf[i].my_y;
 
-    const typename std::map<std::uint32_t, local_complex_type>::const_iterator it = n_pow_x_prime_factor_map.find(n);
+    const typename boost::unordered_map<std::uint32_t, local_complex_type>::const_iterator it = n_pow_x_prime_factor_map.find(n);
 
     if(it == n_pow_x_prime_factor_map.end())
     {
@@ -469,7 +469,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   // logarithms in a static table.
 
   // Declare a map of prime factors raised to the power of the argument s.
-  std::map<std::uint32_t, local_complex_type> n_pow_s_prime_factor_map;
+  boost::unordered_map<std::uint32_t, local_complex_type> n_pow_s_prime_factor_map;
 
   // Generate a list of the first 300 prime numbers.
   static std::deque<std::uint32_t> prime_data;
