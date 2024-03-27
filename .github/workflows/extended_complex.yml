@@ -33,6 +33,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/exception
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           git submodule update --init libs/unordered
@@ -69,6 +70,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/exception
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           git submodule update --init libs/unordered
@@ -105,6 +107,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/exception
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           git submodule update --init libs/unordered
@@ -141,6 +144,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/exception
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           git submodule update --init libs/unordered
@@ -169,6 +173,7 @@ jobs:
           git submodule update --init libs/assert
           git submodule update --init libs/config
           git submodule update --init libs/core
+          git submodule update --init libs/exception
           git submodule update --init libs/math
           git submodule update --init libs/multiprecision
           git submodule update --init libs/unordered
