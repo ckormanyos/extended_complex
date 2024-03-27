@@ -34,6 +34,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
           git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
@@ -74,6 +75,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
           git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
@@ -114,6 +116,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
           git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
@@ -154,6 +157,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
           git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
@@ -186,6 +190,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
           git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
