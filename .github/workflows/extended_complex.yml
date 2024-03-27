@@ -34,6 +34,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/core
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
           git submodule update --init libs/static_assert
           git submodule update --init libs/throw_exception
@@ -72,6 +73,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/core
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
           git submodule update --init libs/static_assert
           git submodule update --init libs/throw_exception
@@ -110,6 +112,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/core
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
           git submodule update --init libs/static_assert
           git submodule update --init libs/throw_exception
@@ -148,6 +151,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/core
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
           git submodule update --init libs/static_assert
           git submodule update --init libs/throw_exception
@@ -178,6 +182,7 @@ jobs:
           git submodule update --init libs/config
           git submodule update --init libs/core
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
           git submodule update --init libs/static_assert
           git submodule update --init libs/throw_exception
