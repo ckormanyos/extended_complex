@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/E4jz4s43r" alt="godbolt">
+    <a href="https://godbolt.org/z/T8eh15nGr" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -35,7 +35,7 @@ $$
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/E4jz4s43r).
+at [Godbolt](https://godbolt.org/z/T8eh15nGr).
 
 ```cpp
 #include <extended_complex.h>
@@ -73,19 +73,19 @@ namespace local
 
 auto main() -> int
 {
-  using float_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
+  using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>>;
 
-  using complex_type = extended_complex::complex<float_type>;
+  using real_type = typename complex_type::value_type;
 
-  const complex_type val_z1(float_type(12U) / 10U, float_type(34U) / 10U);
+  const complex_type val_z1(real_type(12U) / 10U, real_type(34U) / 10U);
 
-  const complex_type sqrt_result = sqrt(val_z1);
+  const complex_type sqrt_result { sqrt(val_z1) };
 
-  const char* p_str_ctrl_real = "+1.5500889128472581416161256546038815669761567486848749301860666965618993040312647033986371788677357208";
-  const char* p_str_ctrl_imag = "+1.096711282759503047577277387056220643003106823143745046422869808875853261131777962620301480493467395";
+  const real_type ctrl_real { "+1.5500889128472581416161256546038815669761567486848749301860666965618993040312647033986371788677357208" };
+  const real_type ctrl_imag { "+1.096711282759503047577277387056220643003106823143745046422869808875853261131777962620301480493467395" };
 
-  const auto result_real_is_ok = local::is_close_fraction(sqrt_result.real(), float_type(p_str_ctrl_real));
-  const auto result_imag_is_ok = local::is_close_fraction(sqrt_result.imag(), float_type(p_str_ctrl_imag));
+  const auto result_real_is_ok = local::is_close_fraction(sqrt_result.real(), ctrl_real);
+  const auto result_imag_is_ok = local::is_close_fraction(sqrt_result.imag(), ctrl_imag);
 
   const auto result_is_ok = (result_real_is_ok && result_imag_is_ok);
 
@@ -93,11 +93,11 @@ auto main() -> int
   const auto flg = std::cout.flags();
 
   // Visualize if the result is OK.
-  std::cout << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
+  std::cout << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<real_type>::digits10))
             << sqrt_result
             << std::endl;
 
-  // Print the exact result-OK indication.
+  // Print the result-OK indication.
   std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
 
   std::cout.flags(flg);
