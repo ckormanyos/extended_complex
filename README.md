@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/T8eh15nGr" alt="godbolt">
+    <a href="https://godbolt.org/z/Paadqoqbv" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -35,12 +35,12 @@ $$
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/T8eh15nGr).
+at [Godbolt](https://godbolt.org/z/Paadqoqbv).
 
 ```cpp
-#include <extended_complex.h>
-
 #include <boost/multiprecision/cpp_dec_float.hpp>
+
+#include <extended_complex.h>
 
 #include <iomanip>
 #include <iostream>
@@ -54,20 +54,7 @@ namespace local
   {
     using std::fabs;
 
-    auto result_is_ok = bool { };
-
-    if(b == static_cast<NumericType>(0))
-    {
-      result_is_ok = (fabs(a - b) < tol);
-    }
-    else
-    {
-      const auto delta = fabs(1 - (a / b));
-
-      result_is_ok = (delta < tol);
-    }
-
-    return result_is_ok;
+    return (fabs(1 - (a / b)) < tol);
   }
 } // namespace local
 
@@ -84,10 +71,8 @@ auto main() -> int
   const real_type ctrl_real { "+1.5500889128472581416161256546038815669761567486848749301860666965618993040312647033986371788677357208" };
   const real_type ctrl_imag { "+1.096711282759503047577277387056220643003106823143745046422869808875853261131777962620301480493467395" };
 
-  const auto result_real_is_ok = local::is_close_fraction(sqrt_result.real(), ctrl_real);
-  const auto result_imag_is_ok = local::is_close_fraction(sqrt_result.imag(), ctrl_imag);
-
-  const auto result_is_ok = (result_real_is_ok && result_imag_is_ok);
+  const auto result_is_ok = (   local::is_close_fraction(sqrt_result.real(), ctrl_real)
+                             && local::is_close_fraction(sqrt_result.imag(), ctrl_imag));
 
   // Print the hexadecimal representation string output.
   const auto flg = std::cout.flags();
