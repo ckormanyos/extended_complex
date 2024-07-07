@@ -11,6 +11,13 @@
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include <cmath>
+#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#endif
+#include <complex>
+#endif
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -49,7 +56,11 @@ auto example023_riemann_zeta_z() -> bool
     boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
                                   boost::multiprecision::et_off>;
 
+  #if !defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
   using complex_type = extended_complex::complex<multiprecision_float_type>;
+  #else
+  using complex_type = std::complex<multiprecision_float_type>;
+  #endif
   using real_type    = typename complex_type::value_type;
 
   // N[Zeta[(11/10) + ((23 I) /10), 101]
@@ -94,3 +105,9 @@ auto example023_riemann_zeta_z() -> bool
 
   return result_is_ok;
 }
+
+#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+#endif

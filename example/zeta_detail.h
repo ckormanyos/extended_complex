@@ -11,6 +11,8 @@
 #define BOOST_MATH_STANDALONE
 #define BOOST_MULTIPRECISION_STANDALONE
 
+//#define EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX
+
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/unordered/unordered_map.hpp>
 
@@ -87,7 +89,7 @@ template<typename T>
 constexpr auto to_double(const T& val) -> double { return static_cast<double>(val); }
 
 template<typename T>
-constexpr auto to_int64(const T& val) -> double { return static_cast<double>(val); }
+constexpr auto to_int64(const T& val) -> std::int64_t { return static_cast<std::int64_t>(val); }
 
 template<typename T>
 constexpr auto int64_min() -> T { return T { (std::numeric_limits<std::int64_t>::min)() }; }
@@ -181,7 +183,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
         // Compute pure integer power for pure integer arguments.
         if((rx < ef::int64_max<local_real_type>()) && (rx > ef::int64_min<local_real_type>()))
         {
-          pf_pow_x = pow(local_complex_type(n), static_cast<int>(ef::to_int64(rx)));
+          pf_pow_x = pow(local_complex_type(n), /*static_cast<local_real_type>*/(ef::to_int64(rx)));
         }
         else
         {
@@ -204,7 +206,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
     if     (p == static_cast<std::uint32_t>(UINT8_C(1))) { }
     else if(p == static_cast<std::uint32_t>(UINT8_C(2))) { pf_pow_x *=  pf_pow_x; }
     else if(p == static_cast<std::uint32_t>(UINT8_C(3))) { pf_pow_x *= (pf_pow_x * pf_pow_x); }
-    else                                                 { pf_pow_x *= pow(pf_pow_x, static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1)))); }
+    else                                                 { pf_pow_x *= pow(pf_pow_x, /*static_cast<local_real_type>*/(static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1))))); }
 
     jpx *= pf_pow_x;
   }

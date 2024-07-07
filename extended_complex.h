@@ -124,7 +124,8 @@
     template<typename T, typename EnableType = void> complex<T, EnableType> log  (const complex<T, EnableType>&);
     template<typename T, typename EnableType = void> complex<T, EnableType> log10(const complex<T, EnableType>&);
 
-    template<typename T, typename EnableType = void> complex<T, EnableType> pow  (const complex<T, EnableType>&, int);
+    template<typename T, typename IntegralType, typename EnableType = void> typename std::enable_if<std::is_integral<IntegralType>::value, complex<T, EnableType>>::type
+                                                                            pow  (const complex<T, EnableType>&, IntegralType);
     template<typename T, typename EnableType = void> complex<T, EnableType> pow  (const complex<T, EnableType>&, const T&);
     template<typename T, typename EnableType = void> complex<T, EnableType> pow  (const complex<T, EnableType>&, const complex<T, EnableType>&);
     template<typename T, typename EnableType = void> complex<T, EnableType> pow  (const T&, const complex<T, EnableType>&);
@@ -908,7 +909,8 @@
       return log(my_z) / T(log(T(static_cast<unsigned>(UINT8_C(10)))));
     }
 
-    template<typename T, typename EnableType> complex<T, EnableType> pow(const complex<T, EnableType>& my_z, int my_pn)
+    template<typename T, typename IntegralType, typename EnableType> typename std::enable_if<std::is_integral<IntegralType>::value, complex<T, EnableType>>::type
+    pow(const complex<T, EnableType>& my_z, IntegralType my_pn)
     {
       if     (my_pn <  static_cast<int>(INT8_C(0))) { return  T(static_cast<unsigned>(UINT8_C(1))) / pow(my_z, -my_pn); }
       else if(my_pn == static_cast<int>(INT8_C(0))) { return  complex<T, EnableType>(T(static_cast<unsigned>(UINT8_C(1)))); }

@@ -11,6 +11,13 @@
 #include <boost/math/tools/toms748_solve.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
+#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#endif
+#include <complex>
+#endif
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -27,7 +34,11 @@ namespace local
                                     boost::multiprecision::et_off>;
   }
 
+  #if !defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
   using complex_type = extended_complex::complex<detail::multiprecision_float_type>;
+  #else
+  using complex_type = std::complex<detail::multiprecision_float_type>;
+  #endif
   using real_type    = typename complex_type::value_type;
 
   real_type my_riemann_function(const real_type& y)
@@ -172,3 +183,9 @@ auto example023a_riemann_zeta_zeros() -> bool
 
   return result_is_ok;
 }
+
+#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+#endif
