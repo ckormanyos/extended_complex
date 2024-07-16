@@ -145,6 +145,9 @@ boost::unordered_map<std::uint32_t, T> logn_helper<T>::ln_data { };
 
 } // namespace detail
 
+template<typename T, typename IntegralType>
+auto pown(const T& b, const IntegralType n) -> T;
+
 template<typename T>
 auto logn(const std::uint32_t n) -> T { return detail::logn_helper<T>::my_logn(n); }
 
@@ -183,7 +186,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
         // Compute pure integer power for pure integer arguments.
         if((rx < ef::int64_max<local_real_type>()) && (rx > ef::int64_min<local_real_type>()))
         {
-          pf_pow_x = pow(local_complex_type(n), /*static_cast<local_real_type>*/(ef::to_int64(rx)));
+          pf_pow_x = Util::pown(local_complex_type(n), ef::to_int64(rx));
         }
         else
         {
@@ -206,12 +209,61 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
     if     (p == static_cast<std::uint32_t>(UINT8_C(1))) { }
     else if(p == static_cast<std::uint32_t>(UINT8_C(2))) { pf_pow_x *=  pf_pow_x; }
     else if(p == static_cast<std::uint32_t>(UINT8_C(3))) { pf_pow_x *= (pf_pow_x * pf_pow_x); }
-    else                                                 { pf_pow_x *= pow(pf_pow_x, /*static_cast<local_real_type>*/(static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1))))); }
+    else                                                 { pf_pow_x *= Util::pown(pf_pow_x, /*static_cast<local_real_type>*/(static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1))))); }
 
     jpx *= pf_pow_x;
   }
 
   return jpx;
+}
+
+template<typename T, typename IntegralType>
+auto pown(const T& b, const IntegralType p) -> T
+{
+  // Calculate (b ^ p) for both real as well as complex-valued b,
+  // where p is a signed or unsigned integral type.
+
+  using local_number_type = T;
+
+  local_number_type result { };
+
+  if     (p <  static_cast<std::int64_t>(INT8_C(0))) { result = local_number_type(static_cast<unsigned>(UINT8_C(1))) / pown(b, -p); }
+  else if(p == static_cast<std::int64_t>(INT8_C(0))) { result = local_number_type(static_cast<unsigned>(UINT8_C(1))); }
+  else if(p == static_cast<std::int64_t>(INT8_C(1))) { result = b; }
+  else if(p == static_cast<std::int64_t>(INT8_C(2))) { result = b; result *= b; }
+  else if(p == static_cast<std::int64_t>(INT8_C(3))) { result = b; result *= b; result *= b; }
+  else if(p == static_cast<std::int64_t>(INT8_C(4))) { result = b; result *= b; result *= result; }
+  else
+  {
+    result = local_number_type(static_cast<unsigned>(UINT8_C(1)));
+
+    local_number_type y(b);
+
+    auto p_local = static_cast<std::uint64_t>(p);
+
+    // Use the so-called ladder method for the power calculation.
+    for(;;)
+    {
+      const auto do_power_multiply =
+        (static_cast<std::uint_fast8_t>(p_local & static_cast<unsigned>(UINT8_C(1))) != static_cast<std::uint_fast8_t>(UINT8_C(0)));
+
+      if(do_power_multiply)
+      {
+        result *= y;
+      }
+
+      p_local >>= static_cast<unsigned>(UINT8_C(1));
+
+      if(p_local == static_cast<std::uint64_t>(UINT8_C(0)))
+      {
+        break;
+      }
+
+      y *= y;
+    }
+  }
+
+  return result;
 }
 
 } // namespace Util
@@ -527,7 +579,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
       );
 
     local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
-    local_real_type four_pow_j              = pow(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
+    local_real_type four_pow_j              = Util::pown(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
     local_real_type n_minus_j_fact          = ef::one<local_real_type>();
     local_real_type two_j_fact              = n_plus_j_minus_one_fact * static_cast<std::int32_t>(static_cast<std::int32_t>(INT8_C(2)) * N);
 
