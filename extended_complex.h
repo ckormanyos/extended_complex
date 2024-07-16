@@ -29,11 +29,7 @@
   #endif
   #include <type_traits>
 
-  #if defined(_MSC_VER) && (_MSC_VER <= 1800)
-    #define EXTENDED_COMPLEX_CONSTEXPR
-  #else
-    #define EXTENDED_COMPLEX_CONSTEXPR constexpr
-  #endif
+  #define EXTENDED_COMPLEX_CONSTEXPR constexpr
 
   namespace extended_complex
   {

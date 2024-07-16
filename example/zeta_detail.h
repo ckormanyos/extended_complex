@@ -27,8 +27,7 @@ namespace zeta_detail { namespace detail {
 
 namespace Util {
 
-template<typename T1,
-         typename T2 = T1>
+template<typename T1, typename T2 = T1>
 struct point
 {
   explicit point(const T1& x = T1(),
@@ -51,32 +50,24 @@ auto order(const T& val) -> int
   using std::log;
   using std::lround;
 
-  const auto d10_scale =
-    static_cast<std::uint32_t>
+  const float log_radix_term
+  {
+    static_cast<float>
     (
-      lround
-      (
-        static_cast<float>
-        (
-            static_cast<float>
-            (
-              1000.0F * log(static_cast<float>(std::numeric_limits<T>::radix))
-            )
-          / log(10.0F)
-        )
-      )
-    );
+      1000.0F * log(static_cast<float>(std::numeric_limits<T>::radix))
+    )
+    / log(10.0F)
+  };
+
+  const std::uint32_t d10_scale { lround(log_radix_term) };
 
   const auto ib = static_cast<std::int32_t>(ilogb(val));
 
-  const auto my_order =
-    static_cast<std::uint32_t>
-    (
-        static_cast<std::uint64_t>(static_cast<std::uint64_t>(ib) * d10_scale)
-      / static_cast<std::uint32_t>(UINT16_C(1000))
-    );
-
-  return my_order;
+  return
+  {
+      static_cast<std::uint64_t>(static_cast<std::uint64_t>(ib) * d10_scale)
+    / static_cast<std::uint32_t>(UINT16_C(1000))
+  };
 }
 
 template<typename T>
@@ -146,7 +137,7 @@ boost::unordered_map<std::uint32_t, T> logn_helper<T>::ln_data { };
 } // namespace detail
 
 template<typename T, typename IntegralType>
-auto pown(const T& b, const IntegralType n) -> T;
+auto pown(const T& b, const IntegralType p) -> std::enable_if_t<std::is_integral<IntegralType>::value, T>;
 
 template<typename T>
 auto logn(const std::uint32_t n) -> T { return detail::logn_helper<T>::my_logn(n); }
@@ -161,27 +152,29 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 
   ef::prime_factors(j, pf);
 
-  local_complex_type jpx = ef::one<local_real_type>();
+  local_complex_type jpx { ef::one<local_real_type>() };
 
   for(std::size_t i = static_cast<std::size_t>(0u); i < pf.size(); i++)
   {
     local_complex_type pf_pow_x;
 
-    const std::uint32_t n = pf[i].my_x;
-    const std::uint32_t p = pf[i].my_y;
+    const auto n = pf[i].my_x;
+    const auto p = pf[i].my_y;
 
-    const typename boost::unordered_map<std::uint32_t, local_complex_type>::const_iterator it = n_pow_x_prime_factor_map.find(n);
+    using const_iterator_type = typename boost::unordered_map<std::uint32_t, local_complex_type>::const_iterator;
 
-    if(it == n_pow_x_prime_factor_map.end())
+    const const_iterator_type itr = n_pow_x_prime_factor_map.find(n);
+
+    if(itr == n_pow_x_prime_factor_map.end())
     {
       // Compute n^x using exp[x * log(n)] and use the map data in the Zeta::logn(...).
       // Obtain the necessary integer logarithms from a table.
 
-      const auto x_is_int = ((x.imag() == 0) && (static_cast<int>(x.real()) == x.real()));
+      const bool x_is_int { ((x.imag() == 0) && (static_cast<int>(x.real()) == x.real())) };
 
       if(x_is_int)
       {
-        const local_real_type rx = x.real();
+        const local_real_type rx { x.real() };
 
         // Compute pure integer power for pure integer arguments.
         if((rx < ef::int64_max<local_real_type>()) && (rx > ef::int64_min<local_real_type>()))
@@ -202,14 +195,15 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
     }
     else
     {
-      pf_pow_x = it->second;
+      pf_pow_x = itr->second;
     }
 
     // Do the power expansion.
     if     (p == static_cast<std::uint32_t>(UINT8_C(1))) { }
     else if(p == static_cast<std::uint32_t>(UINT8_C(2))) { pf_pow_x *=  pf_pow_x; }
     else if(p == static_cast<std::uint32_t>(UINT8_C(3))) { pf_pow_x *= (pf_pow_x * pf_pow_x); }
-    else                                                 { pf_pow_x *= Util::pown(pf_pow_x, /*static_cast<local_real_type>*/(static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1))))); }
+    else if(p == static_cast<std::uint32_t>(UINT8_C(4))) { pf_pow_x *= pf_pow_x; pf_pow_x *= pf_pow_x; }
+    else                                                 { pf_pow_x *= Util::pown(pf_pow_x, static_cast<std::int64_t>(p - static_cast<std::uint32_t>(UINT8_C(1)))); }
 
     jpx *= pf_pow_x;
   }
@@ -218,7 +212,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 }
 
 template<typename T, typename IntegralType>
-auto pown(const T& b, const IntegralType p) -> T
+auto pown(const T& b, const IntegralType p) -> std::enable_if_t<std::is_integral<IntegralType>::value, T>
 {
   // Calculate (b ^ p) for both real as well as complex-valued b,
   // where p is a signed or unsigned integral type.
@@ -227,15 +221,17 @@ auto pown(const T& b, const IntegralType p) -> T
 
   local_number_type result { };
 
-  if     (p <  static_cast<std::int64_t>(INT8_C(0))) { result = local_number_type(static_cast<unsigned>(UINT8_C(1))) / pown(b, -p); }
-  else if(p == static_cast<std::int64_t>(INT8_C(0))) { result = local_number_type(static_cast<unsigned>(UINT8_C(1))); }
+  const local_number_type local_one { ef::one<local_number_type>() };
+
+  if     (p <  static_cast<std::int64_t>(INT8_C(0))) { result = local_one / pown(b, -p); }
+  else if(p == static_cast<std::int64_t>(INT8_C(0))) { result = local_one; }
   else if(p == static_cast<std::int64_t>(INT8_C(1))) { result = b; }
   else if(p == static_cast<std::int64_t>(INT8_C(2))) { result = b; result *= b; }
   else if(p == static_cast<std::int64_t>(INT8_C(3))) { result = b; result *= b; result *= b; }
   else if(p == static_cast<std::int64_t>(INT8_C(4))) { result = b; result *= b; result *= result; }
   else
   {
-    result = local_number_type(static_cast<unsigned>(UINT8_C(1)));
+    result = local_one;
 
     local_number_type y(b);
 
@@ -279,8 +275,7 @@ public:
   static constexpr std::size_t start_index = static_cast<std::size_t>(UINT8_C(2));
 
   explicit Inserter(std::deque<value_type>& sequence)
-    : count(static_cast<value_type>(start_index)),
-      my_it(std::back_inserter(sequence)) { }
+    : my_it(std::back_inserter(sequence)) { }
 
   Inserter() = delete;
 
@@ -297,7 +292,7 @@ public:
   }
 
 private:
-  mutable value_type count { };
+  mutable value_type count { start_index };
   mutable std::back_insert_iterator<std::deque<value_type>> my_it;
 };
 
@@ -311,14 +306,13 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
   constexpr auto min_hundred = static_cast<std::uint32_t>(UINT8_C(100));
   constexpr auto xmax        = static_cast<double>((std::numeric_limits<std::uint32_t>::max)());
 
-  const auto N       = (std::max)(min_hundred, n);
-  const auto xn      = static_cast<double>(N);
+  const auto xn = static_cast<double>((std::max)(min_hundred, n));
 
   using std::log;
 
   const auto logn    = log(xn);
   const auto loglogn = log(logn);
-  const auto top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((static_cast<double>(1.8) * loglogn) / logn)));
+  const auto top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((1.8 * loglogn) / logn)));
   const auto xlim    = (std::min)(top, xmax);
   const auto nlim    = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
   const auto limit   = (std::max)(n, nlim);
@@ -374,7 +368,7 @@ inline auto Data(void) -> std::deque<std::uint32_t>&
   return primes;
 }
 
-inline auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
+constexpr auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
 {
   const std::uint32_t q = static_cast<std::uint32_t>(np / p);
   const std::uint32_t r = static_cast<std::uint32_t>(np - static_cast<std::uint32_t>(q * p));
@@ -385,7 +379,7 @@ inline auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
   {
     np = q;
   }
-    
+
   return is_prime_factor;
 }
 
@@ -535,99 +529,100 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
 
   static const std::vector<std::uint32_t> primes(prime_data.begin(), prime_data.end());
 
+  const local_real_type upper_limit { static_cast<std::uint32_t>(UINT32_C(1000100)) };
+
+  using std::fabs;
+
+  if(fabs(imag(s)) > upper_limit)
   {
-    const local_real_type upper_limit { static_cast<std::uint32_t>(UINT32_C(1000100)) };
+    // Return NaN if s has a large imaginary part.
+    return local_complex_type { std::numeric_limits<local_real_type>::quiet_NaN() };
+  }
 
-    using std::abs;
+  // Use the accelerated alternating converging series for Zeta as shown in:
+  // http://numbers.computation.free.fr/Constants/Miscellaneous/zetaevaluations.html
+  // taken from P. Borwein, "An Efficient Algorithm for the Riemann Zeta Function",
+  // January 1995.
 
-    if(abs(imag(s)) > upper_limit)
+  // Compute the coefficients dk in a loop and calculate the zeta function sum
+  // within the same loop on the fly.
+
+  // Set up the factorials and powers for the calculation of the coefficients dk.
+  // Note that j = n at this stage in the calculation. Also note that the value of
+  // dn is equal to the value of d0 at the end of the loop.
+
+  // Use N = (digits * 1.45) + {|imag(s)| * 1.1}
+  constexpr double nd { static_cast<double>(std::numeric_limits<local_real_type>::digits10) * static_cast<double>(1.45) };
+
+  using std::fabs;
+
+  const double ni = static_cast<double>(static_cast<double>(1.10) * fabs(ef::to_double(imag(s))));
+
+  const std::int32_t N { static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni))) };
+
+  auto neg_term = ((N % static_cast<std::int32_t>(2)) == static_cast<std::int32_t>(0));
+
+  const unsigned int
+    two_n_minus_one
     {
-      // Return NaN if s has a large imaginary part.
-      return local_complex_type { std::numeric_limits<local_real_type>::quiet_NaN() };
-    }
-
-    // Use the accelerated alternating converging series for Zeta as shown in:
-    // http://numbers.computation.free.fr/Constants/Miscellaneous/zetaevaluations.html
-    // taken from P. Borwein, "An Efficient Algorithm for the Riemann Zeta Function",
-    // January 1995.
-
-    // Compute the coefficients dk in a loop and calculate the zeta function sum
-    // within the same loop on the fly.
-
-    // Set up the factorials and powers for the calculation of the coefficients dk.
-    // Note that j = n at this stage in the calculation. Also note that the value of
-    // dn is equal to the value of d0 at the end of the loop.
-
-    // Use N = (digits * 1.45) + {|imag(s)| * 1.1}
-    constexpr double nd { static_cast<double>(std::numeric_limits<local_real_type>::digits10) * static_cast<double>(1.45) };
-
-    using std::fabs;
-
-    const double ni = static_cast<double>(static_cast<double>(1.10) * fabs(ef::to_double(imag(s))));
-
-    const auto N = static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni)));
-
-    auto neg_term = ((N % static_cast<std::int32_t>(2)) == static_cast<std::int32_t>(0));
-
-    const auto two_n_minus_one =
       static_cast<unsigned int>
       (
         static_cast<std::int32_t>
         (
           static_cast<std::int32_t>(N + N) - static_cast<std::int32_t>(INT8_C(1))
         )
+      )
+    };
+
+  local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
+  local_real_type four_pow_j              = Util::pown(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
+  local_real_type n_minus_j_fact          = ef::one<local_real_type>();
+  local_real_type two_j_fact              = n_plus_j_minus_one_fact * static_cast<std::int32_t>(static_cast<std::int32_t>(INT8_C(2)) * N);
+
+  local_real_type dn = (n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact);
+
+  local_complex_type jps = Util::j_pow_x(static_cast<std::uint32_t>(N), s, n_pow_s_prime_factor_map);
+
+  local_complex_type zs = ((!neg_term) ? dn : -dn) / jps;
+
+  for(auto   j  = static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1)));
+              j >= static_cast<std::int32_t>(INT8_C(0));
+            --j)
+  {
+    const auto j_is_zero = (j == static_cast<std::int32_t>(INT8_C(0)));
+
+    const auto two_jp1_two_j =
+      static_cast<std::int32_t>
+      (
+          static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
+        * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * (!j_is_zero ? j : static_cast<std::int32_t>(INT8_C(1))))
       );
 
-    local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
-    local_real_type four_pow_j              = Util::pown(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
-    local_real_type n_minus_j_fact          = ef::one<local_real_type>();
-    local_real_type two_j_fact              = n_plus_j_minus_one_fact * static_cast<std::int32_t>(static_cast<std::int32_t>(INT8_C(2)) * N);
+    n_plus_j_minus_one_fact /= static_cast<std::int32_t>(N + j);
+    four_pow_j              /= static_cast<std::int32_t>(INT8_C(4));
+    n_minus_j_fact          *= static_cast<std::int32_t>(N - j);
+    two_j_fact              /= two_jp1_two_j;
 
-    local_real_type dn = (n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact);
+    dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact));
 
-    local_complex_type jps = Util::j_pow_x(static_cast<std::uint32_t>(N), s, n_pow_s_prime_factor_map);
-
-    local_complex_type zs = ((!neg_term) ? dn : -dn) / jps;
-
-    for(auto   j  = static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1)));
-               j >= static_cast<std::int32_t>(INT8_C(0));
-             --j)
+    if(!j_is_zero)
     {
-      const auto j_is_zero = (j == static_cast<std::int32_t>(INT8_C(0)));
+      // Increment the zeta function sum.
+      jps = Util::j_pow_x(j, s, n_pow_s_prime_factor_map);
 
-      const auto two_jp1_two_j =
-        static_cast<std::int32_t>
-        (
-            static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
-          * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * (!j_is_zero ? j : static_cast<std::int32_t>(INT8_C(1))))
-        );
+      neg_term = (!neg_term);
 
-      n_plus_j_minus_one_fact /= static_cast<std::int32_t>(N + j);
-      four_pow_j              /= static_cast<std::int32_t>(INT8_C(4));
-      n_minus_j_fact          *= static_cast<std::int32_t>(N - j);
-      two_j_fact              /= two_jp1_two_j;
-
-      dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact));
-
-      if(!j_is_zero)
-      {
-        // Increment the zeta function sum.
-        jps = Util::j_pow_x(j, s, n_pow_s_prime_factor_map);
-
-        neg_term = (!neg_term);
-
-        zs += ((!neg_term) ? dn : -dn) / jps;
-      }
+      zs += ((!neg_term) ? dn : -dn) / jps;
     }
-
-    const local_complex_type one_minus_s { ef::one<local_real_type>() - s };
-
-    static const local_complex_type two_cpx { local_real_type { static_cast<int>(INT8_C(2)) } };
-
-    using std::pow;
-
-    return zs / (dn * (ef::one<local_real_type>() - pow(two_cpx, one_minus_s)));
   }
+
+  const local_complex_type one_minus_s { ef::one<local_real_type>() - s };
+
+  static const local_complex_type two_cpx { local_real_type { static_cast<int>(INT8_C(2)) } };
+
+  using std::pow;
+
+  return zs / (dn * (ef::one<local_real_type>() - pow(two_cpx, one_minus_s)));
 }
 
 } // namespace detail
