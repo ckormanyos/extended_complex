@@ -59,7 +59,7 @@ auto order(const T& val) -> int
     / log(10.0F)
   };
 
-  const std::uint32_t d10_scale { lround(log_radix_term) };
+  const std::uint32_t d10_scale { static_cast<std::int32_t>(lround(log_radix_term)) };
 
   const auto ib = static_cast<std::int32_t>(ilogb(val));
 
