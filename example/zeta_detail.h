@@ -45,42 +45,6 @@ inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uin
 inline auto prime        (const std::uint32_t n, std::deque<std::uint32_t>& primes)-> void;
 
 template<typename T>
-auto order(const T& val) -> int
-{
-  using std::log;
-  using std::lround;
-
-  const float log_radix_term
-  {
-    static_cast<float>
-    (
-      1000.0F * log(static_cast<float>(std::numeric_limits<T>::radix))
-    )
-    / log(10.0F)
-  };
-
-  const std::uint32_t d10_scale
-  {
-    static_cast<std::uint32_t>
-    (
-      (std::max)
-      (
-        static_cast<std::int32_t>(lround(log_radix_term)),
-        static_cast<std::int32_t>(INT8_C(1))
-      )
-    )
-  };
-
-  const std::int32_t ib { static_cast<std::int32_t>(ilogb(val)) };
-
-  return
-  {
-      static_cast<std::uint64_t>(static_cast<std::uint64_t>(ib) * d10_scale)
-    / static_cast<std::uint32_t>(UINT16_C(1000))
-  };
-}
-
-template<typename T>
 constexpr auto tol(void) noexcept -> int { return std::numeric_limits<T>::max_digits10; }
 
 template<typename T>
