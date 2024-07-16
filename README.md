@@ -235,6 +235,51 @@ and also runs on Windows with MSVC. GCC's run-time
 are also used in CI in order to help assure dynamic quality.
 CI uses the develop branch of modular-boost, when needed, for multiprecision types.
 
+## Additonal details
+
+`ckormanyos/extended_complex` has been tested with numerous compilers,
+including target systems ranging from eight to sixty-four bits.
+The library is specifically designed for dualistic efficiency and portability.
+
+### Configuration macros (compile-time)
+
+Various configuration features can optionally be
+enabled or disabled at compile time with the compiler switches:
+
+```cpp
+#define EXTENDED_COMPLEX_DISABLE_IOSTREAM
+```
+
+When working with even the most tiny microcontroller systems,
+I/O streaming can optionally be disabled with the compiler switch:
+
+```cpp
+#define EXTENDED_COMPLEX_DISABLE_IOSTREAM
+```
+
+The default setting is `EXTENDED_COMPLEX_DISABLE_IOSTREAM` not set
+and I/O streaming operations are enabled.
+
+```cpp
+#define EXTENDED_COMPLEX_CONSTEXPR
+```
+
+The macro `EXTENDED_COMPLEX_CONSTEXPR` is default-defined to be equal
+to the word `constexpr`. This macro was previously used (for old compilers
+no longer supported) to either use or un-use the word `constexpr`.
+This was back when `constexpr` was new. At this time, simply leave this
+macro unchanged and equal to the word `constexpr`.
+
+```cpp
+#define EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX
+```
+
+Define this advanced design macro on the command line in order to use
+`std::complex` instead of the extended-complex implementation of complex
+when performing stress-tests with Riemann-Zeta calculations.
+This macro can be used to help ensure that this library is compatible to
+the standard-library's `std::complex`.
+
 ## References
 
 [1] C.M. Kormanyos,
