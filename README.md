@@ -235,7 +235,7 @@ and also runs on Windows with MSVC. GCC's run-time
 are also used in CI in order to help assure dynamic quality.
 CI uses the develop branch of modular-boost, when needed, for multiprecision types.
 
-## Additonal details
+## Additional details
 
 `ckormanyos/extended_complex` has been tested with numerous compilers,
 including target systems ranging from eight to sixty-four bits.
