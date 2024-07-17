@@ -6,7 +6,7 @@ extended_complex
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/Paadqoqbv" alt="godbolt">
+    <a href="https://godbolt.org/z/eaKfjdxWM" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -20,7 +20,7 @@ with both built-in floating-point types as well as user-defined numeric types.
 
 The following straightforward example takes a user-defined,
 multiple-precision floating-point type from
-[Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
 ${\sim}~100$ decimal digits of precision.
 
@@ -31,16 +31,16 @@ $$
 $$
 
 $$
-{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}i{\text{.}}
+{\approx}~1.550088912847258141616{\ldots}~{+}~1.096711282759503047577{\ldots}~i{\text{.}}
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/Paadqoqbv).
+at [Godbolt](https://godbolt.org/z/eaKfjdxWM).
 
 ```cpp
-#include <boost/multiprecision/cpp_dec_float.hpp>
-
 #include <extended_complex.h>
+
+#include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include <iomanip>
 #include <iostream>
@@ -74,18 +74,16 @@ auto main() -> int
   const auto result_is_ok = (   local::is_close_fraction(sqrt_result.real(), ctrl_real)
                              && local::is_close_fraction(sqrt_result.imag(), ctrl_imag));
 
-  // Print the hexadecimal representation string output.
-  const auto flg = std::cout.flags();
-
   // Visualize if the result is OK.
-  std::cout << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<real_type>::digits10))
-            << sqrt_result
-            << std::endl;
+  std::stringstream strm { };
+
+  strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<real_type>::digits10))
+       << sqrt_result;
 
   // Print the result-OK indication.
-  std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
+  strm << "\nresult_is_ok: " << std::boolalpha << result_is_ok;
 
-  std::cout.flags(flg);
+  std::cout << strm.str() << std::endl;
 }
 ```
 
@@ -118,7 +116,7 @@ $$
 $$
 
 $$
-{\approx}{~}{~}0.632109498389343535342{\ldots}~{-}~0.265505793636743413620{\ldots} i$$
+{\approx}~0.632109498389343535342{\ldots}~{-}~0.265505793636743413620{\ldots}~i
 $$
 
 is calculated.
@@ -166,7 +164,9 @@ Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
 the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
 are calculated to ${\sim}~501$ decimal digits of precision.
-Root finding uses [_Algorithm_ _748_](https://doi.org/10.1145/210089.210111).
+Root finding uses the implementation of
+[_Algorithm_ _748_](https://doi.org/10.1145/210089.210111)
+found in [Boost.Math](https://www.boost.org/doc/libs/1_85_0/libs/math/doc/html/index.html).
 See also [2] in the references below.
 
 The results found are:
@@ -222,7 +222,7 @@ A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
-from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_84_0/libs/multiprecision/doc/html/index.html).
+from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
 
 The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in the tests.
@@ -233,7 +233,8 @@ Continuous integration runs on Ubuntu and MacOS with both GCC/clang
 and also runs on Windows with MSVC. GCC's run-time
 [sanitizers](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html)
 are also used in CI in order to help assure dynamic quality.
-CI uses the develop branch of modular-boost, when needed, for multiprecision types.
+CI uses the develop branch of modular-boost, when needed,
+for multiprecision types and root-finding.
 
 ## Additional details
 
@@ -253,20 +254,19 @@ These are described in the following paragraphs.
 
 When working with even the most tiny microcontroller systems,
 I/O-streaming can optionally be disabled with the compiler switch
-`EXTENDED_COMPLEX_DISABLE_IOSTREAM`
-
-The default setting is `EXTENDED_COMPLEX_DISABLE_IOSTREAM` not set
-and I/O streaming operations are enabled.
+`EXTENDED_COMPLEX_DISABLE_IOSTREAM`. The default setting is
+`EXTENDED_COMPLEX_DISABLE_IOSTREAM` not set and I/O streaming
+operations are enabled.
 
 ```cpp
-#define EXTENDED_COMPLEX_CONSTEXPR
+#define EXTENDED_COMPLEX_CONSTEXPR constexpr
 ```
 
 The macro `EXTENDED_COMPLEX_CONSTEXPR` is default-defined to be equal
 to the word `constexpr`. This macro was previously used (for old compilers
 no longer supported) to either use or un-use the word `constexpr`.
-This was back when `constexpr` was new. At this time, simply leave this
-macro unchanged. It is default-set to the word `constexpr`.
+This was back when `constexpr` was relatively new. At this time,
+simply leave this macro unchanged. It is default-set to the word `constexpr`.
 
 ```cpp
 #define EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX
