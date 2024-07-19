@@ -99,7 +99,7 @@ auto main() -> int
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example023_riemann_zeta_z.cpp)
 provides a header-only implementation of the complex-valued
 [Riemann-zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
-The program handles arguments in a relatively large, yet limited,
+The program handles arguments in a relatively large (yet limited)
 unit disc of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
 the [`e_float`](https://doi.acm.org/10.1145/1916461.1916469)
@@ -165,7 +165,7 @@ In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_c
 the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
 are calculated to ${\sim}~501$ decimal digits of precision.
 Root finding uses the implementation of
-[_Algorithm_ _748_](https://doi.org/10.1145/210089.210111)
+[Algorithm 748](https://doi.org/10.1145/210089.210111)
 found in [Boost.Math](https://www.boost.org/doc/libs/1_85_0/libs/math/doc/html/index.html).
 See also [2] in the references below.
 
