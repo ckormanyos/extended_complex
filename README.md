@@ -92,7 +92,7 @@ auto main() -> int
 ### Complex-Valued Riemann-Zeta Function
 
 <p align="center">
-    <a href="https://godbolt.org/z/xqcehj4fj" alt="godbolt">
+    <a href="https://godbolt.org/z/b9dcGM93W" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -107,7 +107,7 @@ code and paper. See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/xqcehj4fj).
+[here](https://godbolt.org/z/b9dcGM93W).
 
 In particular, the value of
 
