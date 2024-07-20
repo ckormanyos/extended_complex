@@ -582,11 +582,13 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
     if(!j_is_zero)
     {
       // Increment the zeta function sum.
-      jps = Util::j_pow_x(j, s, n_pow_s_prime_factor_map);
+      jps = Util::j_pow_x(static_cast<std::uint32_t>(j), s, n_pow_s_prime_factor_map);
 
       neg_term = (!neg_term);
 
-      zs += ((!neg_term) ? dn : -dn) / jps;
+      const local_complex_type delta_dn { dn / jps };
+
+      (!neg_term) ? zs += delta_dn : zs -= delta_dn;
     }
   }
 
