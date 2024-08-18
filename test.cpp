@@ -150,6 +150,108 @@ namespace local
       result_is_ok = (result_strm_is_ok && result_is_ok);
     }
 
+    // Ensure that all forms of I/O-streaming work.
+    {
+      {
+        std::stringstream strm;
+
+        strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
+             << "(1.25)";
+
+        complex_type ctrl;
+
+        strm >> ctrl;
+
+        using std::fpclassify;
+
+        const auto result_strm_is_ok = (ctrl.real() == float_type { 1.25L } && fpclassify(ctrl.imag()) == FP_ZERO);
+
+        result_is_ok = (result_strm_is_ok && result_is_ok);
+      }
+
+      {
+        std::stringstream strm;
+
+        strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
+             << "1.25";
+
+        complex_type ctrl;
+
+        strm >> ctrl;
+
+        using std::fpclassify;
+
+        const auto result_strm_is_ok = (ctrl.real() == float_type { 1.25L } && fpclassify(ctrl.imag()) == FP_ZERO);
+
+        result_is_ok = (result_strm_is_ok && result_is_ok);
+      }
+
+      {
+        std::stringstream strm;
+
+        strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
+             << "(x1.25)";
+
+        complex_type ctrl;
+
+        strm >> ctrl;
+
+        const auto result_strm_has_fail_is_ok = (strm.rdstate() == std::ios_base::failbit);;
+
+        result_is_ok = (result_strm_has_fail_is_ok && result_is_ok);
+      }
+    }
+
+    // Ensure that division with self is OK.
+    {
+      for(float_type flt = float_type { 1.25L }; flt < float_type { 3.0L }; flt += float_type { 0.25L })
+      {
+        complex_type cpx;
+
+        #if defined(__clang__)
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wself-assign-overloaded"
+        #endif
+
+        cpx /= cpx;
+
+        #if defined(__clang__)
+        #pragma GCC diagnostic pop
+        #endif
+
+        using std::fpclassify;
+
+        const auto result_self_div_is_ok = ((cpx.real() == 1) && (fpclassify(cpx.imag()) == FP_ZERO));
+
+        result_is_ok = (result_self_div_is_ok && result_is_ok);
+      }
+    }
+
+    // Ensure that division by self is OK.
+    {
+      for(float_type flt = float_type { 1.25L }; flt < float_type { 3.0L }; flt += float_type { 0.25L })
+      {
+        complex_type cpx;
+
+        #if defined(__clang__)
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wself-assign-overloaded"
+        #endif
+
+        cpx -= cpx;
+
+        #if defined(__clang__)
+        #pragma GCC diagnostic pop
+        #endif
+
+        using std::fpclassify;
+
+        const auto result_self_sub_is_ok = (((fpclassify(cpx.real()) == FP_ZERO)) && (fpclassify(cpx.imag()) == FP_ZERO));
+
+        result_is_ok = (result_self_sub_is_ok && result_is_ok);
+      }
+    }
+
     const complex_type control_01(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_02(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_03(my_lexical_cast<float_type>(  "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"),    my_lexical_cast<float_type>( "-0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"));
