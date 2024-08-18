@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.34114.132
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "extended_complex", "extended_complex.vcxproj", "{86701D12-57C0-4D03-BB4A-637ECEE3E589}"
 EndProject
@@ -15,6 +15,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E2934CA9-C187-441D-9B95-D80E5DA74EEF}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\extended_complex.yml = .github\workflows\extended_complex.yml
+		.github\workflows\extended_complex_codecov.yml = .github\workflows\extended_complex_codecov.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".gcov", ".gcov", "{2DDB748D-CE63-49C6-859E-B0EA8973C695}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "make", "make", "{BC3B2BBF-E330-4F4B-A31E-BA40807432E6}"
+	ProjectSection(SolutionItems) = preProject
+		.gcov\make\make_gcov_01_generic.gmk = .gcov\make\make_gcov_01_generic.gmk
+		.gcov\make\make_gcov_02_files.gmk = .gcov\make\make_gcov_02_files.gmk
+		.gcov\make\make_gcov_03_flags.gmk = .gcov\make\make_gcov_03_flags.gmk
 	EndProjectSection
 EndProject
 Global
@@ -33,6 +43,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E2934CA9-C187-441D-9B95-D80E5DA74EEF} = {F7210510-5825-413E-8E1A-1A66B965F122}
+		{BC3B2BBF-E330-4F4B-A31E-BA40807432E6} = {2DDB748D-CE63-49C6-859E-B0EA8973C695}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE1B7689-8323-4A41-AF7C-C54D31185BFF}

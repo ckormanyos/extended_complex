@@ -27,7 +27,11 @@ namespace local
 {
   namespace detail
   {
+    #if !defined(EXTENDED_COMPLEX_REDUCE_TEST_DEPTH)
     constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(501)) };
+    #else
+    constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(51)) };
+    #endif
 
     using multiprecision_float_type =
       boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
