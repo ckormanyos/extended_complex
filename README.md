@@ -18,6 +18,15 @@ The project is written in header-only C++14, and compatible through C++14, 17, 2
 The `extended_complex::complex` template class can be used
 with both built-in floating-point types as well as user-defined numeric types.
 
+## Potential Use Cases
+
+There are numerous potential use cases for `ckormanyos/extended_complex`.
+These include (but are not limited to) the following and more.
+
+  - Instantiate complex-valued types for user-defined types including multiple-precision types or hardware-emulated types.
+  - Perform complex-valued calculations with standard built-in types if STL support for `<complex>` is missing, as may be the case for certain tiny embedded systems.
+  - Verify other complex-valued implementations.
+
 ## Example
 
 The following straightforward example takes a user-defined,
@@ -229,7 +238,7 @@ from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprec
 The above-mentioned in-depth Riemann-zeta examples are also executed
 and verified in the tests. These tests are used in CI to verify
 the expected functionality and also to obtain
-[code coverage results](https://app.codecov.io/gh/ckormanyos/extended_complex_).
+[code coverage results](https://app.codecov.io/gh/ckormanyos/extended_complex).
 
 ## Continuous Integration
 
