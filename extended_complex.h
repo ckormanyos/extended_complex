@@ -340,11 +340,9 @@
       using value_type = T;
 
       EXTENDED_COMPLEX_CONSTEXPR complex(value_type my_x = value_type(),
-                                         value_type my_y = value_type()) : my_re(my_x),
-                                                                           my_im(my_y) { }
+                                         value_type my_y = value_type()) : my_re(my_x), my_im(my_y) { }
 
-      EXTENDED_COMPLEX_CONSTEXPR complex(const complex& other) : my_re(other.my_re),
-                                                                 my_im(other.my_im) { }
+      EXTENDED_COMPLEX_CONSTEXPR complex(const complex& other) : my_re(other.my_re), my_im(other.my_im) { }
 
       EXTENDED_COMPLEX_CONSTEXPR complex(complex&& other) noexcept : my_re(std::move(static_cast<value_type&&>(other.my_re))),
                                                                      my_im(std::move(static_cast<value_type&&>(other.my_im))) { }
@@ -611,6 +609,7 @@
       const std::array<std::regex, static_cast<std::size_t>(UINT8_C(3))> my_regexes =
       {{
         // A regular expression for an (extended) complex number of the form (u,v).
+
         std::regex(  std::string("\\({1}")                             // One open parentheses.
                    + std::string("([\\+\\-]{0,1}[0-9]*\\.*[0-9]*)")    // Possible +-, decimal point and digits 0-9.
                    + std::string("([eE]{0,1}[\\+\\-]{0,1}[0-9]*)")     // Possible exponent field.
@@ -620,12 +619,16 @@
                    + std::string("\\){1}")),                           // One close parentheses.
 
         // A regular expression for an (extended) complex number of the form (u).
+        // See also: https://godbolt.org/z/M1d48xjnG
+
         std::regex(  std::string("\\({1}")                             // One open parentheses.
                    + std::string("([\\+\\-]{0,1}[0-9]*\\.*[0-9]*)")    // Possible +-, decimal point and digits 0-9.
                    + std::string("([eE]{0,1}[\\+\\-]{0,1}[0-9]*)")     // Possible exponent field.
                    + std::string("\\){1}")),                           // One close parentheses.
 
         // A regular expression for an (extended) complex number of the form u.
+        // See also: https://godbolt.org/z/3vvrn8jdv
+
         std::regex(  std::string("([\\+\\-]{0,1}[0-9]*\\.*[0-9]*)")    // Possible +-, decimal point and digits 0-9.
                    + std::string("([eE]{0,1}[\\+\\-]{0,1}[0-9]*)"))    // Possible exponent field.
       }};
@@ -731,6 +734,8 @@
       {
         // Error case: Restore the characters in the input stream
         // and set the fail bit in the input stream.
+        // See also: https://godbolt.org/z/Ye45nEfWf
+
         std::for_each(my_input_str.cbegin(),
                       my_input_str.cend(),
                       [&my_istream](const char& my_c)
