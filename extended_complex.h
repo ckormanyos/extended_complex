@@ -13,6 +13,20 @@
 #ifndef EXTENDED_COMPLEX_2016_02_22
   #define EXTENDED_COMPLEX_2016_02_22
 
+  #if defined(__clang__)
+    #if defined __has_feature && __has_feature(thread_sanitizer)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #elif defined(__GNUC__)
+    #if defined(__SANITIZE_THREAD__) || defined(EXTENDED_COMPLEX_HAS_COVERAGE)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #elif defined(_MSC_VER)
+    #if defined(_DEBUG)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #endif
+
   #if !defined(EXTENDED_COMPLEX_DISABLE_IOSTREAM)
   #include <algorithm>
   #include <array>
