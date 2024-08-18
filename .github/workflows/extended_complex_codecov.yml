@@ -34,10 +34,17 @@ jobs:
           git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
           cd ../boost-root
           git submodule update --init tools
+          git submodule update --init libs/assert
           git submodule update --init libs/config
+          git submodule update --init libs/container_hash
           git submodule update --init libs/core
+          git submodule update --init libs/describe
           git submodule update --init libs/math
+          git submodule update --init libs/mp11
           git submodule update --init libs/multiprecision
+          git submodule update --init libs/static_assert
+          git submodule update --init libs/throw_exception
+          git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
       - name: gnumake-gcc-gcov-native
