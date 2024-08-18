@@ -4,6 +4,8 @@ extended_complex
 <p align="center">
     <a href="https://github.com/ckormanyos/extended_complex/actions">
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://codecov.io/gh/ckormanyos/extended_complex" > 
+        <img src="https://codecov.io/gh/ckormanyos/extended_complex/graph/badge.svg?token=PyARTmnrTq"/></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
     <a href="https://godbolt.org/z/eaKfjdxWM" alt="godbolt">
@@ -225,7 +227,9 @@ the extended-complex class for both built-in floating point types
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
 
 The above-mentioned in-depth Riemann-zeta examples are also executed
-and verified in the tests.
+and verified in the tests. These tests are used in CI to verify
+the expected functionality and also to obtain
+[code coverage results](https://app.codecov.io/gh/ckormanyos/extended_complex_).
 
 ## Continuous Integration
 
