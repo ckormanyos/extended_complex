@@ -202,6 +202,38 @@ namespace local
       }
     }
 
+    // Ensure that division with self is OK.
+    {
+      for(float_type flt = float_type { 1.25L }; flt < float_type { 3.0L }; flt += float_type { 0.25L })
+      {
+        complex_type cpx;
+
+        cpx /= cpx;
+
+        using std::fpclassify;
+
+        const auto result_self_div_is_ok = ((cpx.real() == 1) && (fpclassify(cpx.imag()) == FP_ZERO));
+
+        result_is_ok = (result_self_div_is_ok && result_is_ok);
+      }
+    }
+
+    // Ensure that division by self is OK.
+    {
+      for(float_type flt = float_type { 1.25L }; flt < float_type { 3.0L }; flt += float_type { 0.25L })
+      {
+        complex_type cpx;
+
+        cpx -= cpx;
+
+        using std::fpclassify;
+
+        const auto result_self_sub_is_ok = (((fpclassify(cpx.real()) == FP_ZERO)) && (fpclassify(cpx.imag()) == FP_ZERO));
+
+        result_is_ok = (result_self_sub_is_ok && result_is_ok);
+      }
+    }
+
     const complex_type control_01(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_02(my_lexical_cast<float_type>(  "+0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"),    my_lexical_cast<float_type>( "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"));
     const complex_type control_03(my_lexical_cast<float_type>(  "+0.1049891540130151843817787418655097613882863340563991323210412147505422993492407809110629067245119306"),    my_lexical_cast<float_type>( "-0.3605206073752711496746203904555314533622559652928416485900216919739696312364425162689804772234273319"));
