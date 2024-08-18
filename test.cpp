@@ -208,14 +208,14 @@ namespace local
       {
         complex_type cpx;
 
-        #if defined(__GNUC__)
+        #if defined(__clang__)
         #pragma GCC diagnostic push
         #pragma GCC diagnostic ignored "-Wself-assign-overloaded"
         #endif
 
         cpx /= cpx;
 
-        #if defined(__GNUC__)
+        #if defined(__clang__)
         #pragma GCC diagnostic pop
         #endif
 
@@ -233,14 +233,14 @@ namespace local
       {
         complex_type cpx;
 
-        #if defined(__GNUC__)
+        #if defined(__clang__)
         #pragma GCC diagnostic push
         #pragma GCC diagnostic ignored "-Wself-assign-overloaded"
         #endif
 
         cpx -= cpx;
 
-        #if defined(__GNUC__)
+        #if defined(__clang__)
         #pragma GCC diagnostic pop
         #endif
 
