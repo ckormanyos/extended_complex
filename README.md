@@ -234,10 +234,12 @@ algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
-
 The above-mentioned in-depth Riemann-zeta examples are also executed
-and verified in the tests. These tests are used in CI to verify
-the expected functionality and also to obtain
+and verified in the tests.
+
+These in-depth, combined test suites are used in CI
+to verify the expected functionality.
+They are also employed to obtain
 [code coverage results](https://app.codecov.io/gh/ckormanyos/extended_complex).
 
 ## Continuous Integration

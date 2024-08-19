@@ -13,30 +13,30 @@
 #ifndef UTIL_2024_08_19_H
   #define UTIL_2024_08_19_H
 
-namespace util
-{
-  template<typename NumericType>
-  auto is_close_fraction(const NumericType& a,
-                         const NumericType& b,
-                         const NumericType& tol) noexcept -> bool
+  namespace util
   {
-    using std::fabs;
-
-    auto result_is_ok = bool { };
-
-    if(b == static_cast<NumericType>(0))
+    template<typename NumericType>
+    auto is_close_fraction(const NumericType& a,
+                           const NumericType& b,
+                           const NumericType& tol) noexcept -> bool
     {
-      result_is_ok = (fabs(a - b) < tol);
-    }
-    else
-    {
-      const auto delta = fabs(1 - (a / b));
+      using std::fabs;
 
-      result_is_ok = (delta < tol);
-    }
+      auto result_is_ok = bool { };
 
-    return result_is_ok;
-  }
-} // namespace util
+      if(b == static_cast<NumericType>(0))
+      {
+        result_is_ok = (fabs(a - b) < tol);
+      }
+      else
+      {
+        const auto delta = fabs(1 - (a / b));
+
+        result_is_ok = (delta < tol);
+      }
+
+      return result_is_ok;
+    }
+  } // namespace util
 
 #endif // UTIL_2024_08_19_H
