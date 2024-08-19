@@ -7,6 +7,7 @@
 
 #include <example/zeta_detail.h>
 #include <extended_complex.h>
+#include <util.h>
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
@@ -22,39 +23,9 @@
 #include <iostream>
 #include <sstream>
 
-namespace local
-{
-  template<typename NumericType>
-  auto is_close_fraction(const NumericType& a,
-                         const NumericType& b,
-                         const NumericType& tol) noexcept -> bool
-  {
-    using std::fabs;
-
-    auto result_is_ok = bool { };
-
-    if(b == static_cast<NumericType>(0))
-    {
-      result_is_ok = (fabs(a - b) < tol);
-    }
-    else
-    {
-      const auto delta = fabs(1 - (a / b));
-
-      result_is_ok = (delta < tol);
-    }
-
-    return result_is_ok;
-  }
-} // namespace local
-
 auto example023_riemann_zeta_z() -> bool
 {
-  #if !defined(EXTENDED_COMPLEX_REDUCE_TEST_DEPTH)
-  constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT8_C(101)) };
-  #else
-  constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT8_C(51)) };
-  #endif
+  constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(101)) };
 
   using multiprecision_float_type =
     boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
@@ -95,8 +66,8 @@ auto example023_riemann_zeta_z() -> bool
         real_type("-0.265505793636743413619960696457985203582955058856950038898137949405729351965402359763549645860763401989286376534257444945731")
       };
 
-    const auto result_zeta_real_is_ok = local::is_close_fraction(rz.real(), rz_ctrl.real(), tol);
-    const auto result_zeta_imag_is_ok = local::is_close_fraction(rz.imag(), rz_ctrl.imag(), tol);
+    const auto result_zeta_real_is_ok = util::is_close_fraction(rz.real(), rz_ctrl.real(), tol);
+    const auto result_zeta_imag_is_ok = util::is_close_fraction(rz.imag(), rz_ctrl.imag(), tol);
 
     result_is_ok = (result_zeta_real_is_ok && result_zeta_imag_is_ok);
 

@@ -32,7 +32,7 @@ endif
 
 CXXFLAGS     = -march=native                                                   \
                -mtune=native                                                   \
-               -O2                                                             \
+               -O1                                                             \
                -Wall                                                           \
                -Wextra                                                         \
                -std=$(STD)                                                     \

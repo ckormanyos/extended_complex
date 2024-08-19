@@ -145,26 +145,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
       // Compute n^x using exp[x * log(n)] and use the map data in the Zeta::logn(...).
       // Obtain the necessary integer logarithms from a table.
 
-      const bool x_is_int { ((x.imag() == 0) && (static_cast<int>(x.real()) == x.real())) };
-
-      if(x_is_int)
-      {
-        const local_real_type rx { x.real() };
-
-        // Compute pure integer power for pure integer arguments.
-        if((rx < ef::int64_max<local_real_type>()) && (rx > ef::int64_min<local_real_type>()))
-        {
-          pf_pow_x = pow(local_complex_type(n), ef::to_int64(rx));
-        }
-        else
-        {
-          pf_pow_x = exp(x * logn<local_real_type>(n));
-        }
-      }
-      else
-      {
-        pf_pow_x = exp(x * logn<local_real_type>(n));
-      }
+      pf_pow_x = exp(x * logn<local_real_type>(n));
 
       n_pow_x_prime_factor_map[n] = pf_pow_x;
     }
@@ -362,7 +343,7 @@ inline auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> v
   }
   else
   {
-    Primes::Generator(n, primes);
+    Primes::Generator(n, primes); // LCOV_EXCL_LINE (not within the scope of testing)
   }
 }
 
@@ -413,7 +394,7 @@ inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uin
   }
   else
   {
-    Primes::Factors(n, pf);
+    Primes::Factors(n, pf); // LCOV_EXCL_LINE (not within the scope of testing)
   }
 }
 
@@ -455,7 +436,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   if(fabs(imag(s)) > upper_limit)
   {
     // Return NaN if s has a large imaginary part.
-    return local_complex_type { std::numeric_limits<local_real_type>::quiet_NaN() };
+    return local_complex_type { std::numeric_limits<local_real_type>::quiet_NaN() }; // LCOV_EXCL_LINE (not within the scope of testing)
   }
 
   // Use the accelerated alternating converging series for Zeta as shown in:
@@ -524,7 +505,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
     n_minus_j_fact          *= static_cast<std::int32_t>(N - j);
     two_j_fact              /= two_jp1_two_j;
 
-    dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact));
+    dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact)); // LCOV_EXCL_LINE (Bogus missed line from lcov)
 
     if(!j_is_zero)
     {
