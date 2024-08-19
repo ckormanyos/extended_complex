@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="example\zeta_detail.h" />
     <ClInclude Include="extended_complex.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="example\example023a_riemann_zeta_zeros.cpp" />

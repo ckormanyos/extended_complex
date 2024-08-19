@@ -10,8 +10,8 @@
 // with both user-defined types as well as built-in float,
 // double and long double.
 
-#ifndef EXTENDED_COMPLEX_2016_02_22
-  #define EXTENDED_COMPLEX_2016_02_22
+#ifndef EXTENDED_COMPLEX_2016_02_22_H
+  #define EXTENDED_COMPLEX_2016_02_22_H
 
   #if defined(__clang__)
     #if defined __has_feature && __has_feature(thread_sanitizer)
@@ -207,7 +207,7 @@
       }
 
       value_type real() const { return my_re; }
-      value_type imag() const { return my_im; }
+      value_type imag() const { return my_im; } // LCOV_EXCL_LINE (Bogus missed line from lcov)
 
       void real(const value_type& my_x) { my_re = my_x; }
       void imag(const value_type& my_y) { my_im = my_y; }
@@ -1063,4 +1063,4 @@
   acosh(x)            830                  3,200
   */
 
-#endif // EXTENDED_COMPLEX_2016_02_22
+#endif // EXTENDED_COMPLEX_2016_02_22_H
