@@ -5,17 +5,17 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#include <extended_complex.h>
+#include <util.h>
+
+#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/core/lightweight_test.hpp>
+
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <sstream>
-
-#include <boost/multiprecision/cpp_dec_float.hpp>
-#include <boost/core/lightweight_test.hpp>
-
-#include <extended_complex.h>
-#include <util.h>
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
 // g++ -Werror -Wall -Wextra -Wno-unused-parameter -O3 -std=c++20 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/boost/boost_1_85_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
