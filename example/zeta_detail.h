@@ -45,7 +45,7 @@ inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uin
 inline auto prime        (const std::uint32_t n, std::deque<std::uint32_t>& primes)-> void;
 
 template<typename T>
-constexpr auto tol(void) noexcept -> int { return std::numeric_limits<T>::max_digits10; }
+constexpr auto tol() noexcept -> int { return std::numeric_limits<T>::max_digits10; }
 
 template<typename T>
 constexpr auto one() -> T { return T { 1U }; }
@@ -250,7 +250,7 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
   primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(0u));
 }
 
-inline auto Data(void) -> std::deque<std::uint32_t>&
+inline auto Data() -> std::deque<std::uint32_t>&
 {
   // Create a static data table of primes and return a reference to it.
   static std::deque<std::uint32_t> primes;
@@ -273,7 +273,7 @@ constexpr auto IsPrimeFactor(std::uint32_t& np, const std::uint32_t p) -> bool
   const std::uint32_t q = static_cast<std::uint32_t>(np / p);
   const std::uint32_t r = static_cast<std::uint32_t>(np - static_cast<std::uint32_t>(q * p));
 
-  const bool is_prime_factor = (r == static_cast<std::uint32_t>(UINT8_C(0)));
+  const bool is_prime_factor { r == static_cast<std::uint32_t>(UINT8_C(0)) };
 
   if(is_prime_factor)
   {
