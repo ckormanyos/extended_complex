@@ -569,28 +569,30 @@
     {
       using std::fabs;
 
-      complex<T, EnableType> my_result;
-
       if(fabs(my_v.real()) < fabs(my_v.imag()))
       {
-        const T my_c_over_d = my_v.real() / my_v.imag();
+        const T my_c_over_d { my_v.real() / my_v.imag() };
 
-        const T my_denominator = (my_v.real() * my_c_over_d) + my_v.imag();
+        const T my_denominator { (my_v.real() * my_c_over_d) + my_v.imag() };
 
-        my_result = complex<T, EnableType>(( my_u * my_c_over_d) / my_denominator,
-                                            -my_u                / my_denominator);
+        return
+        {
+          ( my_u * my_c_over_d) / my_denominator,
+           -my_u                / my_denominator
+        };
       }
       else
       {
-        const T my_d_over_c = my_v.imag() / my_v.real();
+        const T my_d_over_c { my_v.imag() / my_v.real() };
 
-        const T my_denominator = (my_v.imag() * my_d_over_c) + my_v.real();
+        const T my_denominator { (my_v.imag() * my_d_over_c) + my_v.real() };
 
-        my_result = complex<T, EnableType>(  my_u                / my_denominator,
-                                           (-my_u * my_d_over_c) / my_denominator);
+        return
+        {
+            my_u                / my_denominator,
+          (-my_u * my_d_over_c) / my_denominator
+        };
       }
-
-      return my_result;
     }
 
     // Equality and inequality operators.
@@ -637,18 +639,18 @@
                    + std::string("([eE]{0,1}[\\+\\-]{0,1}[0-9]*)"))    // Possible exponent field.
       }};
 
-      T my_real_input(static_cast<unsigned>(UINT8_C(0)));
-      T my_imag_input(static_cast<unsigned>(UINT8_C(0)));
+      T my_real_input { static_cast<unsigned>(UINT8_C(0)) };
+      T my_imag_input { static_cast<unsigned>(UINT8_C(0)) };
 
-      bool my_input_has_error = false;
+      bool my_input_has_error { false };
 
-      std::string my_input_str;
+      std::string my_input_str { };
 
       my_istream >> my_input_str;
 
-      std::match_results<std::string::const_iterator> my_mr;
+      std::match_results<std::string::const_iterator> my_mr { };
 
-      auto my_it_regex_match =
+      const auto my_it_regex_match =
         std::find_if(my_regexes.cbegin(),
                      my_regexes.cend(),
                      [&my_input_str, &my_mr](const std::regex& my_rx) -> bool
@@ -676,10 +678,10 @@
 
         const std::string my_decimal_digits("0123456789");
 
-        const bool my_str1_has_error = ((my_str1.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str1.find_first_of(my_decimal_digits) == std::string::npos));
-        const bool my_str2_has_error = ((my_str2.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str2.find_first_of(my_decimal_digits) == std::string::npos));
-        const bool my_str3_has_error = ((my_str3.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str3.find_first_of(my_decimal_digits) == std::string::npos));
-        const bool my_str4_has_error = ((my_str4.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str4.find_first_of(my_decimal_digits) == std::string::npos));
+        const bool my_str1_has_error { (my_str1.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str1.find_first_of(my_decimal_digits) == std::string::npos) };
+        const bool my_str2_has_error { (my_str2.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str2.find_first_of(my_decimal_digits) == std::string::npos) };
+        const bool my_str3_has_error { (my_str3.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str3.find_first_of(my_decimal_digits) == std::string::npos) };
+        const bool my_str4_has_error { (my_str4.length() != static_cast<std::size_t>(UINT8_C(0))) && (my_str4.find_first_of(my_decimal_digits) == std::string::npos) };
 
         if(my_str1_has_error || my_str2_has_error || my_str3_has_error || my_str4_has_error)
         {
@@ -689,7 +691,7 @@
         {
           // Extract the real part of the complex number.
           {
-            std::stringstream strm;
+            std::stringstream strm { };
 
             strm << my_mr[static_cast<std::size_t>(UINT8_C(1))] << my_mr[static_cast<std::size_t>(UINT8_C(2))];
             strm >> my_real_input;
@@ -697,7 +699,7 @@
 
           // Extract the imaginary part of the complex number.
           {
-            std::stringstream strm;
+            std::stringstream strm { };
 
             strm << my_mr[static_cast<std::size_t>(UINT8_C(3))] << my_mr[static_cast<std::size_t>(UINT8_C(4))];
             strm >> my_imag_input;
@@ -725,7 +727,7 @@
         else
         {
           // Extract the real part of the complex number.
-          std::stringstream strm;
+          std::stringstream strm { };
 
           strm << my_mr[static_cast<std::size_t>(UINT8_C(1))] << my_mr[static_cast<std::size_t>(UINT8_C(2))];
           strm >> my_real_input;
@@ -790,32 +792,28 @@
     {
       using std::fabs;
 
-      T my_result;
-
       if(fabs(my_z.real()) < fabs(my_z.imag()))
       {
-        const T my_a_over_b = my_z.real() / my_z.imag();
+        const T my_a_over_b { my_z.real() / my_z.imag() };
 
-        my_result = (my_z.imag() * my_z.imag()) * (T(static_cast<unsigned>(UINT8_C(1))) + (my_a_over_b * my_a_over_b));
+        return (my_z.imag() * my_z.imag()) * (T(static_cast<unsigned>(UINT8_C(1))) + (my_a_over_b * my_a_over_b));
       }
       else
       {
-        const T my_b_over_a = my_z.imag() / my_z.real();
+        const T my_b_over_a { my_z.imag() / my_z.real() };
 
-        my_result = (my_z.real() * my_z.real()) * (T(static_cast<unsigned>(UINT8_C(1))) + (my_b_over_a * my_b_over_a));
+        return (my_z.real() * my_z.real()) * (T(static_cast<unsigned>(UINT8_C(1))) + (my_b_over_a * my_b_over_a));
       }
-
-      return my_result;
     }
 
     template<typename T, typename EnableType> auto conj(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
-      return complex<T, EnableType>(-my_z.imag(), my_z.real());
+      return { -my_z.imag(), my_z.real() };
     }
 
     template<typename T, typename EnableType> auto proj(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
-      const T denominator_half((norm(my_z) + T(static_cast<unsigned>(UINT8_C(1)))) / static_cast<unsigned>(UINT8_C(2)));
+      const T denominator_half { (norm(my_z) + T(static_cast<unsigned>(UINT8_C(1)))) / static_cast<unsigned>(UINT8_C(2)) };
 
       return
       {
@@ -829,9 +827,12 @@
       using std::cos;
       using std::sin;
 
-      return { my_rho * cos(my_theta), my_rho * sin(my_theta) };
+      return
+      {
+        my_rho * cos(my_theta),
+        my_rho * sin(my_theta)
+      };
     }
-
 
     // Elementary transcendental functions for extended_complex::complex<T, EnableType>.
     // See also ISO/IEC 14882:2011 Sect. 26.4.8.
@@ -891,28 +892,38 @@
     template<typename T, typename EnableType> auto cos(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
       using std::cos;
-      using std::cosh;
+      using std::exp;
       using std::sin;
-      using std::sinh;
+
+      const T exp_imag     { exp(my_z.imag()) };
+      const T exp_imag_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_imag };
+
+      const T cosh_imag { (exp_imag + exp_imag_inv) / static_cast<unsigned>(UINT8_C(2)) };
+      const T sinh_imag { (exp_imag - exp_imag_inv) / static_cast<unsigned>(UINT8_C(2)) };
 
       return
       {
-          cos(my_z.real()) * cosh(my_z.imag()),
-        -(sin(my_z.real()) * sinh(my_z.imag()))
+          cos(my_z.real()) * cosh_imag,
+        -(sin(my_z.real()) * sinh_imag)
       };
     }
 
     template<typename T, typename EnableType> auto cosh(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
       using std::cos;
-      using std::cosh;
+      using std::exp;
       using std::sin;
-      using std::sinh;
+
+      const T exp_real     { exp(my_z.real()) };
+      const T exp_real_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_real };
+
+      const T cosh_real { (exp_real + exp_real_inv) / static_cast<unsigned>(UINT8_C(2)) };
+      const T sinh_real { (exp_real - exp_real_inv) / static_cast<unsigned>(UINT8_C(2)) };
 
       return
       {
-        cos(my_z.imag()) * cosh(my_z.real()),
-        sin(my_z.imag()) * sinh(my_z.real())
+        cos(my_z.imag()) * cosh_real,
+        sin(my_z.imag()) * sinh_real
       };
     }
 
@@ -936,10 +947,11 @@
       using std::atan2;
       using std::log;
 
-      const T my_real_part { log(norm(my_z)) / static_cast<unsigned>(UINT8_C(2)) };
-      const T my_imag_part { atan2(my_z.imag(), my_z.real()) };
-
-      return { my_real_part, my_imag_part };
+      return
+      {
+        log(norm(my_z)) / static_cast<unsigned>(UINT8_C(2)),
+        atan2(my_z.imag(), my_z.real())
+      };
     }
 
     template<typename T, typename EnableType> auto log10(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
@@ -962,7 +974,7 @@
       {
         complex<T, EnableType> my_result { T(static_cast<unsigned>(UINT8_C(1))) };
 
-        complex<T, EnableType> y(my_z);
+        complex<T, EnableType> y { my_z };
 
         auto p_local = static_cast<std::uint64_t>(my_pn);
 
@@ -1012,28 +1024,38 @@
     template<typename T, typename EnableType> auto sin(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
       using std::cos;
-      using std::cosh;
+      using std::exp;
       using std::sin;
-      using std::sinh;
+
+      const T exp_imag     { exp(my_z.imag()) };
+      const T exp_imag_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_imag };
+
+      const T cosh_imag { (exp_imag + exp_imag_inv) / static_cast<unsigned>(UINT8_C(2)) };
+      const T sinh_imag { (exp_imag - exp_imag_inv) / static_cast<unsigned>(UINT8_C(2)) };
 
       return
       {
-        sin(my_z.real()) * cosh(my_z.imag()),
-        cos(my_z.real()) * sinh(my_z.imag())
+        sin(my_z.real()) * cosh_imag,
+        cos(my_z.real()) * sinh_imag
       };
     }
 
     template<typename T, typename EnableType> auto sinh(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
       using std::cos;
-      using std::cosh;
+      using std::exp;
       using std::sin;
-      using std::sinh;
+
+      const T exp_real     { exp(my_z.real()) };
+      const T exp_real_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_real };
+
+      const T cosh_real { (exp_real + exp_real_inv) / static_cast<unsigned>(UINT8_C(2)) };
+      const T sinh_real { (exp_real - exp_real_inv) / static_cast<unsigned>(UINT8_C(2)) };
 
       return
       {
-        cos (my_z.imag()) * sinh(my_z.real()),
-        cosh(my_z.real()) * sin (my_z.imag())
+        cos(my_z.imag()) * sinh_real,
+        sin(my_z.imag()) * cosh_real
       };
     }
 
@@ -1075,11 +1097,15 @@
 
     template<typename T, typename EnableType> auto tan(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
+      // TODO ckormanyos: Can this be refactored/simplified?
+
       return sin(my_z) / cos(my_z);
     }
 
     template<typename T, typename EnableType> auto tanh(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
+      // TODO ckormanyos: Can this be refactored/simplified?
+
       return sinh(my_z) / cosh(my_z);
     }
   } // namespace extended_complex
