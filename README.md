@@ -150,22 +150,23 @@ where $0~<{\sigma}~<1$.
 It is believed that there are infinitely many non-trivial roots (zeros)
 of the complex-valued Riemann-Zeta function. It is, in fact,
 thought that the critical strip contains _all_ of these non-trivial zeros.
+Note that negative, even integer zeros are considered trivial.
 
 This characteristic of the Riemann-Zeta function forges deep connections
 to both prime numbers as well as analytical and theoretical number theory.
+
 The [Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis),
 for instance, states that _all_ non-trivial zeros
-of the Riemann zeta function are localized even further, and they
-lie on the _critical_ _line_ at ${\sigma}~=~1/2$.
-It is profoudly significant due to its evidently inate and
-symbiotic relation to the distribution of prime numbers.
+of the Riemann zeta function are localized even further
+and lie on the _critical_ _line_ at ${\sigma}~=~1/2$.
+The statement of the Riemann Hypothesis is profoudly significant
+due to its inate implicative and symbiotic relation to prime numbers
+and the distribution of prime numbers.
 
-The bold conjecture of the
-[Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis)
-remains unproven, despite significant efforts
-by mathematicians to prove it.
+The bold conjecture of the Riemann Hypothesis remains unproven
+despite significant efforts by mathematicians to prove it.
 
-The graph below shows the absolute value of the complex-valued
+The graph below visualizes the absolute value of the complex-valued
 Riemann-Zeta function on a small segment of the critical line.
 The first $7$ non-trivial zeros are visible.
 
