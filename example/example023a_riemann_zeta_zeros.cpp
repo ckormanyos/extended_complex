@@ -45,7 +45,7 @@ namespace local
   #endif
   using real_type    = typename complex_type::value_type;
 
-  real_type my_riemann_function(const real_type& y)
+  auto my_riemann_function(const real_type& y) -> real_type
   {
     static const real_type my_half { 0.5F };
 

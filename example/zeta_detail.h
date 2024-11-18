@@ -30,8 +30,8 @@ namespace Util {
 template<typename T1, typename T2 = T1>
 struct point
 {
-  explicit point(const T1& x = T1(),
-                 const T2& y = T2()) noexcept : my_x(x), my_y(y) { }
+  explicit constexpr point(const T1& x = T1(),
+                           const T2& y = T2()) noexcept : my_x(x), my_y(y) { }
 
   T1 my_x { };
   T2 my_y { };
@@ -179,7 +179,7 @@ public:
 
   Inserter() = delete;
 
-  void operator()(const bool& bo_is_not_prime) const
+  auto operator()(const bool& bo_is_not_prime) const -> void
   {
     const auto bo_is_prime = (!bo_is_not_prime);
 
