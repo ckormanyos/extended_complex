@@ -109,7 +109,7 @@ auto main() -> int
 
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example023_riemann_zeta_z.cpp)
 provides a header-only implementation of the complex-valued
-[Riemann-zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
+[Riemann-Zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
 The program handles arguments in a relatively large (yet limited)
 unit disc of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
@@ -132,33 +132,41 @@ $$
 
 is calculated.
 
-### High-Precision Zeros on the Critical Line
+### Number Theory and Zeros on the Critical Line
+
+The complex-valued Riemann-Zeta function plays a central role
+in analytical and theoretical number theory and complex analysis.
 
 The so-called _critical_ _strip_ refers to the region in the complex plane
-for which the argument $z$ of the complex-valued Riemann-zeta
+for which the argument $z$ of the complex-valued Riemann-Zeta
 function ${\zeta}(z)$ is
 
 $$
 z={\sigma}~+~it{\mbox{,}}
 $$
 
-where $0<{\sigma}<1$.
+where $0~<{\sigma}~<1$.
 
 It is believed that there are infinitely many non-trivial roots (zeros)
-of the complex-valued Riemann-zeta function. The critical strip
-is thought to contain all the non-trivial zeros.
+of the complex-valued Riemann-Zeta function. It is, in fact,
+thought that the critical strip contains _all_ of these non-trivial zeros.
 
-This characteristic of the Riemann-zeta function forges deep connections
-to both prime numbers as well as number theory.
-
+This characteristic of the Riemann-Zeta function forges deep connections
+to both prime numbers as well as analytical and theoretical number theory.
 The [Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis),
-for instance, states that all non-trivial zeros
-of the Riemann zeta function are further localized and lie on the _critical_ _line_
-at ${\sigma}~=~1/2$. This bold conjecture remains unproven despite significant efforts
+for instance, states that _all_ non-trivial zeros
+of the Riemann zeta function are localized even further, and they
+lie on the _critical_ _line_ at ${\sigma}~=~1/2$.
+It is profoudly significant due to its evidently inate and
+symbiotic relation to the distribution of prime numbers.
+
+The bold conjecture of the
+[Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis)
+remains unproven, despite significant efforts
 by mathematicians to prove it.
 
 The graph below shows the absolute value of the complex-valued
-Riemann-zeta function on a small segment of the critical line.
+Riemann-Zeta function on a small segment of the critical line.
 The first $7$ non-trivial zeros are visible.
 
 ![](./images/zeta_critical_strip.jpg)
@@ -173,7 +181,7 @@ Plot[Abs[Zeta[(1/2) + (I t)]], {t, 1, 42}]
 ```
 
 In [example023a_riemann_zeta_zeros.cpp](https://github.com/ckormanyos/extended_complex/blob/main/example/example023a_riemann_zeta_zeros.cpp),
-the first $7$ non-trivial zeros of the complex-valued Riemann-zeta function on the critical line
+the first $7$ non-trivial zeros of the complex-valued Riemann-Zeta function on the critical line
 are calculated to ${\sim}~501$ decimal digits of precision.
 Root finding uses the implementation of
 [Algorithm 748](https://doi.org/10.1145/210089.210111)
@@ -212,7 +220,7 @@ $$
 
 ### _Not_ Number-Theory-Ready
 
-The range and domain of the Riemann-zeta calculations
+The range and domain of the Riemann-Zeta calculations
 in the particular examples described above are designed
 for high-precision investigations within the above-mentioned unit-disc
 of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
@@ -234,7 +242,7 @@ algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
 from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
-The above-mentioned in-depth Riemann-zeta examples are also executed
+The above-mentioned in-depth Riemann-Zeta examples are also executed
 and verified in the tests.
 
 These in-depth, combined test suites are used in CI
