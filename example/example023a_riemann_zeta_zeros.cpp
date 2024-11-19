@@ -11,13 +11,6 @@
 #include <boost/math/tools/toms748_solve.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
-#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#endif
-#include <complex>
-#endif
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -38,11 +31,7 @@ namespace local
                                     boost::multiprecision::et_off>;
   }
 
-  #if !defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
   using complex_type = extended_complex::complex<detail::multiprecision_float_type>;
-  #else
-  using complex_type = std::complex<detail::multiprecision_float_type>;
-  #endif
   using real_type    = typename complex_type::value_type;
 
   auto my_riemann_function(const real_type& y) -> real_type
@@ -61,7 +50,7 @@ namespace local
       {
         const real_type delta { fabs(1 - (a / b)) };
 
-        static const real_type my_tol { std::numeric_limits<real_type>::epsilon() * 64 };
+        static const real_type my_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64)) };
 
         return (delta < my_tol);
       };
@@ -75,7 +64,7 @@ namespace local
       };
 
     {
-      std::stringstream strm;
+      std::stringstream strm { };
 
       strm << std::setprecision(std::numeric_limits<real_type>::digits10) << result.first;
 
@@ -161,9 +150,9 @@ auto example023a_riemann_zeta_zeros() -> bool
   const complex_type rz5 { find_riemann_root(bt_val5) };
   const complex_type rz6 { find_riemann_root(bt_val6) };
 
-  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * 256 };
+  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT16_C(256)) };
 
-  using std::abs;
+  //using std::abs;
 
   const bool result_rz0_is_ok { (abs(riemann_zeta(rz0)) < my_real_tol) };
   const bool result_rz1_is_ok { (abs(riemann_zeta(rz1)) < my_real_tol) };
@@ -188,8 +177,3 @@ auto example023a_riemann_zeta_zeros() -> bool
   return result_is_ok;
 }
 
-#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
-#endif

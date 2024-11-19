@@ -310,16 +310,6 @@ no longer supported) to either use or un-use the word `constexpr`.
 This was back when `constexpr` was relatively new. At this time,
 simply leave this macro unchanged. It is default-set to the word `constexpr`.
 
-```cpp
-#define EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX
-```
-
-Define this advanced design macro on the command line in order to use
-`std::complex` instead of the extended-complex implementation of complex
-when performing stress-tests with Riemann-Zeta calculations.
-This macro can be used to help ensure that this library is compatible to
-the standard-library's `std::complex`.
-
 ## References
 
 [1] C.M. Kormanyos,
