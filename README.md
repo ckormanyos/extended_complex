@@ -31,8 +31,9 @@ class complex;
 } // namespace extended_complex
 ```
 
-The template parameter `T` is is intended to be a floating-point or a user-defined numeric type.
-The `EnableType` should not be changed. It is used internally to distinguish built-in floating-point types
+The template parameter `T` is is intended to be a built-in floating-point type
+or a user-defined numeric type. The `EnableType` should not be changed.
+It is used internally to distinguish built-in floating-point types
 from user-defined numeric types.
 
 ## Potential Use Cases
