@@ -18,6 +18,19 @@ The project is written in header-only C++14, and compatible through C++14, 17, 2
 The `extended_complex::complex` template class can be used
 with both built-in floating-point types as well as user-defined numeric types.
 
+The complete template signature of the `uintwide_t` class is shown below.
+
+```cpp
+namespace extended_complex {
+
+// Forward declaration of the complex template class.
+
+template<typename T, typename EnableType = void>
+class complex;
+
+} // namespace extended_complex
+```
+
 ## Potential Use Cases
 
 There are numerous potential use cases for `ckormanyos/extended_complex`.
@@ -135,7 +148,7 @@ is calculated.
 ### Number Theory and Zeros on the Critical Line
 
 The complex-valued Riemann-Zeta function plays a central role
-in analytical and theoretical number theory and complex analysis.
+in number theory.
 
 The so-called _critical_ _strip_ refers to the region in the complex plane
 for which the argument $z$ of the complex-valued Riemann-Zeta

@@ -19,6 +19,9 @@
     <ClInclude Include="util.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="stopwatch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
