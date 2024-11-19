@@ -60,7 +60,7 @@
     // See also ISO/IEC 14882:2011 Sect. 26.4.3.
 
     template<typename T>
-    class complex<T, typename std::enable_if<std::is_floating_point<T>::value>::type>;
+    class complex<T, typename std::enable_if_t<std::is_floating_point<T>::value>>;
 
     // Non-member operations for extended_complex::complex<T, EnableType>.
     // Similar to ISO/IEC 14882:2011 Sect. 26.4.6.
@@ -138,7 +138,7 @@
 
     template<typename T,
              typename IntegralType,
-             typename EnableType = void>             auto pow(const complex<T, EnableType>&, IntegralType) -> typename std::enable_if<std::is_integral<IntegralType>::value, complex<T, EnableType>>::type;
+             typename EnableType = void>             auto pow  (const complex<T, EnableType>&, IntegralType) -> typename std::enable_if_t<std::is_integral<IntegralType>::value, complex<T, EnableType>>;
     template<typename T, typename EnableType = void> auto pow  (const complex<T, EnableType>&, const T&) -> complex<T, EnableType>;
     template<typename T, typename EnableType = void> auto pow  (const complex<T, EnableType>&, const complex<T, EnableType>&) -> complex<T, EnableType>;
     template<typename T, typename EnableType = void> auto pow  (const T&, const complex<T, EnableType>&) -> complex<T, EnableType>;
@@ -336,15 +336,17 @@
     // See also ISO/IEC 14882:2011 Sect. 26.4.3.
 
     template<typename T>
-    class complex<T, typename std::enable_if<std::is_floating_point<T>::value>::type>
+    class complex<T, typename std::enable_if_t<std::is_floating_point<T>::value>>
     {
     public:
       using value_type = T;
 
       EXTENDED_COMPLEX_CONSTEXPR complex(value_type my_x = value_type(),
-                                         value_type my_y = value_type()) : my_re(my_x), my_im(my_y) { }
+                                         value_type my_y = value_type()) : my_re(my_x),
+                                                                           my_im(my_y) { }
 
-      EXTENDED_COMPLEX_CONSTEXPR complex(const complex& other) : my_re(other.my_re), my_im(other.my_im) { }
+      EXTENDED_COMPLEX_CONSTEXPR complex(const complex& other) : my_re(other.my_re),
+                                                                 my_im(other.my_im) { }
 
       EXTENDED_COMPLEX_CONSTEXPR complex(complex&& other) noexcept : my_re(std::move(static_cast<value_type&&>(other.my_re))),
                                                                      my_im(std::move(static_cast<value_type&&>(other.my_im))) { }
@@ -962,7 +964,7 @@
     }
 
     template<typename T, typename IntegralType, typename EnableType>
-    auto pow(const complex<T, EnableType>& my_z, IntegralType my_pn) -> typename std::enable_if<std::is_integral<IntegralType>::value, complex<T, EnableType>>::type
+    auto pow(const complex<T, EnableType>& my_z, IntegralType my_pn) -> typename std::enable_if_t<std::is_integral<IntegralType>::value, complex<T, EnableType>>
     {
       if     (my_pn <  static_cast<int>(INT8_C(0))) { return  T(static_cast<unsigned>(UINT8_C(1))) / pow(my_z, -my_pn); }
       else if(my_pn == static_cast<int>(INT8_C(0))) { return  complex<T, EnableType>(T(static_cast<unsigned>(UINT8_C(1)))); }
