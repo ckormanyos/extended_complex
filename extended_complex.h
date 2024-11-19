@@ -1099,16 +1099,40 @@
 
     template<typename T, typename EnableType> auto tan(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
-      // TODO ckormanyos: Can this be refactored/simplified?
+      using std::cos;
+      using std::exp;
+      using std::sin;
 
-      return sin(my_z) / cos(my_z);
+      const T exp_imag     { exp(my_z.imag()) };
+      const T exp_imag_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_imag };
+
+      const T cosh_imag2 { exp_imag + exp_imag_inv };
+      const T sinh_imag2 { exp_imag - exp_imag_inv };
+
+      const T cos_real { cos(my_z.real()) };
+      const T sin_real { sin(my_z.real()) };
+
+      return   complex<T, EnableType>(sin_real * cosh_imag2,  cos_real * sinh_imag2)
+             / complex<T, EnableType>(cos_real * cosh_imag2, -sin_real * sinh_imag2);
     }
 
     template<typename T, typename EnableType> auto tanh(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
-      // TODO ckormanyos: Can this be refactored/simplified?
+      using std::cos;
+      using std::exp;
+      using std::sin;
 
-      return sinh(my_z) / cosh(my_z);
+      const T exp_real     { exp(my_z.real()) };
+      const T exp_real_inv { T(static_cast<unsigned>(UINT8_C(1))) / exp_real };
+
+      const T cosh_real2 { exp_real + exp_real_inv };
+      const T sinh_real2 { exp_real - exp_real_inv };
+
+      const T cos_imag { cos(my_z.imag()) };
+      const T sin_imag { sin(my_z.imag()) };
+
+      return   complex<T, EnableType>(cos_imag * sinh_real2, sin_imag * cosh_real2)
+             / complex<T, EnableType>(cos_imag * cosh_real2, sin_imag * sinh_real2);
     }
   } // namespace extended_complex
 
