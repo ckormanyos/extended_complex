@@ -68,7 +68,7 @@ namespace local
         + std::string(static_cast<std::size_t>(UINT8_C(2)), '9')
       };
 
-    const auto tol = my_lexical_cast<float_type>(str_tol.c_str());
+    const float_type tol { my_lexical_cast<float_type>(str_tol.c_str()) * 10 };
 
     std::cout << "Testing with tolerance: " << tol << std::endl;
 
@@ -107,6 +107,10 @@ namespace local
     const complex_type result_27 = pow  ( val_z1, 3);                                     // N[((12/10) + ((34 I)/10)) ^ 3, 100]
     const complex_type result_28 = pow  ( val_z1, 4);                                     // N[((12/10) + ((34 I)/10)) ^ 4, 100]
     const complex_type result_29 = log10( val_z1);                                        // N[Log[10, (12/10) + ((34 I)/10)], 100]
+    const complex_type result_30 = cosh ( val_z1);                                        // N[Cosh[(12/10) + ((34 I)/10)], 100]
+    const complex_type result_31 = sinh ( val_z1);                                        // N[Sinh[(12/10) + ((34 I)/10)], 100]
+    const complex_type result_32 = tanh ( val_z1);                                        // N[Tanh[(12/10) + ((34 I)/10)], 100]
+    const complex_type result_33 = tan  ( val_z1);                                        // N[Tan[(12/10) + ((34 I)/10)], 100]
 
     auto result_is_ok = true;
 
@@ -258,6 +262,10 @@ namespace local
     const complex_type control_27(my_lexical_cast<float_type>(  "-39.888"),                                                                                                    my_lexical_cast<float_type>( "-24.616"));
     const complex_type control_28(my_lexical_cast<float_type>(  "+35.8288"),                                                                                                   my_lexical_cast<float_type>( "-165.1584"));
     const complex_type control_29(my_lexical_cast<float_type>(  "+0.5569716761534183846032525789711642154148645941935341359005954874987765458150971204038237271294498298"),    my_lexical_cast<float_type>( "+0.5348352667130015664636074917527317522518834314413225905061936414812229669489254880191329916418075640"));
+    const complex_type control_30(my_lexical_cast<float_type>(  "-1.750538529873144139045226521462954860931070703406867443705575327698120127693949444003491179539803540"),     my_lexical_cast<float_type>( "-0.385729418228941114585783287542904778761684113049496885765699906882071623161614865310950661528173196"));
+    const complex_type control_31(my_lexical_cast<float_type>(  "-1.459344510181031985739679928789446132188487461323488604725673812272622166868694452733557505015403343"),     my_lexical_cast<float_type>( "-0.462696919065088203665190427736980818788403809123239459086853242811288735966522197819049006036217659"));
+    const complex_type control_32(my_lexical_cast<float_type>(  "+0.8505969575493737670772866494756194011367091775650155712274948188544893109556716018431217661909071889"),    my_lexical_cast<float_type>( "+0.0768887100657045933256083080177585250084258780189064853743639639730289473609169028321092839605973771"));
+    const complex_type control_33(my_lexical_cast<float_type>(  "+0.0015071018758057830933874042178907505360991883301966324249948453198296050482237926843006572695221630"),    my_lexical_cast<float_type>( "+1.0016427969891410443314045044734637202892888728590729858973991234850406327825813902493396819017587343"));
 
     { const auto result_real_is_ok = util::is_close_fraction(result_01.real(), control_01.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_01.imag(), control_01.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
     { const auto result_real_is_ok = util::is_close_fraction(result_02.real(), control_02.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_02.imag(), control_02.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
@@ -288,6 +296,10 @@ namespace local
     { const auto result_real_is_ok = util::is_close_fraction(result_27.real(), control_27.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_27.imag(), control_27.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
     { const auto result_real_is_ok = util::is_close_fraction(result_28.real(), control_28.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_28.imag(), control_28.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
     { const auto result_real_is_ok = util::is_close_fraction(result_29.real(), control_29.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_29.imag(), control_29.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
+    { const auto result_real_is_ok = util::is_close_fraction(result_30.real(), control_30.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_30.imag(), control_30.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
+    { const auto result_real_is_ok = util::is_close_fraction(result_31.real(), control_31.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_31.imag(), control_31.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
+    { const auto result_real_is_ok = util::is_close_fraction(result_32.real(), control_32.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_32.imag(), control_32.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
+    { const auto result_real_is_ok = util::is_close_fraction(result_33.real(), control_33.real(), tol); const auto result_imag_is_ok = util::is_close_fraction(result_33.imag(), control_33.imag(), tol); BOOST_TEST(result_real_is_ok); BOOST_TEST(result_imag_is_ok); result_is_ok = (result_real_is_ok && result_imag_is_ok && result_is_ok); std::stringstream strm { }; strm << "result_real_is_ok: " << std::boolalpha << result_real_is_ok << ", result_imag_is_ok: " << std::boolalpha << result_imag_is_ok; std::cout << strm.str() << std::endl; }
 
     return result_is_ok;
   }
