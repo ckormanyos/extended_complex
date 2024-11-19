@@ -18,7 +18,7 @@ The project is written in header-only C++14, and compatible through C++14, 17, 2
 The `extended_complex::complex` template class can be used
 with both built-in floating-point types as well as user-defined numeric types.
 
-The complete template signature of the `uintwide_t` class is shown below.
+The complete template signature of the `complex` class is shown below.
 
 ```cpp
 namespace extended_complex {
@@ -30,6 +30,10 @@ class complex;
 
 } // namespace extended_complex
 ```
+
+The template parameter `T` is is intended to be a floating-point or a user-defined numeric type.
+The `EnableType` should not be changed. It is used internally to distinguish built-in floating-point types
+from user-defined numeric types.
 
 ## Potential Use Cases
 
@@ -44,7 +48,7 @@ These include (but are not limited to) the following and more.
 
 The following straightforward example takes a user-defined,
 multiple-precision floating-point type from
-[Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_86_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
 ${\sim}~100$ decimal digits of precision.
 
@@ -199,7 +203,7 @@ the first $7$ non-trivial zeros of the complex-valued Riemann-Zeta function on t
 are calculated to ${\sim}~501$ decimal digits of precision.
 Root finding uses the implementation of
 [Algorithm 748](https://doi.org/10.1145/210089.210111)
-found in [Boost.Math](https://www.boost.org/doc/libs/1_85_0/libs/math/doc/html/index.html).
+found in [Boost.Math](https://www.boost.org/doc/libs/1_86_0/libs/math/doc/html/index.html).
 See also [2] in the references below.
 
 The results found are:
@@ -255,7 +259,7 @@ A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
-from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_85_0/libs/multiprecision/doc/html/index.html).
+from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_86_0/libs/multiprecision/doc/html/index.html).
 The above-mentioned in-depth Riemann-Zeta examples are also executed
 and verified in the tests.
 
