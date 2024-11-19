@@ -6,6 +6,7 @@
 //
 
 #include <extended_complex.h>
+#include <stopwatch.h>
 #include <util.h>
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
@@ -312,6 +313,10 @@ auto main() -> int
 {
   using local_mp_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
 
+  using stopwatch_type = concurrency::stopwatch;
+
+  stopwatch_type my_stopwatch { };
+
   const auto result_flt_________is_ok = local::test<float>();
   const auto result_dbl_________is_ok = local::test<double>();
   const auto result_ldbl________is_ok = local::test<long double>();
@@ -319,24 +324,41 @@ auto main() -> int
   const auto result_example023__is_ok = ::example023_riemann_zeta_z();
   const auto result_example023a_is_ok = ::example023a_riemann_zeta_zeros();
 
-  BOOST_TEST(result_flt_________is_ok);
-  BOOST_TEST(result_dbl_________is_ok);
-  BOOST_TEST(result_ldbl________is_ok);
-  BOOST_TEST(result_mp__________is_ok);
-  BOOST_TEST(result_example023__is_ok);
-  BOOST_TEST(result_example023a_is_ok);
+  const auto execution_time = stopwatch_type::elapsed_time<float>(my_stopwatch);
 
-  auto result_is_ok =
-  (
+  const bool result_is_ok
+  {
        result_flt_________is_ok
     && result_dbl_________is_ok
     && result_ldbl________is_ok
     && result_mp__________is_ok
     && result_example023__is_ok
     && result_example023a_is_ok
-  );
+  };
+
+  {
+    std::stringstream strm { };
+
+    strm << "\nresult_is_ok: "
+         << std::boolalpha
+         << result_is_ok
+         << ", time: "
+         << std::fixed
+         << std::setprecision(1)
+         << execution_time
+         << "s";
+
+    std::cout << strm.str() << std::endl;
+  }
 
   BOOST_TEST(result_is_ok);
+
+  BOOST_TEST(result_flt_________is_ok);
+  BOOST_TEST(result_dbl_________is_ok);
+  BOOST_TEST(result_ldbl________is_ok);
+  BOOST_TEST(result_mp__________is_ok);
+  BOOST_TEST(result_example023__is_ok);
+  BOOST_TEST(result_example023a_is_ok);
 
   return boost::report_errors();
 }
