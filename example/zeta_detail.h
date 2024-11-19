@@ -11,8 +11,6 @@
 #define BOOST_MATH_STANDALONE
 #define BOOST_MULTIPRECISION_STANDALONE
 
-//#define EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX
-
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/unordered/unordered_map.hpp>
 
@@ -87,9 +85,7 @@ public:
 
     if(it_ln == ln_data.cend())
     {
-      using std::log;
-
-      const T ln_value = log( T { n } );
+      const T ln_value { log(T { n }) };
 
       ln_data[n] = ln_value;
 
@@ -125,7 +121,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 
   local_complex_type jpx { ef::one<local_real_type>() };
 
-  for(std::size_t i = static_cast<std::size_t>(0u); i < pf.size(); i++)
+  for(std::size_t i = static_cast<std::size_t>(UINT8_C(0)); i < pf.size(); i++)
   {
     local_complex_type pf_pow_x;
 
@@ -136,12 +132,8 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 
     const const_iterator_type itr = n_pow_x_prime_factor_map.find(n);
 
-    using std::pow;
-
     if(itr == n_pow_x_prime_factor_map.end())
     {
-      using std::exp;
-
       // Compute n^x using exp[x * log(n)] and use the map data in the Zeta::logn(...).
       // Obtain the necessary integer logarithms from a table.
 
@@ -206,16 +198,16 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
   constexpr auto min_hundred = static_cast<std::uint32_t>(UINT8_C(100));
   constexpr auto xmax        = static_cast<double>((std::numeric_limits<std::uint32_t>::max)());
 
-  const auto xn = static_cast<double>((std::max)(min_hundred, n));
+  const double xn { static_cast<double>((std::max)(min_hundred, n)) };
 
   using std::log;
 
-  const auto logn    = log(xn);
-  const auto loglogn = log(logn);
-  const auto top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((1.8 * loglogn) / logn)));
-  const auto xlim    = (std::min)(top, xmax);
-  const auto nlim    = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
-  const auto limit   = (std::max)(n, nlim);
+  const double        logn    = log(xn);
+  const double        loglogn = log(logn);
+  const double        top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((1.8 * loglogn) / logn)));
+  const double        xlim    = (std::min)(top, xmax);
+  const std::uint32_t nlim    = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
+  const std::uint32_t limit   = (std::max)(n, nlim);
 
   // Use a sieve algorithm to generate a boolean table representation of the primes.
 
@@ -223,7 +215,7 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
 
   using primes_inserter_type = Primes::Inserter<std::uint32_t>;
 
-  auto i = static_cast<std::uint32_t>(primes_inserter_type::start_index);
+  std::uint32_t i { static_cast<std::uint32_t>(primes_inserter_type::start_index) };
 
   std::uint32_t i2 { };
 
@@ -247,13 +239,13 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
                 sieve.end(),
                 primes_inserter_type(primes_data));
 
-  primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(0u));
+  primes_data.resize(static_cast<std::size_t>(n), static_cast<std::uint32_t>(UINT8_C(0)));
 }
 
 inline auto Data() -> std::deque<std::uint32_t>&
 {
   // Create a static data table of primes and return a reference to it.
-  static std::deque<std::uint32_t> primes;
+  static std::deque<std::uint32_t> primes { };
 
   if(primes.empty())
   {
@@ -262,6 +254,7 @@ inline auto Data() -> std::deque<std::uint32_t>&
     // exceed 0x10000 (decimal 65,536). This number is significant because it is
     // the maximum value which needs to be tested while computing the prime factors
     // of unsigned 32-bit integers, as done in the subroutine Factors(...).
+
     Primes::Generator(static_cast<std::uint32_t>(UINT16_C(6550)), primes);
   }
 
@@ -424,14 +417,12 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
 
   if(prime_data.empty())
   {
-    ef::prime(static_cast<std::uint32_t>(300u), prime_data);
+    ef::prime(static_cast<std::uint32_t>(UINT16_C(300)), prime_data);
   }
 
   static const std::vector<std::uint32_t> primes(prime_data.begin(), prime_data.end());
 
   const local_real_type upper_limit { static_cast<std::uint32_t>(UINT32_C(1000100)) };
-
-  using std::fabs;
 
   if(fabs(imag(s)) > upper_limit)
   {
@@ -460,7 +451,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
 
   const std::int32_t N { static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni))) };
 
-  auto neg_term = ((N % static_cast<std::int32_t>(2)) == static_cast<std::int32_t>(0));
+  auto neg_term = ((N % static_cast<std::int32_t>(INT8_C(2))) == static_cast<std::int32_t>(INT8_C(0)));
 
   const unsigned int
     two_n_minus_one
@@ -474,8 +465,6 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
       )
     };
 
-  using std::pow;
-
   local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
   local_real_type four_pow_j              = pow(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
   local_real_type n_minus_j_fact          = ef::one<local_real_type>();
@@ -488,16 +477,16 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   local_complex_type zs = ((!neg_term) ? dn : -dn) / jps;
 
   for(auto   j  = static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1)));
-              j >= static_cast<std::int32_t>(INT8_C(0));
-            --j)
+             j >= static_cast<std::int32_t>(INT8_C(0));
+           --j)
   {
-    const auto j_is_zero = (j == static_cast<std::int32_t>(INT8_C(0)));
+    const bool j_is_zero { j == static_cast<std::int32_t>(INT8_C(0)) };
 
     const auto two_jp1_two_j =
       static_cast<std::int32_t>
       (
           static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
-        * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * (!j_is_zero ? j : static_cast<std::int32_t>(INT8_C(1))))
+        * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * ((!j_is_zero) ? j : static_cast<std::int32_t>(INT8_C(1))))
       );
 
     n_plus_j_minus_one_fact /= static_cast<std::int32_t>(N + j);
@@ -523,8 +512,6 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   const local_complex_type one_minus_s { ef::one<local_real_type>() - s };
 
   static const local_complex_type two_cpx { local_real_type { static_cast<int>(INT8_C(2)) } };
-
-  using std::pow;
 
   return zs / (dn * (ef::one<local_real_type>() - pow(two_cpx, one_minus_s)));
 }

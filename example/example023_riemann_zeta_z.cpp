@@ -12,13 +12,6 @@
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include <cmath>
-#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#endif
-#include <complex>
-#endif
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -31,23 +24,24 @@ auto example023_riemann_zeta_z() -> bool
     boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
                                   boost::multiprecision::et_off>;
 
-  #if !defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
   using complex_type = extended_complex::complex<multiprecision_float_type>;
-  #else
-  using complex_type = std::complex<multiprecision_float_type>;
-  #endif
   using real_type    = typename complex_type::value_type;
 
   // N[Zeta[(11/10) + ((23 I) /10), 101]
   //   0.632109498389343535342169571825433072547166503805556530807503296226452975136793086061836360968673834125891496185123905777760
   // - 0.265505793636743413619960696457985203582955058856950038898137949405729351965402359763549645860763401989286376534257444945731 I
 
-  complex_type c(real_type(11) / 10, real_type(23) / 10);
+  complex_type
+    cpx
+    {
+      real_type(static_cast<int>(INT8_C(11))) / static_cast<int>(INT8_C(10)),
+      real_type(static_cast<int>(INT8_C(23))) / static_cast<int>(INT8_C(10))
+    };
 
-  const auto rz = riemann_zeta(c);
+  const auto rz = riemann_zeta(cpx);
 
   {
-    std::stringstream strm;
+    std::stringstream strm { };
 
     strm << std::setprecision(std::numeric_limits<real_type>::digits10) << rz;
 
@@ -57,7 +51,7 @@ auto example023_riemann_zeta_z() -> bool
   bool result_is_ok { };
 
   {
-    const real_type tol { std::numeric_limits<real_type>::epsilon() * 64U };
+    const real_type tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64)) };
 
     const complex_type
       rz_ctrl
@@ -71,7 +65,7 @@ auto example023_riemann_zeta_z() -> bool
 
     result_is_ok = (result_zeta_real_is_ok && result_zeta_imag_is_ok);
 
-    std::stringstream strm;
+    std::stringstream strm { };
 
     strm << "result_is_ok: " << std::boolalpha << result_is_ok;
 
@@ -81,8 +75,3 @@ auto example023_riemann_zeta_z() -> bool
   return result_is_ok;
 }
 
-#if defined(EXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX)
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
-#endif
