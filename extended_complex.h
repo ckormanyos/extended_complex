@@ -879,10 +879,7 @@
 
     template<typename T, typename EnableType> EXTENDED_COMPLEX_CONSTEXPR auto atanh(const complex<T, EnableType>& my_z) -> complex<T, EnableType>
     {
-      const complex<T, EnableType> result
-      {
-        log(T(static_cast<unsigned>(UINT8_C(1))) + my_z) - log(T(static_cast<unsigned>(UINT8_C(1))) - my_z)
-      };
+      const complex<T, EnableType> result { log(T(static_cast<unsigned>(UINT8_C(1))) + my_z) - log(T(static_cast<unsigned>(UINT8_C(1))) - my_z) };
 
       return
       {
