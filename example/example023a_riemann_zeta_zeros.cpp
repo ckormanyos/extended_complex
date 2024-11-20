@@ -36,24 +36,22 @@ namespace local
 
   auto my_riemann_function(const real_type& y) -> real_type
   {
-    static const real_type my_half { 0.5F };
-
-    return riemann_zeta(complex_type { my_half, y }).real();
+    return riemann_zeta(complex_type { real_type { 0.5F }, y }).real();
   }
 
   using bracket_type = std::pair<real_type, real_type>;
 
   auto find_riemann_root(const bracket_type& bt_val) -> complex_type
   {
-    auto tol =
+    auto tol
+    {
       [](const real_type& a, const real_type& b)
       {
         const real_type delta { fabs(1 - (a / b)) };
 
-        static const real_type my_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64)) };
-
-        return (delta < my_tol);
-      };
+        return (delta < (std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64))));
+      }
+    };
 
     std::uintmax_t max_iter { static_cast<std::uintmax_t>(UINT8_C(64)) };
 
@@ -71,9 +69,7 @@ namespace local
       std::cout << strm.str() << std::endl;
     }
 
-    static const real_type my_half { 0.5F };
-
-    return { my_half, result.first };
+    return { real_type { 0.5F }, result.first };
   }
 } // namespace local
 
@@ -142,6 +138,9 @@ auto example023a_riemann_zeta_zeros() -> bool
   using local::complex_type;
   using local::find_riemann_root;
 
+  // TODO: Find the roots with parallel-for, but also notice that
+  // riemann_zeta(...) might not yet be strictly parallelizable.
+
   const complex_type rz0 { find_riemann_root(bt_val0) };
   const complex_type rz1 { find_riemann_root(bt_val1) };
   const complex_type rz2 { find_riemann_root(bt_val2) };
@@ -151,8 +150,6 @@ auto example023a_riemann_zeta_zeros() -> bool
   const complex_type rz6 { find_riemann_root(bt_val6) };
 
   const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT16_C(256)) };
-
-  //using std::abs;
 
   const bool result_rz0_is_ok { (abs(riemann_zeta(rz0)) < my_real_tol) };
   const bool result_rz1_is_ok { (abs(riemann_zeta(rz1)) < my_real_tol) };
