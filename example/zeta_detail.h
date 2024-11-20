@@ -164,14 +164,14 @@ struct Inserter
 public:
   using value_type = IntegralType;
 
-  static constexpr std::size_t start_index = static_cast<std::size_t>(UINT8_C(2));
+  static constexpr std::size_t start_index { static_cast<std::size_t>(UINT8_C(2)) };
 
   explicit Inserter(std::deque<value_type>& sequence)
     : my_it(std::back_inserter(sequence)) { }
 
   Inserter() = delete;
 
-  auto operator()(const bool& bo_is_not_prime) const -> void
+  auto operator()(const bool& bo_is_not_prime) -> void
   {
     const auto bo_is_prime = (!bo_is_not_prime);
 
@@ -184,8 +184,8 @@ public:
   }
 
 private:
-  mutable value_type count { start_index };
-  mutable std::back_insert_iterator<std::deque<value_type>> my_it;
+  value_type count { start_index };
+  std::back_insert_iterator<std::deque<value_type>> my_it;
 };
 
 inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_data) -> void
@@ -202,12 +202,12 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
 
   using std::log;
 
-  const double        logn    = log(xn);
-  const double        loglogn = log(logn);
-  const double        top     = static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((1.8 * loglogn) / logn)));
-  const double        xlim    = (std::min)(top, xmax);
-  const std::uint32_t nlim    = static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim));
-  const std::uint32_t limit   = (std::max)(n, nlim);
+  const double        logn    { log(xn) };
+  const double        loglogn { log(logn) };
+  const double        top     { static_cast<double>(xn * (((logn + loglogn) - 1.0) + ((1.8 * loglogn) / logn))) };
+  const double        xlim    { (std::min)(top, xmax) };
+  const std::uint32_t nlim    { static_cast<std::uint32_t>(static_cast<std::uint64_t>(xlim)) };
+  const std::uint32_t limit   { (std::max)(n, nlim) };
 
   // Use a sieve algorithm to generate a boolean table representation of the primes.
 
@@ -287,13 +287,13 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
 
   using std::sqrt;
 
-  const auto sqrt_n = static_cast<std::uint32_t>(static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5));
+  const std::uint32_t sqrt_n { static_cast<std::uint32_t>(static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5)) };
 
   auto np = n;
 
   for(auto i = static_cast<std::size_t>(UINT8_C(0)); i < sz; ++i)
   {
-    const auto p = Data()[i];
+    const auto& p = Data()[i];
 
     if(IsPrimeFactor(np, p))
     {
@@ -413,7 +413,7 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   boost::unordered_map<std::uint32_t, local_complex_type> n_pow_s_prime_factor_map;
 
   // Generate a list of the first 300 prime numbers.
-  static std::deque<std::uint32_t> prime_data;
+  static std::deque<std::uint32_t> prime_data { };
 
   if(prime_data.empty())
   {
