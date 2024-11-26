@@ -117,7 +117,16 @@ namespace local
     const complex_type result_32 = tanh ( val_z1);                                        // N[Tanh[(12/10) + ((34 I)/10)], 100]
     const complex_type result_33 = tan  ( val_z1);                                        // N[Tan[(12/10) + ((34 I)/10)], 100]
 
-    auto result_is_ok = true;
+    bool result_is_ok { true };
+
+    // Ensure that array-oriented access works.
+    {
+      const bool result_access_00_is_ok = ((reinterpret_cast<const float_type*>(&val_z1))[size_t { UINT8_C(0) }] == float_type(12U) / 10U);
+      const bool result_access_01_is_ok = ((reinterpret_cast<const float_type*>(&val_z1))[size_t { UINT8_C(1) }] == float_type(34U) / 10U);
+
+      result_is_ok = (result_access_00_is_ok && result_is_ok);
+      result_is_ok = (result_access_01_is_ok && result_is_ok);
+    }
 
     // Ensure that I/O-streaming works.
     {
@@ -136,7 +145,7 @@ namespace local
       result_is_ok = (result_strm_is_ok && result_is_ok);
     }
 
-    // Ensure that all forms of I/O-streaming work.
+    // Ensure that various forms of I/O-streaming work.
     {
       {
         std::stringstream strm;
