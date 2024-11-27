@@ -365,12 +365,12 @@
                                                                      my_im(std::move(static_cast<value_type&&>(other.my_im))) { }
 
       template<typename OtherFloatingPointType,
-               typename OtherFloatingPointEnableType = typename std::enable_if_t<std::is_floating_point<OtherFloatingPointType>::value && (sizeof(OtherFloatingPointType) != sizeof(value_type)), void>>
+               typename OtherEnableType = typename std::enable_if_t<std::is_floating_point<OtherFloatingPointType>::value && (sizeof(OtherFloatingPointType) != sizeof(value_type)), void>>
       explicit EXTENDED_COMPLEX_CONSTEXPR complex(const complex<OtherFloatingPointType>& other)
         : my_re(static_cast<value_type>(other.my_re)),
           my_im(static_cast<value_type>(other.my_im)) { }
 
-      auto operator=(const complex& other) -> complex&
+      EXTENDED_COMPLEX_CONSTEXPR auto operator=(const complex& other) -> complex&
       {
         if(this != &other)
         {
