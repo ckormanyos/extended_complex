@@ -196,8 +196,11 @@
       template<typename X>
       EXTENDED_COMPLEX_CONSTEXPR auto operator=(const complex<X>& other) -> complex&
       {
-        my_re = static_cast<value_type>(other.my_re);
-        my_im = static_cast<value_type>(other.my_im);
+        if(this != &other)
+        {
+          my_re = static_cast<value_type>(other.my_re);
+          my_im = static_cast<value_type>(other.my_im);
+        }
 
         return *this;
       }
@@ -205,7 +208,7 @@
       EXTENDED_COMPLEX_CONSTEXPR auto operator=(const value_type& other_x) -> complex&
       {
         my_re = other_x;
-        imag(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0))));
+        imag(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0)))));
 
         return *this;
       }
@@ -213,7 +216,7 @@
       EXTENDED_COMPLEX_CONSTEXPR auto operator=(value_type&& other_x) noexcept -> complex&
       {
         my_re = std::move(other_x);
-        imag(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0))));
+        imag(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0)))));
 
         return *this;
       }
@@ -271,8 +274,8 @@
       {
         if(this == &my_z)
         {
-          real(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0))));
-          imag(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0))));
+          real(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0)))));
+          imag(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0)))));
         }
         else
         {
@@ -307,8 +310,8 @@
       {
         if(this == &my_z)
         {
-          real(static_cast<value_type>(static_cast<unsigned>(UINT8_C(1))));
-          imag(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0))));
+          real(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(1)))));
+          imag(std::move(static_cast<value_type>(static_cast<unsigned>(UINT8_C(0)))));
         }
         else
         {
@@ -353,6 +356,8 @@
     {
     public:
       using value_type = T;
+
+      static_assert(std::is_floating_point<value_type>::value, "Error: The template parameter must be a built-in floating-point type");
 
       EXTENDED_COMPLEX_CONSTEXPR complex(value_type my_x = value_type(),
                                          value_type my_y = value_type()) : my_re(my_x),
@@ -401,8 +406,11 @@
                typename OtherFloatingPointEnableType = typename std::enable_if_t<std::is_floating_point<OtherFloatingPointType>::value && (sizeof(OtherFloatingPointType) != sizeof(value_type)), void>>
       EXTENDED_COMPLEX_CONSTEXPR auto operator=(const complex<OtherFloatingPointType>& other) -> complex&
       {
-        my_re = other.my_re;
-        my_im = other.my_im;
+        if(this != &other)
+        {
+          my_re = static_cast<value_type>(other.my_re);
+          my_im = static_cast<value_type>(other.my_im);
+        }
 
         return *this;
       }
