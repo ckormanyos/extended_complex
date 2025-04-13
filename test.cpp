@@ -19,11 +19,11 @@
 #include <sstream>
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
-// g++ -Werror -Wall -Wextra -Wno-unused-parameter -O3 -std=c++20 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/boost/boost_1_85_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+// g++ -Werror -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=c++23 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/boost/boost_1_87_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex/.gcov/make
-// make prepare -f make_gcov_01_generic.gmk MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_85_0 MY_CC=g++
-// make gcov -f make_gcov_01_generic.gmk --jobs=2 MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_85_0 MY_CC=g++
+// make prepare -f make_gcov_01_generic.gmk MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_87_0 MY_CC=g++
+// make gcov -f make_gcov_01_generic.gmk --jobs=2 MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_87_0 MY_CC=g++
 
 namespace local
 {
