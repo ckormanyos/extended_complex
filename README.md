@@ -120,11 +120,6 @@ auto main() -> int
 
 ### Complex-Valued Riemann-Zeta Function
 
-<p align="center">
-    <a href="https://godbolt.org/z/qvedre8cv" alt="godbolt">
-        <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
-</p>
-
 Consider the
 [Riemann-Zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function).
 It is defined as
@@ -148,6 +143,11 @@ code and paper. See also [1] in the references below.
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
 [here](https://godbolt.org/z/qvedre8cv).
+
+<p align="center">
+    <a href="https://godbolt.org/z/qvedre8cv" alt="godbolt">
+        <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
+</p>
 
 In particular, the value of
 
