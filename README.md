@@ -125,9 +125,20 @@ auto main() -> int
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
+Consider the
+[Riemann-Zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function).
+It is defined as
+
+$$
+{\zeta}\left( s \right)=\sum_{n=1}^{\infty}\frac{1}{n^s}{\text{.}}
+$$
+
 An in-depth, non-trivial [example](https://github.com/ckormanyos/extended_complex/blob/main/example/example023_riemann_zeta_z.cpp)
-provides a header-only implementation of the complex-valued
-[Riemann-Zeta function](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h).
+provides a header-only, multiprecision
+[implementation](https://github.com/ckormanyos/extended_complex/blob/main/example/zeta_detail.h)
+of the complex-valued Riemann-Zeta function.
+The complex-valued Riemann-zeta function has one simple pole at $1$.
+
 The program handles arguments in a relatively large (yet limited)
 unit disc of radius ${\sim}~{10}^{6}$ in ${\mathbb{C}}$.
 This example uses the algorithm described and found in
