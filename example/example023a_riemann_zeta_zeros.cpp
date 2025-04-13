@@ -1,15 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2024.
+//  Copyright Christopher Kormanyos 2024 - 2025.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+//#define EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT
+
 #include <example/zeta_detail.h>
 #include <extended_complex.h>
 
 #include <boost/math/tools/toms748_solve.hpp>
+#if defined(EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT)
+#include <boost/multiprecision/cpp_bin_float.hpp>
+#else
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#endif
 
 #include <iomanip>
 #include <iostream>
@@ -26,9 +32,15 @@ namespace local
     constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(101)) };
     #endif
 
+    #if defined(EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT)
+    using multiprecision_float_type =
+      boost::multiprecision::number<boost::multiprecision::cpp_bin_float<multiprecision_digits10>,
+                                    boost::multiprecision::et_off>;
+    #else
     using multiprecision_float_type =
       boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
                                     boost::multiprecision::et_off>;
+    #endif
   }
 
   using complex_type = extended_complex::complex<detail::multiprecision_float_type>;
@@ -149,7 +161,7 @@ auto example023a_riemann_zeta_zeros() -> bool
   const complex_type rz5 { find_riemann_root(bt_val5) };
   const complex_type rz6 { find_riemann_root(bt_val6) };
 
-  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT16_C(256)) };
+  const real_type my_real_tol { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT32_C(0x100000)) };
 
   const bool result_rz0_is_ok { (abs(riemann_zeta(rz0)) < my_real_tol) };
   const bool result_rz1_is_ok { (abs(riemann_zeta(rz1)) < my_real_tol) };
