@@ -8,8 +8,13 @@
 #ifndef ZETA_DETAIL_2024_03_17_H
 #define ZETA_DETAIL_2024_03_17_H
 
+#if !defined(BOOST_MATH_STANDALONE)
 #define BOOST_MATH_STANDALONE
-#define BOOST_MULTIPRECISION_STANDALONE
+#endif
+
+#if !defined(BOOST_MP_STANDALONE)
+#define BOOST_MP_STANDALONE
+#endif
 
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/unordered/unordered_map.hpp>

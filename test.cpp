@@ -5,6 +5,14 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#if !defined(BOOST_MATH_STANDALONE)
+#define BOOST_MATH_STANDALONE
+#endif
+
+#if !defined(BOOST_MP_STANDALONE)
+#define BOOST_MP_STANDALONE
+#endif
+
 #include <extended_complex.h>
 #include <stopwatch.h>
 #include <util.h>
