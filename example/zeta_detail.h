@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2024.
+//  Copyright Christopher Kormanyos 2024 - 2025.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -332,7 +332,7 @@ inline auto prime(const std::uint32_t n, std::deque<std::uint32_t>& primes) -> v
   // generated.
   if(n < static_cast<std::uint32_t>(Primes::Data().size()))
   {
-    primes.assign(Primes::Data().begin(), Primes::Data().begin() + static_cast<std::size_t>(n));
+    primes.assign(Primes::Data().cbegin(), Primes::Data().cbegin() + static_cast<std::ptrdiff_t>(n));
   }
   else
   {

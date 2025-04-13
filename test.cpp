@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2016 - 2024.
+//  Copyright Christopher Kormanyos 2016 - 2025.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,7 +19,7 @@
 #include <sstream>
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
-// g++ -Werror -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=c++23 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/boost/boost_1_87_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test
+// g++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=c++23 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/ChrisGitRepos/modular_boost/math/include -I/mnt/c/boost/boost_1_87_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex/.gcov/make
 // make prepare -f make_gcov_01_generic.gmk MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_87_0 MY_CC=g++
