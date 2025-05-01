@@ -5,13 +5,11 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-//#define EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT
-
 #include <example/zeta_detail.h>
 #include <extended_complex.h>
 
 #include <boost/math/tools/toms748_solve.hpp>
-#if defined(EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT)
+#if defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
 #include <boost/multiprecision/cpp_bin_float.hpp>
 #else
 #include <boost/multiprecision/cpp_dec_float.hpp>
@@ -32,7 +30,7 @@ namespace local
     constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(101)) };
     #endif
 
-    #if defined(EXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT)
+    #if defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
     using multiprecision_float_type =
       boost::multiprecision::number<boost::multiprecision::cpp_bin_float<multiprecision_digits10>,
                                     boost::multiprecision::et_off>;
@@ -185,4 +183,3 @@ auto example023a_riemann_zeta_zeros() -> bool
 
   return result_is_ok;
 }
-

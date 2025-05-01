@@ -48,7 +48,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
@@ -89,7 +89,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=${{ matrix.standard }} -DEXTENDED_COMPLEX_EXAMPLE023A_USE_BIN_FLOAT -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=${{ matrix.standard }} -DEXTENDED_COMPLEX_USE_CPP_BIN_FLOAT -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
@@ -130,7 +130,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wno-unused-parameter -O3 -std=${{ matrix.standard }} -I. -I../boost-root -DEXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=${{ matrix.standard }} -I. -I../boost-root -DEXTENDED_COMPLEX_RIEMANN_USE_STD_COMPLEX example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
@@ -166,12 +166,12 @@ jobs:
           git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
-      - name: gcc-clang-native
+      - name: gcc-clang-native-asan
         run: |
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -fno-rtti -fsanitize=address -fsanitize=leak -m64 -O1 -Wall -Wextra -Wpedantic -Wno-unused-parameter -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -fno-rtti -fsanitize=address -fsanitize=leak -m64 -O1 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           setarch `uname -m` -R ./test.exe
@@ -207,12 +207,12 @@ jobs:
           git submodule update --init libs/unordered
           ./bootstrap.sh
           ./b2 headers
-      - name: gcc-clang-native
+      - name: gcc-clang-native-ubsan
         run: |
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -fsanitize=undefined -fsanitize=shift -fsanitize=shift-exponent -fsanitize=shift-base -fsanitize=integer-divide-by-zero -fsanitize=unreachable -fsanitize=vla-bound -fsanitize=null -fsanitize=return -fsanitize=signed-integer-overflow -fsanitize=bounds -fsanitize=alignment -fsanitize=object-size -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=nonnull-attribute -fsanitize=returns-nonnull-attribute -fsanitize=bool -fsanitize=enum -fsanitize=vptr -m64 -O2 -Wall -Wextra -Wpedantic -Wno-unused-parameter -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -fsanitize=undefined -fsanitize=shift -fsanitize=shift-exponent -fsanitize=shift-base -fsanitize=integer-divide-by-zero -fsanitize=unreachable -fsanitize=vla-bound -fsanitize=null -fsanitize=return -fsanitize=signed-integer-overflow -fsanitize=bounds -fsanitize=alignment -fsanitize=object-size -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=nonnull-attribute -fsanitize=returns-nonnull-attribute -fsanitize=bool -fsanitize=enum -fsanitize=vptr -m64 -O2 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
@@ -253,7 +253,7 @@ jobs:
           echo "query compiler version"
           ${{ matrix.compiler }} -v
           echo "compile the test program"
-          ${{ matrix.compiler }} -Wall -Wextra -Wno-unused-parameter -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
+          ${{ matrix.compiler }} -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=${{ matrix.standard }} -I. -I../boost-root example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test.exe
           ls -ls ./test.exe
           echo "run the test program"
           ./test.exe
