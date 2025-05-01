@@ -126,19 +126,33 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 
   local_complex_type jpx { ef::one<local_real_type>() };
 
-  for(std::size_t i = static_cast<std::size_t>(UINT8_C(0)); i < pf.size(); i++)
+  for(std::size_t i { static_cast<std::size_t>(UINT8_C(0)) }; i < pf.size(); ++i)
   {
-    local_complex_type pf_pow_x;
-
-    const auto n = pf[i].my_x;
-    const auto p = pf[i].my_y;
+    const std::uint32_t n { pf[i].my_x };
+    const std::int32_t p { static_cast<std::int32_t>(pf[i].my_y) };
 
     using const_iterator_type = typename boost::unordered_map<std::uint32_t, local_complex_type>::const_iterator;
 
-    const const_iterator_type itr = n_pow_x_prime_factor_map.find(n);
+    const const_iterator_type
+      itr
+      {
+        std::find_if
+        (
+          n_pow_x_prime_factor_map.cbegin(),
+          n_pow_x_prime_factor_map.cend(),
+          [&n](const auto& map_elem)
+          {
+            return (map_elem.first == n);
+          }
+        )
+      };
 
-    if(itr == n_pow_x_prime_factor_map.end())
+    local_complex_type pf_pow_x;
+
+    if(itr == n_pow_x_prime_factor_map.cend())
     {
+      using std::exp;
+
       // Compute n^x using exp[x * log(n)] and use the map data in the Zeta::logn(...).
       // Obtain the necessary integer logarithms from a table.
 
@@ -151,9 +165,11 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
       pf_pow_x = itr->second;
     }
 
+    using std::pow;
+
     // Do the power expansion.
 
-    jpx *= pow(pf_pow_x, static_cast<std::int32_t>(p));
+    jpx *= pow(pf_pow_x, p);
   }
 
   return jpx;
@@ -172,7 +188,7 @@ public:
   static constexpr std::size_t start_index { static_cast<std::size_t>(UINT8_C(2)) };
 
   explicit Inserter(std::deque<value_type>& sequence)
-    : my_it(std::back_inserter(sequence)) { }
+    : my_it { std::back_inserter(sequence) } { }
 
   Inserter() = delete;
 
@@ -226,11 +242,11 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
 
   while((i2 = static_cast<std::uint32_t>(i * i)) < limit)
   {
-    if(!sieve[i])
+    if(!sieve[static_cast<std::size_t>(i)])
     {
-      for(auto j = i2; j < limit; j = static_cast<std::uint32_t>(j + i))
+      for(std::uint32_t j { i2 }; j < limit; j = static_cast<std::uint32_t>(j + i))
       {
-        sieve[j] = true;
+        sieve[static_cast<std::size_t>(j)] = true;
       }
     }
 
@@ -286,7 +302,8 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
   // Compute the prime factors of the unsigned integer n. Use the divide algorithm of
   // "The Art of Computer Programming Volume 2 Semi-numerical Algorithms Third Edition",
   // Donald Knuth (Algorithm A, Chapter 4.5.4, page 380 and pages 378-417).
-  static const std::size_t sz = Data().size();
+
+  static const std::size_t sz { Data().size() };
 
   pf.clear();
 
@@ -294,9 +311,9 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
 
   const std::uint32_t sqrt_n { static_cast<std::uint32_t>(static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5)) };
 
-  auto np = n;
+  std::uint32_t np { n };
 
-  for(auto i = static_cast<std::size_t>(UINT8_C(0)); i < sz; ++i)
+  for(std::size_t i { static_cast<std::size_t>(UINT8_C(0)) }; i < sz; ++i)
   {
     const auto& p = Data()[i];
 

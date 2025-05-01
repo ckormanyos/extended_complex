@@ -323,8 +323,8 @@
 
             const value_type my_tmp_re { my_re };
 
-           real(((my_tmp_re * my_c_over_d) + my_im)     / my_denominator);
-           imag(((my_im     * my_c_over_d) - my_tmp_re) / my_denominator);
+            real(((my_tmp_re * my_c_over_d) + my_im)     / my_denominator);
+            imag(((my_im     * my_c_over_d) - my_tmp_re) / my_denominator);
           }
           else
           {
