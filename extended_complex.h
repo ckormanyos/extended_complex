@@ -222,7 +222,7 @@
       }
 
       EXTENDED_COMPLEX_CONSTEXPR auto real() const -> value_type { return my_re; }
-      EXTENDED_COMPLEX_CONSTEXPR auto imag() const -> value_type { return my_im; } // LCOV_EXCL_LINE (Bogus missed line from lcov)
+      EXTENDED_COMPLEX_CONSTEXPR auto imag() const -> value_type { return my_im; }
 
       EXTENDED_COMPLEX_CONSTEXPR auto real(const value_type& my_x) -> void { my_re = my_x; }
       EXTENDED_COMPLEX_CONSTEXPR auto imag(const value_type& my_y) -> void { my_im = my_y; }

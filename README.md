@@ -8,7 +8,7 @@ extended_complex
         <img src="https://codecov.io/gh/ckormanyos/extended_complex/graph/badge.svg?token=PyARTmnrTq"/></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/eaKfjdxWM" alt="godbolt">
+    <a href="https://godbolt.org/z/Ezcj8EvT3" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -49,9 +49,9 @@ These include (but are not limited to) the following and more.
 
 The following straightforward example takes a user-defined,
 multiple-precision floating-point type from
-[Boost.Multiprecision](https://www.boost.org/doc/libs/1_86_0/libs/multiprecision/doc/html/index.html).
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
-${\sim}~100$ decimal digits of precision.
+${\sim}100$ decimal digits of precision.
 
 The square root value computed is
 
@@ -64,7 +64,7 @@ $$
 $$
 
 The example code is listed in its entirety below. It is also available _live_
-at [Godbolt](https://godbolt.org/z/eaKfjdxWM).
+at [Godbolt](https://godbolt.org/z/Ezcj8EvT3).
 
 ```cpp
 #include <extended_complex.h>
@@ -89,7 +89,9 @@ namespace local
 
 auto main() -> int
 {
-  using complex_type = extended_complex::complex<boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>>;
+  using multiprecision_float_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
+
+  using complex_type = extended_complex::complex<multiprecision_float_type>;
 
   using real_type = typename complex_type::value_type;
 
@@ -142,10 +144,10 @@ code and paper. See also [1] in the references below.
 
 The zeta-function calculation for a single complex-valued point having $101$
 decimal digits of precision can also be seen
-[here](https://godbolt.org/z/qvedre8cv).
+[here](https://godbolt.org/z/xjxshE4qj).
 
 <p align="center">
-    <a href="https://godbolt.org/z/qvedre8cv" alt="godbolt">
+    <a href="https://godbolt.org/z/xjxshE4qj" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -215,7 +217,7 @@ the first $7$ non-trivial zeros of the complex-valued Riemann-Zeta function on t
 are calculated to ${\sim}~501$ decimal digits of precision.
 Root finding uses the implementation of
 [Algorithm 748](https://doi.org/10.1145/210089.210111)
-found in [Boost.Math](https://www.boost.org/doc/libs/1_86_0/libs/math/doc/html/index.html).
+found in [Boost.Math](https://www.boost.org/doc/libs/1_88_0/libs/math/doc/html/index.html).
 See also [2] in the references below.
 
 The results found are:
@@ -271,7 +273,7 @@ A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
-from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_86_0/libs/multiprecision/doc/html/index.html).
+from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html).
 The above-mentioned in-depth Riemann-Zeta examples are also executed
 and verified in the tests.
 

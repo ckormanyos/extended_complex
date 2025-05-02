@@ -9,7 +9,11 @@
 #include <extended_complex.h>
 #include <util.h>
 
+#if defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
+#include <boost/multiprecision/cpp_bin_float.hpp>
+#else
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#endif
 
 #include <cmath>
 #include <iomanip>
@@ -20,9 +24,15 @@ auto example023_riemann_zeta_z() -> bool
 {
   constexpr unsigned multiprecision_digits10 { static_cast<unsigned>(UINT16_C(101)) };
 
+  #if defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
+  using multiprecision_float_type =
+    boost::multiprecision::number<boost::multiprecision::cpp_bin_float<multiprecision_digits10>,
+                                  boost::multiprecision::et_off>;
+  #else
   using multiprecision_float_type =
     boost::multiprecision::number<boost::multiprecision::cpp_dec_float<multiprecision_digits10>,
                                   boost::multiprecision::et_off>;
+  #endif
 
   using complex_type = extended_complex::complex<multiprecision_float_type>;
   using real_type    = typename complex_type::value_type;
