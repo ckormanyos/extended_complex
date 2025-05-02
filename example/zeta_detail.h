@@ -20,6 +20,7 @@
 #include <boost/unordered/unordered_map.hpp>
 
 #include <algorithm>
+#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <deque>
@@ -194,7 +195,7 @@ public:
 
   auto operator()(const bool& bo_is_not_prime) -> void
   {
-    const auto bo_is_prime = (!bo_is_not_prime);
+    const bool bo_is_prime { (!bo_is_not_prime) };
 
     if(bo_is_prime)
     {
@@ -216,8 +217,8 @@ inline auto Generator(const std::uint32_t n, std::deque<std::uint32_t>& primes_d
   // number or a minimum of at least 100. Also be sure to limit this range to
   // within the upper limit of std::uint32_t.
 
-  constexpr auto min_hundred = static_cast<std::uint32_t>(UINT8_C(100));
-  constexpr auto xmax        = static_cast<double>((std::numeric_limits<std::uint32_t>::max)());
+  constexpr std::uint32_t min_hundred { static_cast<std::uint32_t>(UINT8_C(100)) };
+  constexpr double xmax { static_cast<double>((std::numeric_limits<std::uint32_t>::max)()) };
 
   const double xn { static_cast<double>((std::max)(min_hundred, n)) };
 
@@ -309,7 +310,14 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
 
   using std::sqrt;
 
-  const std::uint32_t sqrt_n { static_cast<std::uint32_t>(static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5)) };
+  const std::uint32_t
+    sqrt_n
+    {
+      static_cast<std::uint32_t>
+      (
+        static_cast<std::uint64_t>(sqrt(static_cast<double>(n)) + 0.5)
+      )
+    };
 
   std::uint32_t np { n };
 
@@ -370,6 +378,7 @@ inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uin
   // Factor the input integer into a list of primes. For small inputs less than 10,000
   // use the tabulated prime factors list. Calculate the prime factors for larger inputs
   // above 10,000.
+
   static std::vector<local_point_deque_type> prime_factors_list { };
 
   if(prime_factors_list.empty())
@@ -504,19 +513,22 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   {
     const bool j_is_zero { j == static_cast<std::int32_t>(INT8_C(0)) };
 
-    const auto two_jp1_two_j =
-      static_cast<std::int32_t>
-      (
-          static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
-        * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * ((!j_is_zero) ? j : static_cast<std::int32_t>(INT8_C(1))))
-      );
+    const std::int32_t
+      two_jp1_two_j
+      {
+        static_cast<std::int32_t>
+        (
+            static_cast<std::int32_t>((static_cast<std::int32_t>(INT8_C(2)) * j) + static_cast<std::int32_t>(INT8_C(1)))
+          * static_cast<std::int32_t> (static_cast<std::int32_t>(INT8_C(2)) * ((!j_is_zero) ? j : static_cast<std::int32_t>(INT8_C(1))))
+        )
+      };
 
     n_plus_j_minus_one_fact /= static_cast<std::int32_t>(N + j);
     four_pow_j              /= static_cast<std::int32_t>(INT8_C(4));
     n_minus_j_fact          *= static_cast<std::int32_t>(N - j);
     two_j_fact              /= two_jp1_two_j;
 
-    dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact)); // LCOV_EXCL_LINE (Bogus missed line from lcov)
+    dn += ((n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact));
 
     if(!j_is_zero)
     {

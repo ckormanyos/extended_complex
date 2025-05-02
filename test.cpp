@@ -56,27 +56,11 @@ namespace local
     return flt;
   };
 
-  template<typename float_type>
+  template<typename FloatType>
   auto test() -> bool
   {
-    using std::acos;
-    using std::acosh;
-    using std::asin;
-    using std::atan;
-    using std::atanh;
-    using std::cos;
-    using std::cosh;
-    using std::exp;
-    using std::log;
-    using std::log10;
-    using std::pow;
-    using std::sin;
-    using std::sinh;
-    using std::sqrt;
-    using std::tan;
-    using std::tanh;
-
-    typedef typename extended_complex::complex<float_type> complex_type;
+    using complex_type = extended_complex::complex<FloatType>;
+    using float_type = typename complex_type::value_type;
 
     const auto str_tol =
       std::string
@@ -133,8 +117,8 @@ namespace local
     results.push_back(sinh ( val_z1));                                             // N[Sinh[(12/10) + ((34 I)/10)], 100]
     results.push_back(tanh ( val_z1));                                             // N[Tanh[(12/10) + ((34 I)/10)], 100]
     results.push_back(tan  ( val_z1));                                             // N[Tan[(12/10) + ((34 I)/10)], 100]
-    using extended_complex::polar;                                                 // N[(12/10) Cos[34/10], 100]
-    results.push_back(polar(real(val_z1), imag(val_z1)));                          // N[(12/10) Sin[34/10], 100]
+    using extended_complex::polar;
+    results.push_back(polar(real(val_z1), imag(val_z1)));
     results.push_back(asinh( val_z1));                                             // N[ArcSinh[(12/10) + ((34 I)/10)], 100]
     results.push_back(pow  ( val_z1, real(val_z2)));                               // N[((12/10) + ((34  I)/10))^(56/10), 100]
 
@@ -151,17 +135,17 @@ namespace local
 
     // Ensure that I/O-streaming works.
     {
-      std::stringstream strm;
+      std::stringstream strm { };
 
       strm << std::setprecision(static_cast<std::streamsize>(std::numeric_limits<float_type>::digits10))
-           << results[6U];
+           << results[std::size_t { UINT8_C(6) }];
 
       complex_type ctrl;
 
       strm >> ctrl;
 
-      const auto result_strm_is_ok = (   util::is_close_fraction(results[6U].real(), ctrl.real(), tol)
-                                      && util::is_close_fraction(results[6U].imag(), ctrl.imag(), tol));
+      const auto result_strm_is_ok = (   util::is_close_fraction(results[std::size_t { UINT8_C(6) }].real(), ctrl.real(), tol)
+                                      && util::is_close_fraction(results[std::size_t { UINT8_C(6) }].imag(), ctrl.imag(), tol));
 
       result_is_ok = (result_strm_is_ok && result_is_ok);
     }
@@ -356,9 +340,9 @@ extern auto example023a_riemann_zeta_zeros() -> bool;
 auto main() -> int
 {
   #if defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
-  using local_mp_type = boost::multiprecision::number<boost::multiprecision::cpp_bin_float<100>, boost::multiprecision::et_off>;
+  using multiprecision_float_type = boost::multiprecision::number<boost::multiprecision::cpp_bin_float<100>, boost::multiprecision::et_off>;
   #else
-  using local_mp_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
+  using multiprecision_float_type = boost::multiprecision::number<boost::multiprecision::cpp_dec_float<100>, boost::multiprecision::et_off>;
   #endif
 
   using stopwatch_type = concurrency::stopwatch;
@@ -368,7 +352,7 @@ auto main() -> int
   const auto result_flt_________is_ok = local::test<float>();
   const auto result_dbl_________is_ok = local::test<double>();
   const auto result_ldbl________is_ok = local::test<long double>();
-  const auto result_mp__________is_ok = local::test<local_mp_type>();
+  const auto result_mp__________is_ok = local::test<multiprecision_float_type>();
   const auto result_example023__is_ok = ::example023_riemann_zeta_z();
   const auto result_example023a_is_ok = ::example023a_riemann_zeta_zeros();
 

@@ -8,6 +8,8 @@
 #ifndef UTIL_2024_08_19_H
   #define UTIL_2024_08_19_H
 
+  #include <cmath>
+
   namespace util
   {
     template<typename NumericType>

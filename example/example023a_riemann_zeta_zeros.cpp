@@ -42,24 +42,27 @@ namespace local
   }
 
   using complex_type = extended_complex::complex<detail::multiprecision_float_type>;
-  using real_type    = typename complex_type::value_type;
 
-  auto my_riemann_function(const real_type& y) -> real_type
+  using real_type = typename complex_type::value_type;
+
+  static auto my_riemann_function(const real_type& y) -> real_type
   {
     return riemann_zeta(complex_type { real_type { 0.5F }, y }).real();
   }
 
   using bracket_type = std::pair<real_type, real_type>;
 
-  auto find_riemann_root(const bracket_type& bt_val) -> complex_type
+  static auto find_riemann_root(const bracket_type& bt_val) -> complex_type
   {
     auto tol
     {
       [](const real_type& a, const real_type& b)
       {
+        using std::fabs;
+
         const real_type delta { fabs(1 - (a / b)) };
 
-        return (delta < (std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64))));
+        return (delta < real_type { std::numeric_limits<real_type>::epsilon() * static_cast<unsigned>(UINT8_C(64)) });
       }
     };
 
