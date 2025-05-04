@@ -314,6 +314,24 @@ I/O-streaming can optionally be disabled with the compiler switch
 operations are enabled.
 
 ```cpp
+#define EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT
+```
+
+This macro is used in the associated tests and examples
+in order to instantiate the `extended_complex::complex` template class
+with the `cpp_bin_float` big-number backend from
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html),
+instead of the default `cpp_dec_float`.
+Even though the exact big-number floating-point type is not
+specifically mentioned in the single-header implementation file
+of the `extended_complex::complex` template class, the definition of this
+macro can be found there. It is commented out by default and is present
+for convenient manual use when desired but not has not explicitly been
+set through the compiler command line. When building on the command line,
+this macro can be optionally set via `-DEXTENDED_COMPLEX_USE_CPP_BIN_FLOAT`
+(i.e., for GCC-like compilers).
+
+```cpp
 #define EXTENDED_COMPLEX_CONSTEXPR constexpr
 ```
 
