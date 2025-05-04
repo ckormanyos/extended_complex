@@ -13,18 +13,14 @@
 #ifndef EXTENDED_COMPLEX_2016_02_22_H
   #define EXTENDED_COMPLEX_2016_02_22_H
 
-  #if defined(__clang__)
-    #if defined __has_feature && __has_feature(thread_sanitizer)
-    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
-    #endif
-  #elif defined(__GNUC__)
-    #if defined(__SANITIZE_THREAD__) || defined(EXTENDED_COMPLEX_HAS_COVERAGE)
-    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
-    #endif
-  #elif defined(_MSC_VER)
-    #if defined(_DEBUG)
-    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
-    #endif
+  #if !defined(EXTENDED_COMPLEX_DISABLE_IOSTREAM)
+  // Activate manually in special cases when desired.
+  //#define EXTENDED_COMPLEX_DISABLE_IOSTREAM
+  #endif
+
+  #if !defined(EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT)
+  // Activate manually in special cases when desired.
+  //#define EXTENDED_COMPLEX_USE_CPP_BIN_FLOAT
   #endif
 
   #if !defined(EXTENDED_COMPLEX_DISABLE_IOSTREAM)
@@ -44,7 +40,37 @@
   #include <type_traits>
   #include <utility>
 
+  // This is intended to be set permanently and never disabled.
   #define EXTENDED_COMPLEX_CONSTEXPR constexpr
+
+  // The following are automatically deduced by the compiler
+  // and are not intended to be set manually. These include
+  // EXTENDED_COMPLEX_REDUCE_TEST_DEPTH and EXTENDED_COMPLEX_NOINLINE.
+  // They may need to be adjusted when using (an)other compiler(s).
+
+  #if defined(__clang__)
+    #if defined __has_feature && __has_feature(thread_sanitizer)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #elif defined(__GNUC__)
+    #if defined(__SANITIZE_THREAD__) || defined(EXTENDED_COMPLEX_HAS_COVERAGE)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #elif defined(_MSC_VER)
+    #if defined(_DEBUG)
+    #define EXTENDED_COMPLEX_REDUCE_TEST_DEPTH
+    #endif
+  #endif
+
+  #if defined(__clang__)
+  #define EXTENDED_COMPLEX_NOINLINE __attribute__((noinline))
+  #elif defined(__GNUC__)
+  #define EXTENDED_COMPLEX_NOINLINE __attribute__((noinline))
+  #elif defined(_MSC_VER)
+  #define EXTENDED_COMPLEX_NOINLINE __declspec(noinline)
+  #else
+  #define EXTENDED_COMPLEX_NOINLINE
+  #endif
 
   namespace extended_complex
   {

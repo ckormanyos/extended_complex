@@ -20,14 +20,6 @@
 #include <sstream>
 #include <utility>
 
-#if defined(__GNUC__)
-#define EXTENDED_COMPLEX_NOINLINE __attribute__((noinline))
-#elif defined(_MSC_VER)
-#define EXTENDED_COMPLEX_NOINLINE __declspec(noinline)
-#else
-#define EXTENDED_COMPLEX_NOINLINE
-#endif
-
 namespace local
 {
   namespace detail
