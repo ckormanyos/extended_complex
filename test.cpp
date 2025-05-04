@@ -32,7 +32,12 @@
 #include <vector>
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex
+
+// Use cpp_dec_float
 // g++ -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=c++23 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/ChrisGitRepos/modular_boost/math/include -I/mnt/c/boost/boost_1_88_0 example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test
+
+// Use cpp_bin_float
+// g++ -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -std=c++23 -I. -I/mnt/c/ChrisGitRepos/modular_boost/multiprecision/include -I/mnt/c/ChrisGitRepos/modular_boost/math/include -I/mnt/c/boost/boost_1_88_0 -DEXTENDED_COMPLEX_USE_CPP_BIN_FLOAT example/example023_riemann_zeta_z.cpp example/example023a_riemann_zeta_zeros.cpp test.cpp -o test
 
 // cd /mnt/c/Users/ckorm/Documents/Ks/PC_Software/NumericalPrograms/ExtendedNumberTypes/extended_complex/.gcov/make
 // make prepare -f make_gcov_01_generic.gmk MY_ALL_COV=0 MY_BOOST_ROOT=/mnt/c/boost/boost_1_88_0 MY_CC=g++

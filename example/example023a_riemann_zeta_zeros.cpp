@@ -20,6 +20,14 @@
 #include <sstream>
 #include <utility>
 
+#if defined(__GNUC__)
+#define EXTENDED_COMPLEX_NOINLINE __attribute__((noinline))
+#elif defined(_MSC_VER)
+#define EXTENDED_COMPLEX_NOINLINE __declspec(noinline)
+#else
+#define EXTENDED_COMPLEX_NOINLINE
+#endif
+
 namespace local
 {
   namespace detail
@@ -45,14 +53,9 @@ namespace local
 
   using real_type = typename complex_type::value_type;
 
-  static auto my_riemann_function(const real_type& y) -> real_type
-  {
-    return riemann_zeta(complex_type { real_type { 0.5F }, y }).real();
-  }
-
   using bracket_type = std::pair<real_type, real_type>;
 
-  static auto find_riemann_root(const bracket_type& bt_val) -> complex_type
+  EXTENDED_COMPLEX_NOINLINE static auto find_riemann_root(const bracket_type& bt_val) -> complex_type
   {
     auto tol
     {
@@ -66,12 +69,23 @@ namespace local
       }
     };
 
+    static const real_type my_half { 0.5F };
+
+    auto
+      my_riemann_function
+      {
+        [](const real_type& y) -> real_type
+        {
+          return riemann_zeta(complex_type { my_half, y }).real();
+        }
+      };
+
     std::uintmax_t max_iter { static_cast<std::uintmax_t>(UINT8_C(64)) };
 
     const std::pair<real_type, real_type>
       result
       {
-        boost::math::tools::toms748_solve(local::my_riemann_function, bt_val.first, bt_val.second, tol, max_iter)
+        boost::math::tools::toms748_solve(my_riemann_function, bt_val.first, bt_val.second, tol, max_iter)
       };
 
     {
@@ -82,7 +96,7 @@ namespace local
       std::cout << strm.str() << std::endl;
     }
 
-    return { real_type { 0.5F }, result.first };
+    return { my_half, result.first };
   }
 } // namespace local
 

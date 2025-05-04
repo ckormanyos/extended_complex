@@ -134,19 +134,7 @@ auto j_pow_x(const std::uint32_t j, const ComplexType& x, boost::unordered_map<s
 
     using const_iterator_type = typename boost::unordered_map<std::uint32_t, local_complex_type>::const_iterator;
 
-    const const_iterator_type
-      itr
-      {
-        std::find_if
-        (
-          n_pow_x_prime_factor_map.cbegin(),
-          n_pow_x_prime_factor_map.cend(),
-          [&n](const auto& map_elem)
-          {
-            return (map_elem.first == n);
-          }
-        )
-      };
+    const const_iterator_type itr { n_pow_x_prime_factor_map.find(n) };
 
     local_complex_type pf_pow_x;
 
@@ -304,8 +292,6 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
   // "The Art of Computer Programming Volume 2 Semi-numerical Algorithms Third Edition",
   // Donald Knuth (Algorithm A, Chapter 4.5.4, page 380 and pages 378-417).
 
-  static const std::size_t sz { Data().size() };
-
   pf.clear();
 
   using std::sqrt;
@@ -319,11 +305,15 @@ inline auto Factors(const std::uint32_t n, std::deque<Util::point<std::uint32_t>
       )
     };
 
+  const std::deque<std::uint32_t>& my_prime_data = Data();
+
+  static const std::size_t sz { my_prime_data.size() };
+
   std::uint32_t np { n };
 
   for(std::size_t i { static_cast<std::size_t>(UINT8_C(0)) }; i < sz; ++i)
   {
-    const auto& p = Data()[i];
+    const std::uint32_t p { my_prime_data[i] };
 
     if(IsPrimeFactor(np, p))
     {
@@ -395,7 +385,7 @@ inline auto prime_factors(const std::uint32_t n, std::deque<Util::point<std::uin
 
     auto it_next_prime = std::find(Primes::Data().cbegin(), Primes::Data().cend(), n_five);
 
-    for(auto i = static_cast<std::size_t>(UINT8_C(4)); i < prime_factors_list.size(); ++i)
+    for(std::size_t i { static_cast<std::size_t>(UINT8_C(4)) }; i < prime_factors_list.size(); ++i)
     {
       if((it_next_prime != Primes::Data().cend()) && (static_cast<std::uint32_t>(i) == *it_next_prime))
       {
@@ -455,6 +445,8 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
 
   const local_real_type upper_limit { static_cast<std::uint32_t>(UINT32_C(1000100)) };
 
+  using std::fabs;
+
   if(fabs(imag(s)) > upper_limit)
   {
     // Return NaN if s has a large imaginary part.
@@ -476,13 +468,11 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
   // Use N = (digits * 1.45) + {|imag(s)| * 1.1}
   constexpr double nd { static_cast<double>(std::numeric_limits<local_real_type>::digits10) * static_cast<double>(1.45) };
 
-  using std::fabs;
-
   const double ni = static_cast<double>(static_cast<double>(1.10) * fabs(ef::to_double(imag(s))));
 
   const std::int32_t N { static_cast<std::int32_t>(static_cast<std::int64_t>(static_cast<double>(nd + ni))) };
 
-  auto neg_term = ((N % static_cast<std::int32_t>(INT8_C(2))) == static_cast<std::int32_t>(INT8_C(0)));
+  bool neg_term { ((N % static_cast<std::int32_t>(INT8_C(2))) == static_cast<std::int32_t>(INT8_C(0))) };
 
   const unsigned int
     two_n_minus_one
@@ -496,6 +486,8 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
       )
     };
 
+  using std::pow;
+
   local_real_type n_plus_j_minus_one_fact = boost::math::factorial<local_real_type>(two_n_minus_one);
   local_real_type four_pow_j              = pow(local_real_type(static_cast<unsigned>(UINT8_C(4))), static_cast<std::int64_t>(N));
   local_real_type n_minus_j_fact          = ef::one<local_real_type>();
@@ -503,13 +495,11 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
 
   local_real_type dn = (n_plus_j_minus_one_fact * four_pow_j) / (n_minus_j_fact * two_j_fact);
 
-  local_complex_type jps = Util::j_pow_x(static_cast<std::uint32_t>(N), s, n_pow_s_prime_factor_map);
+  local_complex_type zs = ((!neg_term) ? dn : -dn) / Util::j_pow_x(static_cast<std::uint32_t>(N), s, n_pow_s_prime_factor_map);
 
-  local_complex_type zs = ((!neg_term) ? dn : -dn) / jps;
-
-  for(auto   j  = static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1)));
-             j >= static_cast<std::int32_t>(INT8_C(0));
-           --j)
+  for(std::int32_t   j  { static_cast<std::int32_t>(N - static_cast<std::int32_t>(INT8_C(1))) };
+                     j >= static_cast<std::int32_t>(INT8_C(0));
+                   --j)
   {
     const bool j_is_zero { j == static_cast<std::int32_t>(INT8_C(0)) };
 
@@ -533,13 +523,16 @@ auto ZetaTemplate(const ComplexType& s) -> ComplexType
     if(!j_is_zero)
     {
       // Increment the zeta function sum.
-      jps = Util::j_pow_x(static_cast<std::uint32_t>(j), s, n_pow_s_prime_factor_map);
+
+      const local_complex_type
+        delta_dn
+        {
+          dn / Util::j_pow_x(static_cast<std::uint32_t>(j), s, n_pow_s_prime_factor_map)
+        };
 
       neg_term = (!neg_term);
 
-      const local_complex_type delta_dn { dn / jps };
-
-      (!neg_term) ? zs += delta_dn : zs -= delta_dn;
+      (neg_term ? zs -= delta_dn : zs += delta_dn);
     }
   }
 
