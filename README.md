@@ -250,6 +250,17 @@ $$
 t_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
 $$
 
+The colorful image below depicts an RGB phase-plot of the complex-valued
+Riemann-Zeta function. It includes the region of the the first $7$ non-trivial zeros
+of the Riemann-Zeta function that are calculated to high precision in this example.
+The positions of the zeros can easily be recognized in the right-hand side
+of the picture at positive values of the complex part of the argument.
+Each zero can be located where its corresponding cureved bar have its rounded endpoint.
+This phase-plot has been computed with standard double-precision
+using a separate program - not present in this repository.
+
+![](./images/basic_flat_zeta.png)
+
 ### _Not_ Number-Theory-Ready
 
 The range and domain of the Riemann-Zeta calculations
