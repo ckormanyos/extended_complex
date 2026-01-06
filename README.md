@@ -244,15 +244,15 @@ $$
 The colorful image below depicts an RGB phase portrait of the complex-valued
 Riemann-Zeta function. It includes the region of the first $7$ non-trivial zeros
 of the Riemann-Zeta function. These are the same ones that are calculated to high precision
-in this example. This phase-plot has been computed with a separate program
+in this example. This phase portrait has been computed with a separate program
 not present in this repository, and traditional double-precision values
 have been used for the phase calculations.
 
 The positions of the non-trivial zeros on the critical line at ${\sigma}~=~1/2$
 can easily be recognized in the right-hand side of the picture
-at positive values of the complex part of the argument. Each zero
-can be located near the rounded edges of the endpoint of its corresponding,
-slightly curved-up bar-like form. The image shown below is similar
+at positive, non-zero values of the complex part of the argument.
+Each zero can be located near the rounded edge of the endpoint of its corresponding
+slightly curved-up, bar-like form. The image shown below is similar
 to the one shown in Fig. 5.1 of [4]. The image here, however,
 has slightly different coordinates and also uses the opposite RGB phase convention,
 going clockwise through the color wheel.
