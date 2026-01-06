@@ -241,15 +241,21 @@ $$
 t_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
 $$
 
-The colorful image below depicts an RGB phase-plot of the complex-valued
-Riemann-Zeta function. It includes the region of the the first $7$ non-trivial zeros
-of the Riemann-Zeta function that are calculated to high precision in this example.
-This phase-plot has been computed with a separate program not present in this repository.
+The colorful image below depicts an RGB phase portrait of the complex-valued
+Riemann-Zeta function. It includes the region of the first $7$ non-trivial zeros
+of the Riemann-Zeta function. These are the same ones that are calculated to high precision
+in this example. This phase-plot has been computed with a separate program
+not present in this repository, and traditional double-precision values
+have been used for the phase calculations.
 
-The positions of the non-trivial zeros on the critical line can easily be recognized
-in the right-hand side of the picture at positive values of the complex part
-of the argument. Each zero can be located near the rounded edges
-of the endpoint of its corresponding, slightly curved-up bar.
+The positions of the non-trivial zeros on the critical line at ${\sigma}~=~1/2$
+can easily be recognized in the right-hand side of the picture
+at positive values of the complex part of the argument. Each zero
+can be located near the rounded edges of the endpoint of its corresponding,
+slightly curved-up bar-like form. The image shown below is similar
+to the one shown in Fig. 5.1 of [4]. The image here, however,
+has slightly different coordinates and also uses the opposite RGB phase convention,
+going clockwise through the color wheel.
 
 ![](./images/basic_flat_zeta.png)
 
@@ -342,7 +348,8 @@ The macro `EXTENDED_COMPLEX_CONSTEXPR` is default-defined to be equal
 to the word `constexpr`. This macro was previously used (for old compilers
 no longer supported) to either use or un-use the word `constexpr`.
 This was back when `constexpr` was relatively new. At this time,
-simply leave this macro unchanged. It is default-set to the word `constexpr`.
+simply leave this macro unchanged. It is default-set to the word `constexpr`
+and this is not intended to be changed.
 
 ## References
 
@@ -359,3 +366,7 @@ ACM Transactions on Mathematical Software, Vol. 21, Issue 3, pp 327-344 (01 Sept
 [3] D. Platt and T. Trudgian,
 _The_ _Riemann_ _hypothesis_ _is_ _true_ _up_ _to_ ${\mbox{\textit{3}}}{\cdot}{\mbox{\textit{10}}}^{\mbox{\textit{\small{12}}}}$,
 [arXiv:2004.09765](https://arxiv.org/pdf/2004.09765.pdf).
+
+[4] E. Wegert,
+_Visual_ _Complex_ _Functions:_ _An_ _Introduction_ _with_ _Phase_ _Portraits_,
+(Springer/Birkhaeuser, Basel, 2012).
