@@ -8,7 +8,7 @@ extended_complex
         <img src="https://codecov.io/gh/ckormanyos/extended_complex/graph/badge.svg?token=PyARTmnrTq"/></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
-    <a href="https://godbolt.org/z/Ezcj8EvT3" alt="godbolt">
+    <a href="https://godbolt.org/z/1TMYzfGbh" alt="godbolt">
         <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
 </p>
 
@@ -49,7 +49,7 @@ These include (but are not limited to) the following and more.
 
 The following straightforward example takes a user-defined,
 multiple-precision floating-point type from
-[Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html).
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_90_0/libs/multiprecision/doc/html/index.html).
 It computes a complex-valued square root with
 ${\sim}100$ decimal digits of precision.
 
@@ -142,15 +142,6 @@ This example uses the algorithm described and found in
 the [`e_float`](https://doi.acm.org/10.1145/1916461.1916469)
 code and paper. See also [1] in the references below.
 
-The zeta-function calculation for a single complex-valued point having $101$
-decimal digits of precision can also be seen
-[here](https://godbolt.org/z/xjxshE4qj).
-
-<p align="center">
-    <a href="https://godbolt.org/z/xjxshE4qj" alt="godbolt">
-        <img src="https://img.shields.io/badge/try%20it%20on-godbolt-green" /></a>
-</p>
-
 In particular, the value of
 
 $$
@@ -217,7 +208,7 @@ the first $7$ non-trivial zeros of the complex-valued Riemann-Zeta function on t
 are calculated to ${\sim}~501$ decimal digits of precision.
 Root finding uses the implementation of
 [Algorithm 748](https://doi.org/10.1145/210089.210111)
-found in [Boost.Math](https://www.boost.org/doc/libs/1_88_0/libs/math/doc/html/index.html).
+found in [Boost.Math](https://www.boost.org/doc/libs/1_90_0/libs/math/doc/html/index.html).
 See also [2] in the references below.
 
 The results found are:
@@ -250,6 +241,18 @@ $$
 t_{6}~{\approx}~40.918719012147495187398126914633254395726165962777{\ldots}
 $$
 
+The colorful image below depicts an RGB phase-plot of the complex-valued
+Riemann-Zeta function. It includes the region of the the first $7$ non-trivial zeros
+of the Riemann-Zeta function that are calculated to high precision in this example.
+This phase-plot has been computed with a separate program not present in this repository.
+
+The positions of the zeros can easily be recognized on the critical line
+in the right-hand side of the picture at positive values of the complex part
+of the argument. Each zero can be located where its corresponding,
+slightly curved-up bar has its rounded endpoint.
+
+![](./images/basic_flat_zeta.png)
+
 ### _Not_ Number-Theory-Ready
 
 The range and domain of the Riemann-Zeta calculations
@@ -273,7 +276,7 @@ A small test program exercises a variety of non-trivial
 algebraic and elementary-function values. The test program verifies
 the extended-complex class for both built-in floating point types
 `float`, `double` and `long double` as well as a $100$-decimal digit type
-from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html).
+from [Boost.Multiprecision](https://www.boost.org/doc/libs/1_90_0/libs/multiprecision/doc/html/index.html).
 The above-mentioned in-depth Riemann-Zeta examples are also executed
 and verified in the tests.
 
@@ -320,7 +323,7 @@ operations are enabled.
 This macro is used in the associated tests and examples
 in order to instantiate the `extended_complex::complex` template class
 with the `cpp_bin_float` big-number backend from
-[Boost.Multiprecision](https://www.boost.org/doc/libs/1_88_0/libs/multiprecision/doc/html/index.html),
+[Boost.Multiprecision](https://www.boost.org/doc/libs/1_90_0/libs/multiprecision/doc/html/index.html),
 instead of the default `cpp_dec_float`.
 Even though the exact big-number floating-point type is not
 specifically mentioned in the single-header implementation file
