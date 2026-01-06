@@ -246,10 +246,10 @@ Riemann-Zeta function. It includes the region of the the first $7$ non-trivial z
 of the Riemann-Zeta function that are calculated to high precision in this example.
 This phase-plot has been computed with a separate program not present in this repository.
 
-The positions of the zeros can easily be recognized on the critical line
+The positions of the non-trivial zeros on the critical line can easily be recognized
 in the right-hand side of the picture at positive values of the complex part
-of the argument. Each zero can be located where its corresponding,
-slightly curved-up bar has its rounded endpoint.
+of the argument. Each zero can be located near the rounded edges
+of the endpoint of its corresponding, slightly curved-up bar.
 
 ![](./images/basic_flat_zeta.png)
 
