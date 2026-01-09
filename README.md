@@ -257,7 +257,7 @@ to the one shown in Fig. 5.1 of [4]. The image here, however,
 has slightly different coordinates and also uses the opposite RGB phase convention,
 going clockwise through the color wheel.
 
-![](./images/basic_flat_zeta.png)
+![](./images/basic_flat_fig5_1_zeta.png)
 
 ### _Not_ Number-Theory-Ready
 
