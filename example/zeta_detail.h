@@ -91,7 +91,9 @@ public:
 
     if(it_ln == ln_data.cend())
     {
-      const T ln_value { log(T { n }) };
+      using std::log;
+
+      const T ln_value { log(T { static_cast<T>(n) }) };
 
       ln_data[n] = ln_value;
 

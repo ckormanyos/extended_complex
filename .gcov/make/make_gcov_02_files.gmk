@@ -1,5 +1,5 @@
 ﻿# ------------------------------------------------------------------------------
-#  Copyright Christopher Kormanyos 2022 - 2024.
+#  Copyright Christopher Kormanyos 2022 - 2026.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,4 +7,5 @@
 
 FILES_PRJ  =   $(PATH_SRC)/example/example023_riemann_zeta_z                    \
                $(PATH_SRC)/example/example023a_riemann_zeta_zeros               \
+               $(PATH_SRC)/example/example023b_riemann_zeta_double_check        \
                $(PATH_SRC)/test
