@@ -101,7 +101,7 @@ public:
     }
     else
     {
-      return it_ln->second; // LCOV_EXCL_LINE (known hit in tests coverage tool false negative)
+      return it_ln->second; // LCOV_EXCL_LINE (Known hit: in tests coverage tool this is a false negative)
     }
   }
 
