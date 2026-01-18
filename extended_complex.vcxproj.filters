@@ -33,6 +33,9 @@
     <ClCompile Include="example\example023a_riemann_zeta_zeros.cpp">
       <Filter>Source Files\example</Filter>
     </ClCompile>
+    <ClCompile Include="example\example023b_riemann_zeta_double_check.cpp">
+      <Filter>Source Files\example</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="codecov.yml" />
