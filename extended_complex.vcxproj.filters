@@ -33,7 +33,7 @@
     <ClCompile Include="example\example023a_riemann_zeta_zeros.cpp">
       <Filter>Source Files\example</Filter>
     </ClCompile>
-    <ClCompile Include="example\example023b_riemann_zeta_double_check.cpp">
+    <ClCompile Include="example\example023b_riemann_zeta_double.cpp">
       <Filter>Source Files\example</Filter>
     </ClCompile>
   </ItemGroup>

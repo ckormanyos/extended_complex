@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="example\example023a_riemann_zeta_zeros.cpp" />
-    <ClCompile Include="example\example023b_riemann_zeta_double_check.cpp" />
+    <ClCompile Include="example\example023b_riemann_zeta_double.cpp" />
     <ClCompile Include="example\example023_riemann_zeta_z.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
