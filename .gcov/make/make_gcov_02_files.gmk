@@ -7,5 +7,5 @@
 
 FILES_PRJ  =   $(PATH_SRC)/example/example023_riemann_zeta_z                    \
                $(PATH_SRC)/example/example023a_riemann_zeta_zeros               \
-               $(PATH_SRC)/example/example023b_riemann_zeta_double_check        \
+               $(PATH_SRC)/example/example023b_riemann_zeta_double              \
                $(PATH_SRC)/test

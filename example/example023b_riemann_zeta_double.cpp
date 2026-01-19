@@ -11,9 +11,9 @@
 
 namespace local
 {
-  auto riemann_zeta_z_check_double() -> bool;
+  auto riemann_zeta_z_double() -> bool;
 
-  auto riemann_zeta_z_check_double() -> bool
+  auto riemann_zeta_z_double() -> bool
   {
     using complex_type = extended_complex::complex<double>;
     using real_type    = typename complex_type::value_type;
@@ -53,9 +53,9 @@ namespace local
   }
 } // namespace local
 
-auto example023b_riemann_zeta_z_check_double() -> bool
+auto example023b_riemann_zeta_z_double() -> bool
 {
-  const bool result_check_double_is_ok { local::riemann_zeta_z_check_double() };
+  const bool result_double_is_ok { local::riemann_zeta_z_double() };
 
-  return result_check_double_is_ok;
+  return result_double_is_ok;
 }
