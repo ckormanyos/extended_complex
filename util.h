@@ -9,9 +9,26 @@
   #define UTIL_2024_08_19_H
 
   #include <cmath>
+  #include <sstream>
 
   namespace util
   {
+    template<typename FloatType>
+    auto my_lexical_cast(const char* p_str) -> FloatType
+    {
+      std::stringstream strm { };
+
+      strm << p_str;
+
+      using float_type = FloatType;
+
+      float_type flt { };
+
+      strm >> flt;
+
+      return flt;
+    };
+
     template<typename NumericType>
     auto is_close_fraction(const NumericType& a,
                            const NumericType& b,
