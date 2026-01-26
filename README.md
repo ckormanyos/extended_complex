@@ -345,11 +345,11 @@ this macro can be optionally set via `-DEXTENDED_COMPLEX_USE_CPP_BIN_FLOAT`
 ```
 
 The macro `EXTENDED_COMPLEX_CONSTEXPR` is default-defined to be equal
-to the word `constexpr`. This macro was previously used (for old compilers
-no longer supported) to either use or un-use the word `constexpr`.
+to the keyword `constexpr`. This macro was previously utilized on old compilers
+that are no longer supported. The historical use was to either use or un-use the keyword `constexpr`.
 This was back when `constexpr` was relatively new. At this time,
-simply leave this macro unchanged. It is default-set to the word `constexpr`
-and this is not intended to be changed.
+simply leave this macro unchanged. Its default setting is `constexpr`,
+which is the appropriate, modern keyword. It is not intended to be changed.
 
 ## References
 
