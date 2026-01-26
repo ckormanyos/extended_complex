@@ -4,7 +4,7 @@ extended_complex
 <p align="center">
     <a href="https://github.com/ckormanyos/extended_complex/actions">
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
-    <a href="https://codecov.io/gh/ckormanyos/extended_complex" > 
+    <a href="https://app.codecov.io/gh/ckormanyos/extended_complex">
         <img src="https://codecov.io/gh/ckormanyos/extended_complex/graph/badge.svg?token=PyARTmnrTq"/></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
