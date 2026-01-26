@@ -4,7 +4,7 @@ extended_complex
 <p align="center">
     <a href="https://github.com/ckormanyos/extended_complex/actions">
         <img src="https://github.com/ckormanyos/extended_complex/actions/workflows/extended_complex.yml/badge.svg" alt="Build Status"></a>
-    <a href="https://codecov.io/gh/ckormanyos/extended_complex" > 
+    <a href="https://app.codecov.io/gh/ckormanyos/extended_complex">
         <img src="https://codecov.io/gh/ckormanyos/extended_complex/graph/badge.svg?token=PyARTmnrTq"/></a>
     <a href="https://github.com/ckormanyos/extended_complex/blob/main/LICENSE_1_0.txt">
         <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
@@ -345,11 +345,11 @@ this macro can be optionally set via `-DEXTENDED_COMPLEX_USE_CPP_BIN_FLOAT`
 ```
 
 The macro `EXTENDED_COMPLEX_CONSTEXPR` is default-defined to be equal
-to the word `constexpr`. This macro was previously used (for old compilers
-no longer supported) to either use or un-use the word `constexpr`.
+to the keyword `constexpr`. This macro was previously utilized on old compilers
+that are no longer supported. The historical use was to either use or un-use the keyword `constexpr`.
 This was back when `constexpr` was relatively new. At this time,
-simply leave this macro unchanged. It is default-set to the word `constexpr`
-and this is not intended to be changed.
+simply leave this macro unchanged. Its default setting is `constexpr`,
+which is the appropriate, modern keyword. It is not intended to be changed.
 
 ## References
 
